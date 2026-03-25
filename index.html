@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Olajumoke O. Medunoye | HR, AI & People Analytics Portfolio</title>
+<title>Olajumoke O. Medunoye | HR & People Analytics Portfolio</title>
 
 <style>
 
@@ -15,29 +16,62 @@ body {
     margin: 0;
 }
 
+/* NAVIGATION */
+
+nav {
+    background: #020617;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    color: #e2e8f0;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #38bdf8;
+}
+
+/* CONTAINER */
+
 .container {
     max-width: 1000px;
     margin: auto;
-    padding: 40px 20px;
+    padding: 30px 20px;
 }
 
+/* PROFILE */
+
 header {
-    margin-bottom: 30px;
+    text-align: center;
+}
+
+.profile-img {
+    width: 160px;
+    border-radius: 50%;
+    border: 4px solid #38bdf8;
+    margin-top: 20px;
 }
 
 h1 {
-    color: #ffffff;
+    color: white;
+    margin-bottom: 5px;
 }
 
 .subtitle {
     color: #38bdf8;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
+/* SECTIONS */
+
 section {
-    background-color: #1e293b;
-    padding: 20px;
+    background: #1e293b;
+    padding: 22px;
     margin-top: 20px;
     border-radius: 10px;
 }
@@ -46,75 +80,102 @@ h2 {
     color: #7dd3fc;
 }
 
-p {
-    line-height: 1.6;
-}
-
-ul {
-    padding-left: 20px;
-}
-
-li {
-    margin-bottom: 8px;
-}
+/* PROJECT LINKS */
 
 .project-links a {
     display: block;
-    padding: 12px;
+    padding: 14px;
     margin-bottom: 10px;
-    background-color: #334155;
+    background: #334155;
     border-radius: 6px;
     text-decoration: none;
     color: #e2e8f0;
-    font-weight: 500;
 }
 
 .project-links a:hover {
-    background-color: #475569;
+    background: #475569;
 }
 
-.badge-container {
+/* BADGES */
+
+.badges {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 10px;
 }
 
 .badge {
-    background-color: #334155;
+    background: #334155;
     padding: 8px 12px;
     border-radius: 6px;
-    font-size: 14px;
 }
+
+/* SCREENSHOTS */
+
+.screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.screenshot-grid img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* BUTTON */
 
 .cv-button {
     display: inline-block;
-    padding: 10px 15px;
+    padding: 10px 18px;
     background: #38bdf8;
     color: #0f172a;
     border-radius: 6px;
     text-decoration: none;
     font-weight: 600;
-    margin-top: 10px;
 }
 
-.cv-button:hover {
-    background: #0ea5e9;
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+nav a {
+    display: block;
+    margin: 10px 0;
+}
+
+.profile-img {
+    width: 130px;
+}
+
+.container {
+    padding: 20px;
+}
+
 }
 
 .footer {
     margin-top: 30px;
     padding-top: 15px;
     border-top: 1px solid #334155;
-    font-size: 14px;
-    color: #94a3b8;
     text-align: center;
 }
 
 </style>
+
 </head>
 
 <body>
+
+<nav>
+
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#screenshots">Screenshots</a>
+<a href="#contact">Contact</a>
+
+</nav>
 
 <div class="container">
 
@@ -123,139 +184,177 @@ li {
 <h1>Olajumoke O. Medunoye</h1>
 
 <div class="subtitle">
-HR • Customer Care • Workforce Planning • Artificial Intelligence • People Analytics
+
+HR • Customer Care • Workforce Planning • People Analytics
+
 </div>
 
+<img src="profile.jpg" class="profile-img">
+
 <p>
-I specialise in using data and artificial intelligence to improve workforce performance, recruitment efficiency, and customer service operations.
-This portfolio demonstrates practical analytics and AI-driven solutions across HR, customer care, and workforce planning.
+
+I am passionate about using data to improve workforce performance, recruitment efficiency, and customer service operations.
+
+My experience working directly with customers and operational teams helped me understand how data can drive better decisions and improve organisational performance.
+
+Today, I use analytics to identify trends, monitor performance, and support workforce planning across HR and operations.
+
 </p>
 
 </header>
 
-<section>
+<section id="about">
 
-<h2>Core Skills</h2>
+<h2>About Me</h2>
+
+<p>
+
+I am an HR and People Analytics professional with experience in customer service and workforce operations.
+
+I specialise in analysing workforce and operational data to support better decision-making, improve performance, and enhance service delivery.
+
+I am currently open to opportunities across the United Kingdom and remote roles in:
+
+</p>
 
 <ul>
+
 <li>HR Analytics</li>
-<li>Customer Service Analytics</li>
+<li>People Analytics</li>
 <li>Workforce Planning</li>
-<li>Artificial Intelligence in HR</li>
-<li>Predictive Analytics</li>
-<li>Performance Monitoring</li>
-<li>Data Analysis</li>
-<li>Power BI</li>
-<li>SQL</li>
-<li>Excel</li>
+<li>Operations Analytics</li>
+<li>Customer Success</li>
+
 </ul>
 
 </section>
 
-<section>
+<section id="skills">
 
-<h2>AI & Advanced Analytics</h2>
+<h2>Core Skills</h2>
 
-<div class="badge-container">
+<ul>
 
-<div class="badge">Machine Learning</div>
+<li>HR Analytics</li>
+<li>Workforce Planning</li>
+<li>Recruitment Analytics</li>
+<li>Customer Service Analytics</li>
+<li>Performance Monitoring</li>
+<li>Data Visualisation</li>
+<li>Power BI</li>
+<li>SQL</li>
+<li>Excel</li>
+
+</ul>
+
+<h3>AI & Advanced Analytics</h3>
+
+<div class="badges">
+
 <div class="badge">Predictive Analytics</div>
-<div class="badge">Natural Language Processing</div>
-<div class="badge">AI in HR</div>
-<div class="badge">Customer Analytics</div>
+<div class="badge">Attrition Prediction</div>
 <div class="badge">Workforce Forecasting</div>
+<div class="badge">Customer Analytics</div>
 
 </div>
 
 </section>
 
-<section>
+<section id="projects">
 
 <h2>Portfolio Projects</h2>
 
 <div class="project-links">
 
 <a href="dashboard1.html">
-HR Attrition Analysis Dashboard  
-<br>
-<small>Identifies turnover risk and supports retention strategy</small>
+HR Attrition Analysis Dashboard
 </a>
 
 <a href="dashboard2.html">
-Recruitment Pipeline Dashboard  
-<br>
-<small>Tracks hiring funnel and improves recruitment efficiency</small>
+Recruitment Pipeline Dashboard
 </a>
 
 <a href="dashboard3.html">
-Customer Service Performance Dashboard  
-<br>
-<small>Monitors response time, resolution time, and customer satisfaction</small>
+Customer Service Performance Dashboard
 </a>
 
 <a href="dashboard4.html">
-Hiring Performance Dashboard  
-<br>
-<small>Improves time-to-hire and workforce planning decisions</small>
+Hiring Performance Dashboard
 </a>
 
 <a href="dashboard5.html">
-Employee Performance Dashboard  
-<br>
-<small>Analyzes productivity, engagement, and training impact</small>
+Employee Performance Dashboard
 </a>
 
 <a href="dashboard6.html">
-Predictive Analytics Dashboard  
-<br>
-<small>Forecasts attrition, workforce demand, and customer behaviour</small>
+Predictive Analytics Dashboard
 </a>
 
 <a href="ai_workforce_planning.html">
-AI Workforce Planning & Attrition Prediction  
-<br>
-<small>Predicts staffing needs and identifies high-risk employees</small>
+AI Workforce Planning Project
 </a>
 
 <a href="ai_customer_service.html">
-AI Customer Care Ticket Classification  
-<br>
-<small>Automates ticket prioritisation and predicts resolution time</small>
+AI Customer Care Project
 </a>
 
 </div>
 
 </section>
 
-<section>
+<section id="screenshots">
+
+<h2>Project Screenshots</h2>
+
+<div class="screenshot-grid">
+
+<img src="screenshot1.png">
+<img src="screenshot2.png">
+<img src="screenshot3.png">
+<img src="screenshot4.png">
+
+</div>
+
+</section>
+
+<section id="contact">
 
 <h2>Contact</h2>
 
 <p>
+
 LinkedIn:
+
 <a href="https://www.linkedin.com/in/olajumoke-medunoye" target="_blank">
 View LinkedIn Profile
 </a>
+
 </p>
 
 <p>
+
 Email:
+
 olajumokemedunoye@gmail.com
+
 </p>
 
 <a href="cv.pdf" download class="cv-button">
+
 Download CV
+
 </a>
 
 </section>
 
 <div class="footer">
 
-Portfolio demonstrating HR, Customer Care, Workforce Planning, and Artificial Intelligence solutions.
+Portfolio demonstrating practical HR and People Analytics capabilities using real-world business scenarios.
 
 </div>
 
 </div>
 
 </body>
+
 </html>
