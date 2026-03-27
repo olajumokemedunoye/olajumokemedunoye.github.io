@@ -5,12 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Olajumoke Medunoye | HR & People Analytics Portfolio</title>
 
+<!-- Google Analytics placeholder -->
+<script>
+// Replace 'G-XXXXXXX' with your real Google Analytics ID later
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);} 
+gtag('js', new Date());
+</script>
+
 <style>
 :root {
     --primary: #0F172A;
     --accent: #7C3AED;
-    --background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 100%);
+    --background: #F8FAFC;
+    --card: #FFFFFF;
     --text: #1F2937;
+}
+
+body.dark {
+    --primary: #020617;
+    --accent: #A78BFA;
+    --background: #020617;
+    --card: #0F172A;
+    --text: #E5E7EB;
 }
 
 body {
@@ -20,18 +37,38 @@ body {
     color: var(--text);
 }
 
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: var(--accent);
+  width: 0%;
+  z-index: 9999;
+}
+
 header {
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary), #1E293B);
     color: white;
-    padding: 20px;
+    padding: 30px 20px;
     text-align: center;
 }
 
 nav a {
     color: white;
-    margin: 0 12px;
+    margin: 0 10px;
     text-decoration: none;
     font-weight: bold;
+}
+
+.toggle-btn {
+    margin-top: 15px;
+    background: var(--accent);
+    border: none;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 section {
@@ -48,30 +85,35 @@ section {
 }
 
 .hero img {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     border: 5px solid var(--accent);
 }
 
 .card {
-    background: white;
+    background: var(--card);
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
 }
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 20px;
 }
 
 .project img {
     width: 100%;
     border-radius: 10px;
-    margin-bottom: 10px;
 }
 
 .btn {
@@ -84,133 +126,180 @@ section {
     margin-top: 10px;
 }
 
+.filter-btn {
+    padding: 8px 14px;
+    margin: 5px;
+    border: none;
+    border-radius: 6px;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.skill {
+    background: var(--card);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.testimonial {
+    font-style: italic;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
 footer {
     background: var(--primary);
     color: white;
     text-align: center;
     padding: 20px;
 }
+
+@media (max-width: 768px) {
+.hero {flex-direction: column; text-align: center;}
+}
 </style>
 </head>
 
 <body>
 
+<div id="progress-bar"></div>
+
 <header>
 <h1>Olajumoke O. Medunoye</h1>
-<p>HR & People Analytics | Workforce Planning | Power BI | SQL | Excel</p>
+<p>HR & People Analytics | Workforce Planning | Predictive Analytics</p>
+
 <nav>
-<a href="#about">About</a>
 <a href="#projects">Projects</a>
-<a href="#experience">Experience</a>
+<a href="#skills">Skills</a>
+<a href="#testimonials">Testimonials</a>
 <a href="#contact">Contact</a>
 </nav>
+
+<button class="toggle-btn" onclick="toggleMode()">Toggle Dark / Light Mode</button>
+
 </header>
 
 <section class="hero">
-<img src="profile.jpg" alt="Olajumoke Medunoye" onerror="this.src='profile.jpeg'">
+<img src="profile.jpeg" alt="Olajumoke Medunoye">
 <div>
 <h2>HR & People Analytics Consultant</h2>
-<p>
-I help organisations reduce attrition, optimise workforce planning, and improve operational performance using data-driven insights. My work focuses on workforce analytics, recruitment performance, and predictive modelling using Power BI, SQL, and Excel.
-</p>
-<a href="Olajumoke_Medunoye_LinkedIn_Aligned_CV.pdf" class="btn">Download CV</a>
+<p>Helping organisations reduce attrition and optimise workforce planning using data.</p>
+<a href="Olajumoke_Medunoye_Final_CV_2026.pdf" class="btn">Download CV</a>
 </div>
-</section>
-
-<section id="about">
-<h2>About Me</h2>
-<p>
-I am a Workforce & HR Analytics professional with experience delivering analytics solutions across customer operations, HR, and business performance environments. I specialise in transforming workforce data into actionable insights that support strategic decision-making and operational efficiency.
-</p>
 </section>
 
 <section id="projects">
 <h2>Analytics Projects</h2>
 
+<div>
+<button class="filter-btn" onclick="filterProjects('all')">All</button>
+<button class="filter-btn" onclick="filterProjects('hr')">HR</button>
+<button class="filter-btn" onclick="filterProjects('ai')">AI</button>
+</div>
+
 <div class="projects-grid">
 
-<div class="card project">
-<img src="hr_attrition_dashboard.jpg" alt="HR Attrition Dashboard">
-<h3>HR Attrition Analysis Dashboard</h3>
-<p>
-Identified £312K in hidden turnover costs and highlighted early-tenure attrition risks.
-<br><strong>Tools:</strong> SQL, Excel, Power BI
-<br><strong>Impact:</strong> Enabled targeted retention strategies and workforce planning decisions.
-</p>
+<div class="card project" data-category="hr">
+<img src="hr_attrition_dashboard.jpeg">
+<h3>HR Attrition Dashboard</h3>
 </div>
 
-<div class="card project">
-<img src="recruitment_pipeline_dashboard.jpg" alt="Recruitment Pipeline Dashboard">
-<h3>Recruitment Pipeline Analytics</h3>
-<p>
-Analysed recruitment funnel performance and identified bottlenecks affecting hiring timelines.
-<br><strong>Tools:</strong> Power BI, Excel
-<br><strong>Impact:</strong> Improved recruitment efficiency and reduced time-to-fill delays.
-</p>
+<div class="card project" data-category="hr">
+<img src="recruitment_pipeline_dashboard.jpeg">
+<h3>Recruitment Analytics</h3>
 </div>
 
-<div class="card project">
-<img src="employee_performance_dashboard.jpg" alt="Employee Performance Dashboard">
-<h3>Employee Performance Analytics Dashboard</h3>
-<p>
-Tracked performance metrics and workforce productivity trends.
-<br><strong>Tools:</strong> Power BI, Excel
-<br><strong>Impact:</strong> Improved visibility into employee performance and productivity trends.
-</p>
-</div>
-
-<div class="card project">
-<img src="ai_predictive_attrition_dashboard.png" alt="AI Predictive Attrition Dashboard">
-<h3>AI Predictive Attrition Risk Model</h3>
-<p>
-Developed a predictive analytics model to identify employees at risk of leaving using workforce data patterns.
-<br><strong>Tools:</strong> Python, SQL, Power BI
-<br><strong>Impact:</strong> Enabled proactive retention planning and reduced attrition risk exposure.
-</p>
+<div class="card project" data-category="ai">
+<img src="ai_predictive_attrition_dashboard.png">
+<h3>AI Predictive Attrition Model</h3>
 </div>
 
 </div>
+
 </section>
 
-<section id="experience">
-<h2>Professional Experience</h2>
+<section id="skills">
+<h2>Skills</h2>
 
-<div class="card">
-<h3>HR Analyst Consultant — 10Alytics</h3>
-<p>Nov 2024 – Present | Remote</p>
-<p>Designed Power BI dashboards reducing reporting time by 40% and improving recruitment efficiency by 25%.</p>
+<div class="skills-grid">
+<div class="skill">📊 Power BI</div>
+<div class="skill">📈 Excel</div>
+<div class="skill">🗄 SQL</div>
+<div class="skill">🤖 Predictive Analytics</div>
+<div class="skill">📉 Workforce Planning</div>
 </div>
 
-<div class="card">
-<h3>Customer Service Representative — Conduent</h3>
-<p>Jul 2023 – Present | Leeds, United Kingdom</p>
-<p>Handled high-volume customer enquiries while maintaining service quality standards and resolution targets.</p>
+</section>
+
+<section id="testimonials">
+<h2>Testimonials</h2>
+
+<div class="card testimonial">
+"Delivered workforce insights that improved reporting efficiency and supported better decision-making." 
 </div>
 
-<div class="card">
-<h3>Customer Operations Analyst — MoonPay</h3>
-<p>Mar 2023 – Present | Remote</p>
-<p>Reduced ticket response time by 30% through workflow analysis and process improvements.</p>
-</div>
-
-<div class="card">
-<h3>HR & People Analyst — Tangerine Africa</h3>
-<p>Jan 2019 – Mar 2023</p>
-<p>Built workforce dashboards improving retention and operational performance metrics.</p>
+<div class="card testimonial">
+"Strong analytical thinker who translates complex data into actionable HR strategies." 
 </div>
 
 </section>
 
 <section id="contact">
 <h2>Contact</h2>
+
+<form>
+<input type="text" placeholder="Your Name">
+<input type="email" placeholder="Your Email">
+<textarea rows="4" placeholder="Your Message"></textarea>
+<button class="btn" type="submit">Send Message</button>
+</form>
+
 <p>Email: olajumokemedunoye@gmail.com</p>
 <p>LinkedIn: www.linkedin.com/in/olajumoke-medunoye</p>
-<p>Location: United Kingdom</p>
+
 </section>
 
 <footer>
-<p>© 2026 Olajumoke Medunoye | HR & People Analytics Portfolio</p>
+<p>© 2026 Olajumoke Medunoye</p>
 </footer>
+
+<script>
+function toggleMode() {
+ document.body.classList.toggle('dark');
+}
+
+function filterProjects(category) {
+ let projects = document.querySelectorAll('.project');
+ projects.forEach(p => {
+   if (category === 'all' || p.dataset.category === category) {
+     p.style.display = 'block';
+   } else {
+     p.style.display = 'none';
+   }
+ });
+}
+
+window.onscroll = function() {
+ let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+ let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+ let scrolled = (winScroll / height) * 100;
+ document.getElementById('progress-bar').style.width = scrolled + '%';
+};
+</script>
 
 </body>
 </html>
