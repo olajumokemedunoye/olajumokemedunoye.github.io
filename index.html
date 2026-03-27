@@ -1,402 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olajumoke Medunoye | HR & People Analytics | Workforce Planning | Recruitment Analytics | Leeds UK</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olajumoke Medunoye | HR & People Analytics Portfolio</title>
 
-    <!-- ATS / SEO Optimization -->
-    <meta name="description" content="HR and People Analytics professional skilled in workforce planning, recruitment analytics, HR reporting, and data visualization using Power BI and Excel. Based in Leeds, United Kingdom.">
-    <meta name="keywords" content="HR Analytics, People Analytics, Workforce Planning, Recruitment Analytics, HR Reporting, Power BI, Excel, Leeds UK">
+<style>
+:root {
+    --primary: #0F172A;
+    --accent: #7C3AED;
+    --background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 100%);
+    --text: #1F2937;
+}
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background: var(--background);
+    color: var(--text);
+}
 
-    <style>
-        :root {
-            --primary: #0F172A;
-            --secondary: #1E293B;
-            --accent: #7C3AED;
-            --background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 100%);
-            --text: #1F2937;
-            --primary: #1F3A5F;
-            --accent: #6A5ACD;
-            --background: #FFFFFF;
-            --text: #333333;
-        }
+header {
+    background: var(--primary);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
 
-        body {
-            background: var(--background);
-            min-height: 100vh;
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            background-color: var(--background);
-            color: var(--text);
-            line-height: 1.6;
-        }
+nav a {
+    color: white;
+    margin: 0 12px;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 15px 30px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+section {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 20px;
+}
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1100px;
-            margin: auto;
-        }
+.hero {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
 
-        nav h1 {
-            font-size: 18px;
-            margin: 0;
-        }
+.hero img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid var(--accent);
+}
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-            margin: 0;
-            padding: 0;
-        }
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-        }
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
 
-        nav a:hover {
-            color: var(--accent);
-        }
+.project img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
 
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 40px 20px;
-        }
+.btn {
+    background: var(--accent);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
 
-        .hero {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .hero img {
-            width: 250px;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 5px solid var(--accent);
-        }
-
-        h2 {
-            color: var(--primary);
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: white;
-            padding: 10px 18px;
-            border-radius: 8px;
-            text-decoration: none;
-            margin-top: 10px;
-            font-weight: 600;
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-        }
-
-        .skills-grid,
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            border: 1px solid #e0e0e0;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            background: white;
-        }
-
-        .project img {
-            width: 100%;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        footer {
-            background-color: var(--primary);
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-        }
-
-        @media (max-width: 768px) {
-            .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero img {
-                margin: auto;
-            }
-        }
-    </style>
+footer {
+    background: var(--primary);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <!-- Professional banner styling for LinkedIn consistency -->
-    <nav>
-        <h1>Olajumoke Medunoye</h1>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+<h1>Olajumoke O. Medunoye</h1>
+<p>HR & People Analytics | Workforce Planning | Power BI | SQL | Excel</p>
+<nav>
+<a href="#about">About</a>
+<a href="#projects">Projects</a>
+<a href="#experience">Experience</a>
+<a href="#contact">Contact</a>
+</nav>
 </header>
 
-<section class="container hero">
-    <img src="profile.jpg" alt="Olajumoke Medunoye" onerror="this.src='profile.jpeg'">
-
-    <div>
-        <h2>HR & People Analytics Professional</h2>
-
-        <p>
-            I specialize in analyzing workforce and operational data to identify trends, monitor performance,
-            and support data-driven decision-making. My expertise includes workforce planning, recruitment
-            analytics, and performance reporting using Power BI, Excel, and HR metrics.
-        </p>
-
-        <a href="Olajumoke_Medunoye_Updated_CV.pdf" class="btn">Download CV</a>
-    </div>
+<section class="hero">
+<img src="profile.jpg" alt="Olajumoke Medunoye" onerror="this.src='profile.jpeg'">
+<div>
+<h2>HR & People Analytics Consultant</h2>
+<p>
+I help organisations reduce attrition, optimise workforce planning, and improve operational performance using data-driven insights. My work focuses on workforce analytics, recruitment performance, and predictive modelling using Power BI, SQL, and Excel.
+</p>
+<a href="Olajumoke_Medunoye_LinkedIn_Aligned_CV.pdf" class="btn">Download CV</a>
+</div>
 </section>
 
-<section id="about" class="container">
-    <h2>About Me</h2>
-
-    <p>
-        HR Business Partner and Workforce Analytics Specialist with over 5 years of experience delivering workforce planning, HR analytics, and operational performance insights across financial services and technology environments. Skilled in transforming HR and operational data into actionable business decisions using Power BI, SQL, Python, and Excel.
-    </p>
-
+<section id="about">
+<h2>About Me</h2>
+<p>
+I am a Workforce & HR Analytics professional with experience delivering analytics solutions across customer operations, HR, and business performance environments. I specialise in transforming workforce data into actionable insights that support strategic decision-making and operational efficiency.
+</p>
 </section>
 
-<section id="achievements" class="container">
-    <h2>Key Achievements</h2>
+<section id="projects">
+<h2>Analytics Projects</h2>
 
-    <div class="card">
-        <ul>
-            <li>Reduced reporting cycle time by approximately 30% through automated dashboards and reporting processes.</li>
-            <li>Delivered workforce analytics solutions supporting workforce planning for organizations with over 500 employees.</li>
-            <li>Improved operational performance monitoring through KPI dashboards used by senior stakeholders.</li>
-        </ul>
-    </div>
+<div class="projects-grid">
 
+<div class="card project">
+<img src="hr_attrition_dashboard.jpg" alt="HR Attrition Dashboard">
+<h3>HR Attrition Analysis Dashboard</h3>
+<p>
+Identified £312K in hidden turnover costs and highlighted early-tenure attrition risks.
+<br><strong>Tools:</strong> SQL, Excel, Power BI
+<br><strong>Impact:</strong> Enabled targeted retention strategies and workforce planning decisions.
+</p>
+</div>
+
+<div class="card project">
+<img src="recruitment_pipeline_dashboard.jpg" alt="Recruitment Pipeline Dashboard">
+<h3>Recruitment Pipeline Analytics</h3>
+<p>
+Analysed recruitment funnel performance and identified bottlenecks affecting hiring timelines.
+<br><strong>Tools:</strong> Power BI, Excel
+<br><strong>Impact:</strong> Improved recruitment efficiency and reduced time-to-fill delays.
+</p>
+</div>
+
+<div class="card project">
+<img src="employee_performance_dashboard.jpg" alt="Employee Performance Dashboard">
+<h3>Employee Performance Analytics Dashboard</h3>
+<p>
+Tracked performance metrics and workforce productivity trends.
+<br><strong>Tools:</strong> Power BI, Excel
+<br><strong>Impact:</strong> Improved visibility into employee performance and productivity trends.
+</p>
+</div>
+
+<div class="card project">
+<img src="ai_predictive_attrition_dashboard.png" alt="AI Predictive Attrition Dashboard">
+<h3>AI Predictive Attrition Risk Model</h3>
+<p>
+Developed a predictive analytics model to identify employees at risk of leaving using workforce data patterns.
+<br><strong>Tools:</strong> Python, SQL, Power BI
+<br><strong>Impact:</strong> Enabled proactive retention planning and reduced attrition risk exposure.
+</p>
+</div>
+
+</div>
 </section>
 
-<section id="skills" class="container">
-    <h2>About Me</h2>
+<section id="experience">
+<h2>Professional Experience</h2>
 
-    <p>
-        I am an HR and People Analytics professional based in Leeds, United Kingdom. I am passionate about
-        transforming workforce data into actionable insights that improve employee experience, operational
-        efficiency, and business performance.
-    </p>
-</section>
+<div class="card">
+<h3>HR Analyst Consultant — 10Alytics</h3>
+<p>Nov 2024 – Present | Remote</p>
+<p>Designed Power BI dashboards reducing reporting time by 40% and improving recruitment efficiency by 25%.</p>
+</div>
 
-<section id="skills" class="container">
-    <h2>Skills</h2>
+<div class="card">
+<h3>Customer Service Representative — Conduent</h3>
+<p>Jul 2023 – Present | Leeds, United Kingdom</p>
+<p>Handled high-volume customer enquiries while maintaining service quality standards and resolution targets.</p>
+</div>
 
-    <div class="skills-grid">
+<div class="card">
+<h3>Customer Operations Analyst — MoonPay</h3>
+<p>Mar 2023 – Present | Remote</p>
+<p>Reduced ticket response time by 30% through workflow analysis and process improvements.</p>
+</div>
 
-        <div class="card">
-            <h3>HR Skills</h3>
-            <ul>
-                <li>Workforce Planning</li>
-                <li>Recruitment & Selection</li>
-                <li>Employee Relations</li>
-                <li>Performance Management</li>
-                <li>HR Reporting</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3>Data & Analytics</h3>
-            <ul>
-                <li>Power BI</li>
-                <li>Advanced Excel</li>
-                <li>SQL</li>
-                <li>Dashboard Development</li>
-                <li>Data Visualization</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3>Business Operations</h3>
-            <ul>
-                <li>Customer Success</li>
-                <li>Process Improvement</li>
-                <li>Stakeholder Communication</li>
-                <li>Service Delivery</li>
-                <li>Problem Solving</li>
-            </ul>
-                <div class="card project">
-            <img src="workforce_forecasting_dashboard.jpg" alt="Workforce Forecasting Dashboard">
-            <h3>Workforce Forecasting & Headcount Planning Dashboard</h3>
-            <p>
-                Developed workforce forecasting models to predict staffing needs based on demand patterns and operational data.
-                <br><strong>Tools:</strong> Power BI, Excel, Workforce Planning Analytics
-                <br><strong>Impact:</strong> Supported proactive staffing decisions and improved workforce planning accuracy.
-            </p>
-        </div>
-
-    </div>
-</section>
-
-<section id="projects" class="container">
-    <!-- Projects automatically generated from dashboards -->
-    <h2>Projects</h2>
-
-    <div class="projects-grid">
-
-        <div class="card project">
-            <img src="customer_service_dashboard.jpg" alt="Customer Service Dashboard">
-            <h3>Customer Service Performance Dashboard</h3>
-            <p>
-                Analyzed customer service response time and satisfaction metrics to identify service improvement opportunities.
-            </p>
-        </div>
-
-        <div class="card project">
-            <img src="hr_attrition_dashboard.jpg" alt="HR Attrition Dashboard">
-            <h3>HR Attrition Dashboard</h3>
-            <p>
-                Analyzed employee turnover trends to identify departments with high attrition and support retention strategies using workforce data.
-                <br><strong>Tools:</strong> Power BI, Excel, HR Metrics
-                <br><strong>Impact:</strong> Identified high-risk departments and supported targeted retention planning.
-                <br><strong>Tools:</strong> Power BI, Excel, HR Metrics
-            </p>
-        </div>
-
-        <div class="card project">
-            <img src="recruitment_pipeline_dashboard.jpg" alt="Recruitment Pipeline Dashboard">
-            <h3>Recruitment Pipeline Dashboard</h3>
-            <p>
-                Monitored recruitment stages to improve hiring efficiency and reduce time-to-fill positions.
-                <br><strong>Tools:</strong> Power BI, Excel, Recruitment Analytics
-                <br><strong>Impact:</strong> Highlighted recruitment bottlenecks and supported faster hiring decisions.
-                <br><strong>Tools:</strong> Power BI, Excel, Recruitment Analytics
-            </p>
-        </div>
-
-        <div class="card project">
-            <img src="employee_performance_dashboard.jpg" alt="Employee Performance Dashboard">
-            <h3>Employee Performance Dashboard</h3>
-            <p>
-                Tracked performance metrics to support performance reviews and workforce planning decisions.
-                <br><strong>Tools:</strong> Power BI, Excel, Performance Metrics
-                <br><strong>Impact:</strong> Improved visibility of employee performance trends for management decisions.
-                <br><strong>Tools:</strong> Power BI, Excel, Performance Metrics
-            </p>
-        </div>
-
-    </div>
-</section>
-
-<section id="experience" class="container">
-    <h2>Experience</h2>
-
-    <div class="card">
-        <h3>Workforce and HR Analytics Consultant</h3>
-        <p>10Alytics | Remote</p>
-        <p>2022 – Present</p>
-        <ul>
-            <li>Delivered HR analytics projects including attrition modelling, headcount forecasting, and recruitment analytics.</li>
-            <li>Built interactive Power BI dashboards tracking workforce KPIs and reducing reporting cycle time.</li>
-            <li>Developed predictive models to identify high-risk employee segments and support retention strategies.</li>
-        </ul>
-    </div>
-
-    <div class="card">
-        <h3>Customer Service Advisor</h3>
-        <p>Conduent | United Kingdom</p>
-        <p>2020 – 2022</p>
-        <ul>
-            <li>Supported customer service operations and handled high-volume customer inquiries while maintaining service quality standards.
-            <br><strong>Impact:</strong> Contributed to improved customer satisfaction and operational efficiency across service teams.</li>
-            <li>Produced management information reports translating operational data into decision-ready insights.</li>
-            <li>Identified process improvements that reduced average handling time and improved service delivery.</li>
-        </ul>
-    </div>
-
-    <div class="card">
-        <h3>HR and Operations Analyst</h3>
-        <p>MoonPay | Remote</p>
-        <p>2018 – 2020</p>
-        <ul>
-            <li>Designed HR reporting templates and automated workforce metrics reporting.</li>
-            <li>Conducted workforce analytics and diversity analysis to support HR strategy.</li>
-            <li>Maintained HRIS data integrity and produced headcount and turnover dashboards.</li>
-        </ul>
-    </div>
+<div class="card">
+<h3>HR & People Analyst — Tangerine Africa</h3>
+<p>Jan 2019 – Mar 2023</p>
+<p>Built workforce dashboards improving retention and operational performance metrics.</p>
+</div>
 
 </section>
 
-<section id="certifications" class="container">
-    <h2>Certifications</h2>
-
-    <div class="card">
-        <ul>
-            <li>Power BI Data Analyst Certification</li>
-            <li>HR Analytics & People Metrics Certification</li>
-            <li>PostgreSQL for Data Analytics & Reporting</li>
-            <li>Microsoft Excel Expert (Power Query, Data Visualization)</li>
-            <li>Customer Success Management Certification</li>
-        </ul>
-    </div>
-
-</section>
-
-<section id="education" class="container">
-    <h2>Education</h2>
-
-    <div class="card">
-        <h3>MSc Human Resource Management</h3>
-        <p>Leeds Beckett University, United Kingdom</p>
-        <p>Relevant Modules: HR Analytics, Employment Law, Talent Management, Research Methods</p>
-    </div>
-</section>
-
-<section id="contact" class="container">
-    <h2>Contact</h2>
-
-    <p>Email: olayinkaoladejomedunoye@gmail.com</p>
-    <p>Location: Leeds, United Kingdom</p>
-
-    <a href="https://linkedin.com/in/olajumokemedunoye" class="btn">Connect on LinkedIn</a>
+<section id="contact">
+<h2>Contact</h2>
+<p>Email: olajumokemedunoye@gmail.com</p>
+<p>LinkedIn: www.linkedin.com/in/olajumoke-medunoye</p>
+<p>Location: United Kingdom</p>
 </section>
 
 <footer>
-    <p>
-        © 2026 Olajumoke Medunoye | HR & People Analytics Portfolio
-    </p>
+<p>© 2026 Olajumoke Medunoye | HR & People Analytics Portfolio</p>
 </footer>
 
 </body>
