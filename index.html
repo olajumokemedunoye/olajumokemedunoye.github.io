@@ -3,517 +3,391 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Olajumoke O. Medunoye | HR & People Analytics Portfolio</title>
-
+<title>Olajumoke Medunoye | HR &amp; People Analytics</title>
+<meta name="description" content="HR &amp; People Analytics professional based in Leeds, UK. Specialising in workforce planning, attrition modelling, and Power BI dashboards.">
 <style>
-:root {
-    --primary: #0F172A;
-    --accent: #7C3AED;
-    --background: #F8FAFC;
-    --card: #FFFFFF;
-    --text: #1F2937;
-}
+  :root{
+    --navy:#0F172A; --navy2:#152238; --accent:#7C3AED; --accent2:#5B21B6;
+    --bg:#F7F8FB; --card:#FFFFFF; --text:#1F2937; --muted:#64748B; --line:#E5E7EB;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+  a{color:inherit;}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px;}
+  header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:64px 0 56px;}
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;font-size:14px;flex-wrap:wrap;gap:12px;}
+  .topbar .brand{font-weight:700;letter-spacing:.3px;}
+  .topbar nav a{color:rgba(255,255,255,.75);margin-left:20px;text-decoration:none;font-size:14px;}
+  .topbar nav a:hover{color:#fff;}
+  .hero{display:flex;align-items:center;gap:36px;flex-wrap:wrap;}
+  .hero img{width:132px;height:132px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,.25);}
+  .eyebrow{color:#C4B5FD;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+  h1{font-size:38px;margin:0 0 8px;font-weight:700;}
+  .role{font-size:17px;color:#CBD5E1;margin:0 0 16px;}
+  .tagline{max-width:560px;color:#94A3B8;font-size:15px;margin:0 0 22px;}
+  .btnrow{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{display:inline-block;background:var(--accent);color:#fff;padding:11px 20px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;}
+  .btn.outline{background:transparent;border:1px solid rgba(255,255,255,.35);}
+  .stats{display:flex;gap:36px;margin-top:36px;flex-wrap:wrap;}
+  .stat b{display:block;font-size:26px;color:#fff;}
+  .stat span{font-size:12px;color:#94A3B8;text-transform:uppercase;letter-spacing:.5px;}
 
-body.dark {
-    --primary: #020617;
-    --accent: #A78BFA;
-    --background: #020617;
-    --card: #0F172A;
-    --text: #E5E7EB;
-}
+  section{max-width:1100px;margin:0 auto;padding:64px 24px;}
+  h2{font-size:26px;margin:0 0 8px;}
+  .section-sub{color:var(--muted);font-size:15px;margin:0 0 32px;max-width:640px;}
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    background: var(--background);
-    color: var(--text);
-    line-height: 1.6;
-}
+  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;}
+  .about-grid p{color:#374151;font-size:15px;}
+  .focus-list{list-style:none;margin:0;padding:0;}
+  .focus-list li{padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:#374151;}
+  @media(max-width:760px){.about-grid{grid-template-columns:1fr;}}
 
-#progress-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 4px;
-  background: var(--accent);
-  width: 0%;
-  z-index: 9999;
-}
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;}
+  .skill-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;}
+  .skill-card h4{margin:0 0 8px;font-size:14px;color:var(--accent2);text-transform:uppercase;letter-spacing:.4px;}
+  .skill-card p{margin:0;font-size:14px;color:#374151;}
 
-header {
-    background: linear-gradient(135deg, var(--primary), #1E293B);
-    color: white;
-    padding: 30px 20px;
-    text-align: center;
-}
+  .project-card{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:18px;overflow:hidden;}
+  .project-img{width:100%;height:260px;object-fit:cover;display:block;border-bottom:1px solid var(--line);background:#EEF0F4;}
+  .project-img-placeholder{width:100%;height:120px;display:flex;align-items:center;justify-content:center;background:#EEF0F4;color:var(--muted);font-size:13px;border-bottom:1px solid var(--line);}
+  .tool-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+  .tool-chip{background:#F5F3FF;color:var(--accent2);font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px;}
+  .project-head{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;cursor:pointer;gap:16px;}
+  .project-head .tag{font-size:11px;color:var(--accent2);font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;}
+  .project-head h3{margin:0 0 6px;font-size:18px;}
+  .project-head .meta{font-size:13px;color:var(--muted);}
+  .project-head .chev{font-size:20px;color:var(--muted);transition:transform .2s;flex-shrink:0;}
+  .project-card.open .chev{transform:rotate(45deg);}
+  .project-body{max-height:0;overflow:hidden;transition:max-height .3s ease;border-top:1px solid transparent;}
+  .project-card.open .project-body{border-top:1px solid var(--line);}
+  .project-body-inner{padding:22px 24px 26px;font-size:14px;color:#374151;}
+  .project-body-inner h5{margin:16px 0 6px;font-size:13px;text-transform:uppercase;letter-spacing:.4px;color:var(--accent2);}
+  .project-body-inner h5:first-child{margin-top:0;}
+  .project-body-inner ol{margin:6px 0 0;padding-left:20px;}
+  .project-body-inner li{margin-bottom:6px;}
+  .outcome-box{background:#F5F3FF;border-left:3px solid var(--accent);padding:12px 16px;border-radius:6px;margin-top:14px;font-size:14px;}
 
-nav a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-    font-weight: bold;
-}
+  .exp-item{border-left:2px solid var(--line);padding:2px 0 28px 24px;position:relative;}
+  .exp-item::before{content:"";position:absolute;left:-7px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--accent);}
+  .exp-item .dates{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;}
+  .exp-item h3{margin:4px 0 2px;font-size:17px;}
+  .exp-item .org{color:var(--accent2);font-size:14px;margin:0 0 10px;font-weight:600;}
+  .exp-item p{margin:0;font-size:14px;color:#374151;}
 
-.toggle-btn {
-    margin-top: 15px;
-    background: var(--accent);
-    border: none;
-    color: white;
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-}
+  .cred-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
+  .cred-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;}
+  .cred-card h4{margin:0 0 4px;font-size:14px;}
+  .cred-card p{margin:0;font-size:13px;color:var(--muted);}
 
-section {
-    max-width: 1100px;
-    margin: auto;
-    padding: 40px 20px;
-}
-
-.hero {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-.hero img {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    border: 5px solid var(--accent);
-}
-
-.card {
-    background: var(--card);
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-}
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
-}
-
-.project img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-
-.btn {
-    background: var(--accent);
-    color: white;
-    padding: 10px 18px;
-    border-radius: 8px;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 10px;
-}
-
-.filter-btn {
-    padding: 8px 14px;
-    margin: 5px;
-    border: none;
-    border-radius: 6px;
-    background: var(--primary);
-    color: white;
-    cursor: pointer;
-}
-
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-}
-
-.skill {
-    background: var(--card);
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-footer {
-    background: var(--primary);
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
-
-@media (max-width: 768px) {
-.hero {flex-direction: column; text-align: center;}
-}
-
+  footer{background:var(--navy);color:#94A3B8;padding:40px 0;text-align:center;font-size:13px;}
+  footer a{color:#C4B5FD;text-decoration:none;}
+  .contact-row{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:16px;}
 </style>
 </head>
-
 <body>
 
-<div id="progress-bar"></div>
-
 <header>
-<h1>Olajumoke O. Medunoye</h1>
-<p>HR & People Analytics | Workforce Planning | Predictive Analytics</p>
-
-<nav>
-<a href="#about">About</a>
-<a href="#projects">Projects</a>
-<a href="#education">Education</a>
-<a href="#certifications">Certifications</a>
-<a href="#experience">Experience</a>
-<a href="#skills">Skills</a>
-<a href="#contact">Contact</a>
-</nav>
-
-<button class="toggle-btn" onclick="toggleMode()">Toggle Dark / Light Mode</button>
-
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">O.Medunoye</div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#portfolio">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#credentials">Credentials</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="hero">
+      <div>
+        <div class="eyebrow">HR &amp; People Analytics · Leeds, UK</div>
+        <h1>Olajumoke Medunoye</h1>
+        <p class="role">HR Analyst &amp; People Analytics Professional</p>
+        <p class="tagline">Turning workforce data into decisions — dashboards, forecasting models, and analytics solutions that help organisations understand attrition, plan headcount, and measure what matters.</p>
+        <div class="btnrow">
+          <a href="#portfolio" class="btn">View Projects</a>
+          <a href="mailto:olajumokemedunoye@gmail.com" class="btn outline">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>£312K</b><span>Turnover costs surfaced</span></div>
+      <div class="stat"><b>40%</b><span>Reporting time reduced</span></div>
+      <div class="stat"><b>36→14</b><span>Days time-to-hire</span></div>
+    </div>
+  </div>
 </header>
 
-<section class="hero">
-<img src="profile.jpeg" alt="Olajumoke Medunoye">
-<div>
-<h2>HR & People Analytics Consultant</h2>
-<p>
-Helping organisations reduce attrition and optimise workforce planning using data-driven insights.
-</p>
-<a href="Olajumoke_Medunoye_Final_CV_2026.pdf" class="btn">Download CV</a>
-<a href="HR_Analytics_Project_Presentation_Deck.pptx" class="btn">Download Project Presentation</a>
-</div>
-</section>
-
 <section id="about">
-<h2>About Me</h2>
+  <h2>About Me</h2>
+  <p class="section-sub">Most HR teams are sitting on data they can't act on.</p>
+  <div class="about-grid">
+    <div>
+      <p>I'm an HR and People Analytics professional based in Leeds, UK, with an MSc in Human Resource Management and professional accreditations from CIPD and MHRAP.</p>
+      <p>My work sits at the intersection of HR strategy and data. I build dashboards, forecasting models, and reporting solutions that give HR teams and leadership the visibility they need to make informed decisions on workforce planning, retention, and performance.</p>
+      <p>Technically, I work across Power BI, SQL/PostgreSQL, Excel, and Python. I've delivered projects spanning attrition modelling, recruitment analytics, capacity planning, and operational performance reporting — each one built as a full workflow from raw data to executive-ready dashboard, not just a chart.</p>
+      <p>Currently open to remote and hybrid HR Analytics and People Analytics roles across the UK and internationally.</p>
+    </div>
+    <ul class="focus-list">
+      <li>Reducing employee attrition through data-informed retention strategies</li>
+      <li>Workforce capacity and demand planning</li>
+      <li>Recruitment efficiency and hiring pipeline analytics</li>
+      <li>Performance visibility through automated dashboards</li>
+      <li>Predictive analytics for HR decision-making</li>
+      <li>HR data validation and reporting governance</li>
+    </ul>
+  </div>
+</section>
 
-<p>
-I am a HR & People Analytics professional based in the United Kingdom, specialising in turning workforce and operational data into actionable insights that support better business decisions.
-</p>
+<section id="skills" style="background:#F1F1F8;">
+  <h2>Tools &amp; Capabilities</h2>
+  <p class="section-sub">Technical Skills</p>
+  <div class="skills-grid">
+    <div class="skill-card"><h4>Visualisation</h4><p>Power BI, DAX, Data Modelling</p></div>
+    <div class="skill-card"><h4>Data &amp; Databases</h4><p>SQL, PostgreSQL, Excel, Python</p></div>
+    <div class="skill-card"><h4>Analytics Domains</h4><p>People Analytics, Workforce Planning, Predictive Analytics, Attrition Modelling</p></div>
+    <div class="skill-card"><h4>HR Practice</h4><p>Recruitment Analytics, Performance Management, HR Strategy</p></div>
+  </div>
+</section>
 
-<p>
-With a background in Human Resource Management (MSc) and professional accreditation (Assoc CIPD, MHRAP), I combine HR expertise with data analytics skills to build dashboards and reporting solutions that help organisations understand workforce trends, improve performance, and plan resources effectively.
-</p>
+<section id="portfolio">
+  <h2>Analytics Projects</h2>
+  <p class="section-sub">Click a project to see the full workflow — data source, method, and tools, not just the headline outcome.</p>
 
-<ul>
-<li><ul>
-<li>Reducing employee attrition and improving retention strategies</li>
-<li>Optimising workforce capacity and demand planning</li>
-<li>Improving recruitment efficiency and hiring timelines</li>
-<li>Enhancing performance visibility through data-driven reporting</li>
-<li>Supporting operational decision-making with predictive analytics</li>
-</ul></li>
-</ul>
+  <div class="project-card">
+    <img class="project-img" src="https://raw.githubusercontent.com/olajumokemedunoye/olajumokemedunoye.github.io/main/ai_predictive_attrition_dashboard.jpeg" alt="AI Predictive Attrition & Workforce Risk Model dashboard preview" loading="lazy">
+    <div class="project-head" onclick="toggleProject(this)">
+      <div>
+        <div class="tag">Project 01 · Python · SQL · Power BI</div>
+        <h3>AI Predictive Attrition &amp; Workforce Risk Model</h3>
+        <div class="meta">Classification model surfacing per-employee attrition risk</div>
+        <div class="tool-chips"><span class="tool-chip">Python</span><span class="tool-chip">SQL</span><span class="tool-chip">Power BI</span></div>
+      </div>
+      <div class="chev">+</div>
+    </div>
+    <div class="project-body"><div class="project-body-inner">
+      <h5>Business Problem</h5>
+      <p>HR only found out about attrition risk after an employee resigned — retention conversations were reactive, not targeted.</p>
+      <h5>Data &amp; Tools</h5>
+      <p>Python (pandas, scikit-learn), SQL, Power BI. Inputs: tenure, engagement survey scores, performance ratings, manager-change history, absence patterns.</p>
+      <h5>Workflow</h5>
+      <ol>
+        <li>Extracted and joined workforce records from HRIS via SQL into a single employee-level table.</li>
+        <li>Cleaned and engineered features in Python — tenure bands, rolling engagement trend, manager-change flags.</li>
+        <li>Trained a classification model to output a per-employee attrition risk score.</li>
+        <li>Validated model output against known historical leavers before rollout.</li>
+        <li>Published risk scores into a Power BI dashboard, refreshed on a schedule, segmented by department and manager.</li>
+      </ol>
+      <div class="outcome-box"><b>Outcome:</b> Gave HR business partners a ranked, evidence-based list to prioritise retention conversations, instead of reacting after resignations were already submitted.</div>
+    </div></div>
+  </div>
 
-<p>
-I am currently open to remote and hybrid HR and People Analytics opportunities where I can help organisations leverage data to improve workforce outcomes and support strategic decision-making.
-</p>
+  <div class="project-card">
+    <img class="project-img" src="https://raw.githubusercontent.com/olajumokemedunoye/olajumokemedunoye.github.io/main/hr_attrition_dashboard.jpeg" alt="HR Attrition Analysis & Cost-of-Turnover Model dashboard preview" loading="lazy">
+    <div class="project-head" onclick="toggleProject(this)">
+      <div>
+        <div class="tag">Project 02 · SQL · Excel · Power BI</div>
+        <h3>HR Attrition Analysis &amp; Cost-of-Turnover Model</h3>
+        <div class="meta">£312K in annual hidden turnover costs surfaced</div>
+        <div class="tool-chips"><span class="tool-chip">SQL</span><span class="tool-chip">Excel</span><span class="tool-chip">Power BI</span></div>
+      </div>
+      <div class="chev">+</div>
+    </div>
+    <div class="project-body"><div class="project-body-inner">
+      <h5>Business Problem</h5>
+      <p>Leadership knew attrition "felt high" but had no costed figure to justify investing in retention.</p>
+      <h5>Data &amp; Tools</h5>
+      <p>SQL, Excel, Power BI. Inputs: salary data, recruitment spend, onboarding cost estimates, departure records.</p>
+      <h5>Workflow</h5>
+      <ol>
+        <li>Pulled departure and salary data via SQL; built a cost-per-departure formula in Excel combining recruitment, onboarding, and productivity-ramp cost components.</li>
+        <li>Applied the formula across all departures in the reporting period to produce a total cost figure.</li>
+        <li>Segmented results by tenure band, department, and performance band in Power BI to show where cost concentrated.</li>
+        <li>Cross-checked the top-line number against payroll figures for sanity before presenting.</li>
+      </ol>
+      <div class="outcome-box"><b>Outcome:</b> Surfaced £312K in annual hidden turnover costs not visible in standard headcount reporting, with a department-level breakdown leadership could act on.</div>
+    </div></div>
+  </div>
+
+  <div class="project-card">
+    <img class="project-img" src="https://raw.githubusercontent.com/olajumokemedunoye/olajumokemedunoye.github.io/main/recruitment_pipeline_dashboard.jpeg" alt="Recruitment Pipeline & Hiring Efficiency Dashboard preview" loading="lazy">
+    <div class="project-head" onclick="toggleProject(this)">
+      <div>
+        <div class="tag">Project 03 · Excel · Power BI</div>
+        <h3>Recruitment Pipeline &amp; Hiring Efficiency Dashboard</h3>
+        <div class="meta">Time-to-hire cut 36 → 14 days</div>
+        <div class="tool-chips"><span class="tool-chip">Excel</span><span class="tool-chip">Power BI</span></div>
+      </div>
+      <div class="chev">+</div>
+    </div>
+    <div class="project-body"><div class="project-body-inner">
+      <h5>Business Problem</h5>
+      <p>Recruiters and hiring managers couldn't see where candidates were dropping out of the funnel or why time-to-hire was creeping up.</p>
+      <h5>Data &amp; Tools</h5>
+      <p>Excel, Power BI. Inputs: ATS export — stage-by-stage candidate movement, timestamps, source channel.</p>
+      <h5>Workflow</h5>
+      <ol>
+        <li>Exported raw stage-by-stage pipeline data from the ATS.</li>
+        <li>Cleaned and restructured it in Excel into a funnel format (applied → screened → interviewed → offered → hired), calculating conversion and dwell time per stage.</li>
+        <li>Built a Power BI dashboard breaking the funnel down by role, source channel, and recruiter.</li>
+        <li>Identified that drop-off concentrated in external-channel hires, and modelled the impact of shifting more roles to internal recruitment.</li>
+      </ol>
+      <div class="outcome-box"><b>Outcome:</b> Time-to-hire fell from 36 to 14 days after the resulting process changes; the internal-recruitment shift showed potential to cut external hiring costs by up to 96%.</div>
+    </div></div>
+  </div>
+
+  <div class="project-card">
+    <img class="project-img" src="https://raw.githubusercontent.com/olajumokemedunoye/olajumokemedunoye.github.io/main/employee_performance_dashboard.jpeg" alt="Employee Performance & Productivity Analytics Dashboard preview" loading="lazy">
+    <div class="project-head" onclick="toggleProject(this)">
+      <div>
+        <div class="tag">Project 04 · Power BI · Excel</div>
+        <h3>Employee Performance &amp; Productivity Analytics Dashboard</h3>
+        <div class="meta">Single cross-department performance view</div>
+        <div class="tool-chips"><span class="tool-chip">Power BI</span><span class="tool-chip">Excel</span></div>
+      </div>
+      <div class="chev">+</div>
+    </div>
+    <div class="project-body"><div class="project-body-inner">
+      <h5>Business Problem</h5>
+      <p>Performance and productivity data lived in separate department spreadsheets — no single view for spotting underperformance early or tracking improvement.</p>
+      <h5>Data &amp; Tools</h5>
+      <p>Power BI, Excel. Inputs: quarterly performance ratings, productivity metrics by team.</p>
+      <h5>Workflow</h5>
+      <ol>
+        <li>Consolidated department-level spreadsheets into one structured data model in Excel.</li>
+        <li>Standardised rating scales and productivity metrics across departments so they were comparable.</li>
+        <li>Built a Power BI report with filters by team, performance band, and time period.</li>
+        <li>Set it up for quarterly refresh so managers could track movement over review cycles.</li>
+      </ol>
+      <div class="outcome-box"><b>Outcome:</b> Gave managers a single filterable view to identify underperforming pockets and track whether interventions were working quarter over quarter.</div>
+    </div></div>
+  </div>
+
+  <div class="project-card">
+    <img class="project-img" src="https://raw.githubusercontent.com/olajumokemedunoye/olajumokemedunoye.github.io/main/customer_service_dashboard.jpeg" alt="Customer Service Operations & KPI Dashboard preview" loading="lazy">
+    <div class="project-head" onclick="toggleProject(this)">
+      <div>
+        <div class="tag">Project 05 · Excel · Power BI</div>
+        <h3>Customer Service Operations &amp; KPI Dashboard</h3>
+        <div class="meta">30% faster ticket response, 95% CSAT</div>
+        <div class="tool-chips"><span class="tool-chip">Excel</span><span class="tool-chip">Power BI</span></div>
+      </div>
+      <div class="chev">+</div>
+    </div>
+    <div class="project-body"><div class="project-body-inner">
+      <h5>Business Problem</h5>
+      <p>Ticket response times were slipping and it wasn't clear where in the workflow the delays were concentrated. Delivered during the Conduent role (see Experience).</p>
+      <h5>Data &amp; Tools</h5>
+      <p>Excel, Power BI. Inputs: interaction-level data — response time, resolution time, CSAT score, contact reason.</p>
+      <h5>Workflow</h5>
+      <ol>
+        <li>Pulled interaction-level logs and cleaned them in Excel, tagging each ticket by contact reason and channel.</li>
+        <li>Analysed response and resolution time by contact reason to isolate where delays concentrated.</li>
+        <li>Built a Power BI KPI dashboard tracking CSAT, AHT, and FCR against SLA targets.</li>
+        <li>Fed findings back into workflow changes targeting the specific bottleneck identified.</li>
+      </ol>
+      <div class="outcome-box"><b>Outcome:</b> Average ticket response time fell 30%, supporting a 95% customer satisfaction rate and 90% first-contact resolution.</div>
+    </div></div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-img-placeholder">Dashboard preview to be added</div>
+    <div class="project-head" onclick="toggleProject(this)">
+      <div>
+        <div class="tag">Project 06 · SQL · Excel · Power BI</div>
+        <h3>Workforce Capacity Planning &amp; Headcount Forecasting</h3>
+        <div class="meta">18% improvement in resource allocation accuracy</div>
+        <div class="tool-chips"><span class="tool-chip">SQL</span><span class="tool-chip">Excel</span><span class="tool-chip">Power BI</span></div>
+      </div>
+      <div class="chev">+</div>
+    </div>
+    <div class="project-body"><div class="project-body-inner">
+      <h5>Business Problem</h5>
+      <p>Headcount planning was done departmentally and ad hoc — leadership had no way to stress-test resourcing decisions before committing budget.</p>
+      <h5>Data &amp; Tools</h5>
+      <p>SQL, Excel, Power BI. Inputs: current headcount, attrition rate, hiring lead time, department growth targets.</p>
+      <h5>Workflow</h5>
+      <ol>
+        <li>Extracted current headcount and historical attrition data via SQL.</li>
+        <li>Built scenario models in Excel covering growth, steady-state, and reduction cases, driven by adjustable assumptions.</li>
+        <li>Surfaced the models in Power BI so leadership could toggle scenarios and see resourcing gaps by department.</li>
+        <li>Flagged two departments where the model showed structural understaffing risk not visible in standard headcount reports.</li>
+      </ol>
+      <div class="outcome-box"><b>Outcome:</b> Improved resource allocation accuracy by 18% and gave leadership a stress-tested basis for hiring decisions.</div>
+    </div></div>
+  </div>
 
 </section>
 
-<section>
-<h2>Key Achievements
-<ul>
-<li>Reduced executive reporting time by 40% through automated dashboards</li>
-<li>Improved recruitment efficiency by 25% using data-driven hiring insights</li>
-<li>Reduced ticket response time by 30% through workflow optimisation</li>
-<li>Identified £312K in hidden turnover costs using workforce analytics</li>
-</ul></li>
-</ul>
+<section id="experience" style="background:#F1F1F8;">
+  <h2>Professional Experience</h2>
+  <p class="section-sub">Career</p>
+
+  <div class="exp-item">
+    <div class="dates">Nov 2024 – Present</div>
+    <h3>HR Analyst Consultant (Remote)</h3>
+    <p class="org">10Alytics.io</p>
+    <p>Designs interactive Power BI dashboards that automate HR reporting, cutting turnaround time by 40%. Runs workforce analytics, retention analysis, and attrition-driver reporting. Cleans, validates, and models HRIS data in SQL (PostgreSQL), Excel, and Power BI. Built SQL-based workforce forecasting models improving resource allocation accuracy by 18%.</p>
+  </div>
+
+  <div class="exp-item">
+    <div class="dates">Jul 2023 – Present</div>
+    <h3>Customer Service Advisor</h3>
+    <p class="org">Conduent, Leeds</p>
+    <p>Manages high-volume customer interactions against SLA and quality targets while tracking CSAT, AHT, and FCR metrics. Analysis of interaction data cut average ticket response time by 30%, supporting a 95% customer satisfaction rate and 90% first-contact resolution.</p>
+  </div>
+
+  <div class="exp-item">
+    <div class="dates">Jan 2019 – Mar 2023</div>
+    <h3>Customer Success Team Lead</h3>
+    <p class="org">Tangerine Africa</p>
+    <p>Led, coached, and developed a team of 36 Customer Success professionals. Developed dashboards tracking employee engagement, attrition, and workforce performance; reduced team turnover by 18% through data-informed retention interventions. Automated workforce reporting, saving 10+ hours of manual work weekly.</p>
+  </div>
 </section>
 
-<section id="projects">
-
-<h2>Analytics Projects Portfolio</h2>
-
-<div class="project">
-<h3>HR Attrition Analysis & Cost-of-Turnover Model</h3>
-
-<p>
-Developed a comprehensive HR analytics dashboard to identify workforce attrition trends and quantify the financial impact of employee turnover across departments.
-</p>
-
-<ul>
-<li>Identified £312K in hidden turnover costs linked to 22% annual attrition</li>
-<li>Analysed workforce data by tenure, department, and performance ratings</li>
-<li>Provided evidence-based retention recommendations to leadership</li>
-<li>Improved workforce planning visibility through interactive dashboards</li>
-</ul>
-
-<p><strong>Tools:</strong> SQL | Excel | Power BI</p>
-</div>
-
-<div class="project">
-<h3>Recruitment Pipeline & Hiring Efficiency Dashboard</h3>
-
-<p>
-Designed a recruitment analytics dashboard to monitor hiring performance, recruitment costs, and time-to-fill metrics, enabling more efficient workforce planning and talent acquisition decisions.
-</p>
-
-<ul>
-<li>Reduced time-to-hire from 36 days to 14 days through process optimisation</li>
-<li>Identified 96% potential cost savings through internal recruitment strategy</li>
-<li>Developed recruitment KPI tracking for hiring managers and HR teams</li>
-<li>Improved recruitment decision-making using data-driven insights</li>
-</ul>
-
-<p><strong>Tools:</strong> Excel | Power BI | HR Analytics</p>
-</div>
-
-<div class="project">
-<h3>Employee Performance & Productivity Analytics Dashboard</h3>
-
-<p>
-Built a performance monitoring dashboard to analyse employee productivity, performance ratings, and operational output across departments.
-</p>
-
-<ul>
-<li>Identified performance gaps and productivity trends across teams</li>
-<li>Improved performance visibility for managers and HR leaders</li>
-<li>Supported performance management and workforce planning decisions</li>
-<li>Enabled data-driven performance reviews and workforce optimisation</li>
-</ul>
-
-<p><strong>Tools:</strong> Power BI | Excel | Performance Analytics</p>
-</div>
-
-<div class="project">
-<h3>Customer Service Operations & KPI Dashboard</h3>
-
-<p>
-Developed an operational analytics dashboard to monitor customer service performance, ticket resolution time, and service quality metrics.
-</p>
-
-<ul>
-<li>Analysed customer service data across high-volume support operations</li>
-<li>Improved visibility into response time and service performance metrics</li>
-<li>Identified workflow bottlenecks impacting customer satisfaction</li>
-<li>Supported operational efficiency and service delivery improvements</li>
-</ul>
-
-<p><strong>Tools:</strong> Excel | Power BI | Customer Analytics</p>
-</div>
-
-<div class="project">
-<h3>Workforce Capacity Planning & Headcount Forecasting Model</h3>
-
-<p>
-Designed a workforce planning model to forecast staffing requirements, analyse workload demand, and support strategic workforce planning decisions.
-</p>
-
-<ul>
-<li>Developed workforce forecasting scenarios for organisational growth planning</li>
-<li>Identified staffing bottlenecks and capacity risks</li>
-<li>Improved workforce planning accuracy and resource allocation</li>
-<li>Supported leadership decision-making through data-driven workforce insights</li>
-</ul>
-
-<p><strong>Tools:</strong> Excel | Power BI | Workforce Planning</p>
-</div>
-
-<div class="project">
-<h3>AI Predictive Attrition & Workforce Risk Model</h3>
-
-<p>
-Built a predictive analytics model to identify employees at risk of leaving the organisation and support proactive retention strategies using workforce data.
-</p>
-
-<ul>
-<li>Developed predictive model to identify high-risk employees</li>
-<li>Improved workforce retention planning using data-driven insights</li>
-<li>Enabled proactive HR interventions and workforce risk monitoring</li>
-<li>Demonstrated application of AI and predictive analytics in HR decision-making</li>
-</ul>
-
-<p><strong>Tools:</strong> Python | SQL | Power BI | Predictive Analytics</p>
-</div>
-
+<section id="credentials">
+  <h2>Credentials</h2>
+  <p class="section-sub">Education &amp; Certifications</p>
+  <div class="cred-grid">
+    <div class="cred-card"><h4>MSc Human Resource Management</h4><p>Leeds Beckett University, UK</p></div>
+    <div class="cred-card"><h4>Associate Member (Assoc CIPD)</h4><p>Chartered Institute of Personnel and Development · 2024</p></div>
+    <div class="cred-card"><h4>Master HR Analytics Professional (MHRAP)</h4><p>Professional accreditation in HR analytics practice · 2025</p></div>
+    <div class="cred-card"><h4>Power BI Data Analytics Certification</h4><p>Dashboard development, DAX, and data modelling</p></div>
+    <div class="cred-card"><h4>SQL for Data Analysis</h4><p>Querying, aggregation, and workforce data modelling (SQL/PostgreSQL)</p></div>
+    <div class="cred-card"><h4>Python for Data Analytics</h4><p>Data wrangling and classification modelling in Python</p></div>
+    <div class="cred-card"><h4>BSc Industrial Relations &amp; Personnel Management</h4><p>Osun State University, Nigeria</p></div>
+    <div class="cred-card"><h4>BSc Economics</h4><p>Ajayi Crowther University, Nigeria</p></div>
+  </div>
 </section>
 
-<section id="education">
-
-<h2>Education</h2>
-
-<div class="card">
-<h3>MSc Human Resource Management</h3>
-<p><strong>Leeds Beckett University, United Kingdom</strong></p>
-<p>
-Dissertation: <em>The Impact of Work Flexibility on Employee Well-being and Gender Equality at TangerineAPT Pensions Limited</em>
-</p>
-<p>
-Research Focus: Workforce flexibility, employee well-being, gender equality, and organisational policy effectiveness in modern workplaces.
-</p>
-</div>
-
-<div class="card">
-<h3>BSc Industrial Relations and Personnel Management</h3>
-<p><strong>Osun State University, Nigeria</strong></p>
-<p>
-Specialised in employee relations, labour law, performance management, and organisational behaviour.
-</p>
-</div>
-
-<div class="card">
-<h3>BSc Economics</h3>
-<p><strong>Ajayi Crowther University, Nigeria</strong></p>
-<p>
-Focused on economic analysis, statistics, financial systems, and business decision-making.
-</p>
-</div>
-
-</section>
-
-<section id="certifications">
-
-<h2>Certifications & Professional Memberships</h2>
-
-<ul>
-<li>Associate Member (Assoc CIPD) — Chartered Institute of Personnel and Development</li>
-<li>Master HR Analytics Professional (MHRAP)</li>
-<li>Power BI Data Analytics Certification</li>
-<li>SQL for Data Analysis</li>
-<li>Python for Data Analytics</li>
-<li>HR Analytics & People Metrics Certification</li>
-</ul>
-
-</section>
-
-<section id="experience">
-
-<h2>Professional Experience</h2>
-
-<div class="card">
-<h3>HR Analyst Consultant</h3>
-<p><strong>10Alytics — Remote | Nov 2024 – Present</strong></p>
-<ul>
-<li>Designed interactive Power BI dashboards to monitor recruitment performance and workforce trends</li>
-<li>Reduced executive reporting time by 40% through automated reporting processes</li>
-<li>Built SQL-based workforce forecasting models improving resource allocation accuracy by 18%</li>
-<li>Delivered workforce insights supporting data-driven HR decision-making</li>
-</ul>
-</div>
-
-<div class="card">
-<h3>Customer Service Representative</h3>
-<p><strong>Conduent — Leeds, United Kingdom | Jul 2023 – Present</strong></p>
-<ul>
-<li>Handled high-volume customer enquiries across phone and digital channels</li>
-<li>Maintained service quality standards including customer satisfaction and resolution targets</li>
-<li>Recorded and analysed customer interaction data using CRM systems</li>
-<li>Collaborated with internal teams to improve service delivery and customer experience</li>
-</ul>
-</div>
-
-<div class="card">
-<h3>Customer Operations Analyst</h3>
-<p><strong>MoonPay — Remote | Mar 2023 – July 2024</strong></p></strong></p>
-<ul>
-<li>Analysed operational workflows across 1,500+ monthly customer interactions</li>
-<li>Reduced ticket response time by 30% through workflow optimisation</li>
-<li>Maintained 95% customer satisfaction and 90% first-contact resolution rates</li>
-<li>Identified service patterns improving customer retention and operational efficiency</li>
-</ul>
-</div>
-
-<div class="card">
-<h3>HR & People Analyst</h3>
-<p><strong>Tangerine Africa — Nigeria | Jan 2019 – Mar 2023</strong></p>
-<ul>
-<li>Developed HR dashboards tracking employee engagement and workforce performance metrics</li>
-<li>Reduced employee turnover by 18% through targeted HR interventions</li>
-<li>Automated workforce reporting saving over 10 hours of manual reporting weekly</li>
-<li>Supported workforce planning and HR strategy through data-driven insights</li>
-</ul>
-</div>
-
-</section>
-
-<section id="skills">
-<h2>Skills</h2>
-
-<div class="skills-grid">
-<div class="skill">📊 Power BI</div>
-<div class="skill">📈 Excel</div>
-<div class="skill">🗄 SQL</div>
-<div class="skill">🤖 Predictive Analytics</div>
-<div class="skill">📉 Workforce Planning</div>
-<div class="skill">📋 HR Analytics</div>
-</div>
-
-</section>
-
-<section id="testimonials">
-<h2>Testimonials</h2>
-
-<div class="card">
-"Olajumoke consistently delivered clear workforce insights that improved decision-making and reporting efficiency."
-</div>
-
-<div class="card">
-"Her ability to translate complex data into actionable HR strategies made a measurable impact on workforce planning."
-</div>
-
-</section>
-
-<section id="contact">
-<h2>Contact</h2>
-
-<form>
-<input type="text" placeholder="Your Name">
-<input type="email" placeholder="Your Email">
-<textarea rows="4" placeholder="Your Message"></textarea>
-<button class="btn" type="submit">Send Message</button>
-</form>
-
-<p>Email: olajumokemedunoye@gmail.com</p>
-
-<a href="https://www.linkedin.com/in/olajumoke-medunoye" class="btn"><a href="https://www.linkedin.com/in/olajumoke-medunoye" target="_blank">View LinkedIn Profile</a></a>
-
-</section>
-
-<footer>
-<p>© 2026 Olajumoke O. Medunoye | HR & People Analytics Portfolio</p>
+<footer id="contact">
+  <div class="wrap">
+    <h2 style="color:#fff;">Currently available for remote roles</h2>
+    <p style="max-width:520px;margin:0 auto 24px;">Open to remote and hybrid HR Analytics and People Analytics roles across the UK and internationally.</p>
+    <div class="contact-row">
+      <a href="mailto:olajumokemedunoye@gmail.com">olajumokemedunoye@gmail.com</a>
+      <a href="https://www.linkedin.com/in/olajumoke-medunoye" target="_blank">LinkedIn</a>
+      <a href="https://github.com/olajumokemedunoye" target="_blank">GitHub</a>
+    </div>
+    <p>© 2026 Olajumoke Medunoye. All rights reserved.</p>
+  </div>
 </footer>
 
 <script>
-
-function toggleMode() {
- document.body.classList.toggle('dark');
+function toggleProject(headEl){
+  var card = headEl.parentElement;
+  var body = card.querySelector('.project-body');
+  var isOpen = card.classList.contains('open');
+  document.querySelectorAll('.project-card.open').forEach(function(c){
+    c.classList.remove('open');
+    c.querySelector('.project-body').style.maxHeight = null;
+  });
+  if(!isOpen){
+    card.classList.add('open');
+    body.style.maxHeight = body.scrollHeight + 'px';
+  }
 }
-
-function filterProjects(category) {
- let projects = document.querySelectorAll('.project');
- projects.forEach(p => {
-   if (category === 'all' || p.dataset.category === category) {
-     p.style.display = 'block';
-   } else {
-     p.style.display = 'none';
-   }
- });
-}
-
-window.onscroll = function() {
- let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
- let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
- let scrolled = (winScroll / height) * 100;
- document.getElementById('progress-bar').style.width = scrolled + '%';
-};
-
 </script>
 
 </body>
