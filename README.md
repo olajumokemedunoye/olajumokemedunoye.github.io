@@ -1,2 +1,5 @@
 # olajumokemedunoye.github.io
-HR &amp; People Analytics Portfolio showcasing dashboards in workforce planning, recruitment, and performance analytics.
+
+HR & People Analytics portfolio — dashboards and analysis across workforce planning, attrition modelling, recruitment analytics and performance reporting.
+
+**Live:** https://olajumokemedunoye.github.io
