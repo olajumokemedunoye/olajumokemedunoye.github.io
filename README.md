@@ -33,7 +33,7 @@ The site separates three kinds of evidence:
 index.html                          single-page site (HTML, CSS, a little JS)
 profile.jpeg                        portrait
 hr_attrition_dashboard.jpeg         dashboard view used in case study 02
-cv/Olajumoke_Medunoye_CV.pdf        CV download (add this file to enable the button)
+cv/Olajumoke_Medunoye_CV.pdf        CV download
 ```
 
 The remaining `.jpeg` files are earlier dashboard images that the page no longer displays.
