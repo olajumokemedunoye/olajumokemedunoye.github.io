@@ -44,6 +44,6 @@ No build step and no dependencies. Open `index.html` in a browser or serve the f
 
 ## Contact
 
-olajumokemedunoye@gmail.com · [LinkedIn](https://www.linkedin.com/in/olajumoke-medunoye) · [GitHub](https://github.com/olajumokemedunoye)
+medunoyeolajumoke@gmail.com · [LinkedIn](https://www.linkedin.com/in/olajumoke-medunoye) · [GitHub](https://github.com/olajumokemedunoye)
 
 Consulting and HR analytics templates are a separate business: [OlaDigitalHub](https://olajumokemedunoye.github.io/OlaDigitalHub/).
