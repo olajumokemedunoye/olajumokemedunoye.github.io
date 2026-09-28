@@ -362,12 +362,7 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
           <div class="cs-block"><h4>Key findings</h4><p>£312K a year in turnover cost that headcount reporting didn't capture (portfolio project figure). A few departments and the early-tenure leavers carried a disproportionate share of it.</p></div>
           <div class="cs-block"><h4>Business implication</h4><p>With a cost attached, retention became a business case leadership could fund.</p></div>
           <div class="cs-block"><h4>Recommendation</h4><p>Focus retention spend on the departments and tenure bands carrying the most cost, starting with early-tenure leavers.</p></div>
-          <div class="cs-block full"><h4>Outcome</h4><p>A costed, department-level view that let leadership set retention priorities.</p>
-            <figure>
-              <img src="hr_attrition_dashboard.jpeg" width="900" height="632" loading="lazy" decoding="async" alt="Attrition dashboard showing overall attrition rate, voluntary and involuntary leavers, attrition by department, exit reasons, monthly leavers trend and a department risk rating.">
-              <figcaption>Dashboard view from this portfolio project.</figcaption>
-            </figure>
-          </div>
+          <div class="cs-block full"><h4>Outcome</h4><p>A costed, department-level view that let leadership set retention priorities.</p></div>
         </div>
       </details>
     </article>
@@ -377,27 +372,51 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
         <span class="case-num" aria-hidden="true">03</span>
         <div>
           <span class="label label-portfolio">Portfolio project</span>
-          <h3 id="cs3">Recruitment Pipeline &amp; Hiring Analytics</h3>
-          <p class="summary">Showed where candidates drop out of the hiring process and how long each stage takes.</p>
-          <ul class="chips" aria-label="Tools and methods"><li>Excel</li><li>Power BI</li><li>Data cleaning</li><li>Funnel analysis</li></ul>
+          <h3 id="cs3">Recruitment Cost &amp; Hiring Analytics</h3>
+          <p class="summary">Compared the cost and speed of internal and external hiring for Ted Square Ltd, a case-study company.</p>
+          <ul class="chips" aria-label="Tools and methods"><li>Excel</li><li>Power BI</li><li>Cost analysis</li><li>Data cleaning</li></ul>
         </div>
       </div>
       <details class="more">
         <summary><span class="when-closed">View case study</span><span class="when-open">Hide case study</span></summary>
         <div class="cs-body">
-          <div class="cs-block"><h4>Business problem</h4><p>Recruiters and hiring managers couldn't see where candidates were dropping out, or why time-to-hire was rising.</p></div>
-          <div class="cs-block"><h4>Data</h4><p>An applicant tracking system (ATS) export showing each candidate's movement through the stages, with timestamps and source channel.</p></div>
+          <div class="cs-block"><h4>Business problem</h4><p>Ted Square Ltd wanted to know whether its mix of internal and external hiring was financially sustainable, without lowering talent quality.</p></div>
+          <div class="cs-block"><h4>Data</h4><p>Hiring records with employment method (internal or external), cost of hire, department, date of hire and performance score.</p></div>
           <div class="cs-block full"><h4>Analysis</h4><ul>
-            <li>Restructured the export in Excel into a funnel: applied, screened, interviewed, offered, hired.</li>
-            <li>Calculated the conversion rate and the time spent at each stage.</li>
-            <li>Built a Power BI dashboard breaking the funnel down by role, source channel and recruiter.</li>
-            <li>Modelled what would happen if more roles were filled through internal recruitment.</li>
+            <li>Cleaned the hiring records and split every hire by employment method.</li>
+            <li>Compared total cost, cost per hire and days to fill for internal and external hires.</li>
+            <li>Broke hiring cost down by department in Power BI and compared performance scores by recruitment method.</li>
           </ul></div>
-          <div class="cs-block"><h4>Tools</h4><p>Excel, Power BI.</p></div>
-          <div class="cs-block"><h4>Key findings</h4><p>Drop-off was concentrated among candidates from external channels, not spread evenly through the process.</p></div>
-          <div class="cs-block"><h4>Business implication</h4><p>The time-to-hire problem sat in specific channels and stages, so fixes could be targeted instead of changing the whole process.</p></div>
-          <div class="cs-block"><h4>Recommendation</h4><p>Fill more suitable roles internally, and track time at each stage on the dashboard.</p></div>
-          <div class="cs-block full"><h4>Outcome</h4><p>A funnel view of conversion and time-to-hire by role, channel and recruiter that recruiters can use to find bottlenecks.</p></div>
+          <div class="cs-block"><h4>Tools</h4><p>Excel, Power BI, PowerPoint.</p></div>
+          <div class="cs-block"><h4>Key findings</h4><ul>
+            <li>External hiring cost £1,223,000 in total; internal hiring cost £52,000.</li>
+            <li>Cost per hire: £6,115 external against £1,733 internal.</li>
+            <li>Days to fill: 36 external against 14 internal.</li>
+          </ul></div>
+          <div class="cs-block"><h4>Business implication</h4><p>External hiring drove almost all recruitment spend. Filling suitable roles internally would cut both cost and time to fill.</p></div>
+          <div class="cs-block"><h4>Recommendation</h4><p>Prioritise internal recruitment where the skills exist, build succession plans for each department, and keep external hiring for specialist roles.</p></div>
+          <div class="cs-block full"><h4>Outcome</h4><p>A costed comparison and action plan the business could use to rebalance its hiring mix.</p>
+            <figure>
+              <svg viewBox="0 0 640 250" role="img" aria-labelledby="rc-title rc-desc" style="width:100%;height:auto;display:block;border:1px solid var(--border);border-radius:8px;background:#fff">
+                <title id="rc-title">Internal versus external hiring at Ted Square Ltd</title>
+                <desc id="rc-desc">Total hiring cost: internal £52,000, external £1,223,000. Cost per hire: internal £1,733, external £6,115. Days to fill: internal 14, external 36.</desc>
+                <g font-family="system-ui,Segoe UI,Arial,sans-serif" font-size="13" fill="#1F2937">
+                  <rect x="20" y="16" width="12" height="12" rx="2" fill="#C2410C"/><text x="38" y="27">Internal</text>
+                  <rect x="110" y="16" width="12" height="12" rx="2" fill="#4B5563"/><text x="128" y="27">External</text>
+                  <text x="20" y="72" font-weight="600">Total hiring cost</text>
+                  <rect x="170" y="56" width="17" height="16" rx="2" fill="#C2410C"/><text x="193" y="69">£52,000</text>
+                  <rect x="170" y="76" width="380" height="16" rx="2" fill="#4B5563"/><text x="556" y="89">£1,223,000</text>
+                  <text x="20" y="142" font-weight="600">Cost per hire</text>
+                  <rect x="170" y="126" width="108" height="16" rx="2" fill="#C2410C"/><text x="284" y="139">£1,733</text>
+                  <rect x="170" y="146" width="380" height="16" rx="2" fill="#4B5563"/><text x="556" y="159">£6,115</text>
+                  <text x="20" y="212" font-weight="600">Days to fill</text>
+                  <rect x="170" y="196" width="148" height="16" rx="2" fill="#C2410C"/><text x="324" y="209">14 days</text>
+                  <rect x="170" y="216" width="380" height="16" rx="2" fill="#4B5563"/><text x="556" y="229">36 days</text>
+                </g>
+              </svg>
+              <figcaption>Chart drawn from the project's summary figures. Bars in each row are scaled to the external value.</figcaption>
+            </figure>
+          </div>
         </div>
       </details>
     </article>
@@ -407,27 +426,36 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
         <span class="case-num" aria-hidden="true">04</span>
         <div>
           <span class="label label-portfolio">Portfolio project</span>
-          <h3 id="cs4">HR Reporting Automation</h3>
-          <p class="summary">Replaced separate departmental spreadsheets with one refreshable performance and productivity report.</p>
-          <ul class="chips" aria-label="Tools and methods"><li>Excel</li><li>Power BI</li><li>Data modelling</li><li>Data cleaning</li></ul>
+          <h3 id="cs4">HR Reporting Automation: Performance Dashboard</h3>
+          <p class="summary">A self-service Power BI report on performance appraisal data for Salford &amp; Co, a case-study company.</p>
+          <ul class="chips" aria-label="Tools and methods"><li>Power BI</li><li>DAX</li><li>Data modelling</li><li>Visualisation</li></ul>
         </div>
       </div>
       <details class="more">
         <summary><span class="when-closed">View case study</span><span class="when-open">Hide case study</span></summary>
         <div class="cs-body">
-          <div class="cs-block"><h4>Business problem</h4><p>Performance and productivity data sat in each department's own spreadsheet. There was no single view for spotting underperformance early or tracking change across review cycles.</p></div>
-          <div class="cs-block"><h4>Data</h4><p>Quarterly performance ratings and team productivity metrics from the departmental spreadsheets.</p></div>
+          <div class="cs-block"><h4>Business problem</h4><p>HR needed one view of appraisal results to answer recurring questions about performance, engagement and training without building a new report each quarter.</p></div>
+          <div class="cs-block"><h4>Data</h4><p>Performance appraisal records for 753 employees: performance score, goals met, engagement, tenure, training hours, department, job role and manager remarks.</p></div>
           <div class="cs-block full"><h4>Analysis</h4><ul>
-            <li>Consolidated the spreadsheets into one structured data model.</li>
-            <li>Standardised the rating scales and productivity measures so departments could be compared directly.</li>
-            <li>Built a Power BI report with filters for team, performance band and period.</li>
-            <li>Set the report to refresh each quarter to match the review cycle.</li>
+            <li>Built a data model with a calendar dimension so results could be viewed by year and quarter.</li>
+            <li>Wrote DAX measures for average performance, goals met, engagement, tenure, training hours and quarter-on-quarter change.</li>
+            <li>Added slicers for quarter, department and employee, so users filter the report instead of asking for new cuts.</li>
+            <li>Plotted training hours against performance score, and performance bands by department.</li>
           </ul></div>
-          <div class="cs-block"><h4>Tools</h4><p>Excel, Power BI.</p></div>
-          <div class="cs-block"><h4>Key findings</h4><p>Comparing departments only worked once they shared one rating scale. The separate spreadsheets had hidden the differences.</p></div>
-          <div class="cs-block"><h4>Business implication</h4><p>Quarterly reporting became a refresh instead of a manual assembly job, and managers saw the same numbers.</p></div>
-          <div class="cs-block"><h4>Recommendation</h4><p>Keep a single agreed rating scale across departments and refresh the report on the review cycle.</p></div>
-          <div class="cs-block full"><h4>Outcome</h4><p>One report where managers can filter to underperforming teams and track movement from quarter to quarter.</p></div>
+          <div class="cs-block"><h4>Tools</h4><p>Power BI, DAX.</p></div>
+          <div class="cs-block"><h4>Key findings</h4><ul>
+            <li>Average performance was 74.8%. It dipped from 75.3% in Q1 to 74.3% in Q2 2024, then held at 74.8% in Q3 and Q4.</li>
+            <li>Performance bands were almost identical across HR, Marketing, Operations and Sales.</li>
+            <li>The scatter showed no clear link between training hours and performance score.</li>
+          </ul></div>
+          <div class="cs-block"><h4>Business implication</h4><p>Performance differences sat with individuals, not departments. More training hours alone were unlikely to lift scores.</p></div>
+          <div class="cs-block"><h4>Recommendation</h4><p>Target development at individual goals and manager feedback, and review whether training content, not volume, supports performance.</p></div>
+          <div class="cs-block full"><h4>Outcome</h4><p>A single refreshable report HR can filter by quarter, department and employee.</p>
+            <figure>
+              <img src="performance_dashboard_powerbi.png" width="1212" height="679" loading="lazy" decoding="async" alt="Power BI dashboard titled Overview of Employee Performance, showing KPI cards for total employees, average performance, engagement and tenure, a quarterly performance trend line, a training hours versus performance scatter plot, an appraisal table, a marital status donut and performance bands by department.">
+              <figcaption>Power BI report from this project. Employee names are hidden.</figcaption>
+            </figure>
+          </div>
         </div>
       </details>
     </article>

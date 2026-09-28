@@ -12,8 +12,8 @@ This is the source for my job-search portfolio. It covers workforce planning, at
 |---|---|---|---|
 | 01 | Workforce Planning & Headcount Forecasting | SQL, Excel, Power BI | Portfolio project |
 | 02 | HR Attrition & Cost-of-Turnover Analysis | SQL, Excel, Power BI | Portfolio project |
-| 03 | Recruitment Pipeline & Hiring Analytics | Excel, Power BI | Portfolio project |
-| 04 | HR Reporting Automation | Excel, Power BI | Portfolio project |
+| 03 | Recruitment Cost & Hiring Analytics | Excel, Power BI | Portfolio project |
+| 04 | HR Reporting Automation: Performance Dashboard | Power BI, DAX | Portfolio project |
 
 Every case study on the site uses the same structure: business problem, data, analysis, tools, key findings, business implication, recommendation and outcome.
 
@@ -32,11 +32,10 @@ The site separates three kinds of evidence:
 ```
 index.html                          single-page site (HTML, CSS, a little JS)
 profile.jpeg                        portrait
-hr_attrition_dashboard.jpeg         dashboard view used in case study 02
+performance_dashboard_powerbi.png   Power BI screenshot used in case study 04
 cv/Olajumoke_Medunoye_CV.pdf        CV download
 ```
 
-The remaining `.jpeg` files are earlier dashboard images that the page no longer displays.
 
 ## Running locally
 
