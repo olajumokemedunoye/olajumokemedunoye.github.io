@@ -17,7 +17,17 @@ This is the source for my job-search portfolio. It covers workforce planning, at
 
 Every case study on the site uses the same structure: business problem, data, analysis, tools, key findings, business implication, recommendation and outcome.
 
-Additional work on the site: Workforce Attrition Risk Modelling (Python, SQL, Power BI), a Customer Service Operations KPI Dashboard, and an illustrative first-year attrition analysis built on synthetic data.
+## Recent projects on public data
+
+Each has its code, data and outputs in `projects/` and a full report on the site.
+
+| Project | Data | Tools | Report |
+|---|---|---|---|
+| UK Gender Pay Gap Analysis 2023–2025 | gov.uk Gender Pay Gap Service, 2023/24 and 2024/25 | SQL (SQLite), Python | [projects/gender-pay-gap.html](https://olajumokemedunoye.github.io/projects/gender-pay-gap.html) |
+| UK Labour Market Briefing for Workforce Planning | ONS Labour Market Statistics, September 2026 | Python, pandas | [projects/labour-market.html](https://olajumokemedunoye.github.io/projects/labour-market.html) |
+| Attrition Risk Model | IBM HR Analytics sample dataset (fictional employees) | Python, scikit-learn | [projects/attrition-risk-model.html](https://olajumokemedunoye.github.io/projects/attrition-risk-model.html) |
+
+Also on the site: a Customer Service Operations KPI Dashboard and an illustrative first-year attrition analysis built on synthetic data.
 
 ## How results are labelled
 
@@ -37,13 +47,18 @@ attrition_cost_powerbi.png          Power BI screenshot used in case study 02
 recruitment_cost_powerbi.png        Power BI screenshot used in case study 03
 performance_dashboard_powerbi.png   Power BI screenshot used in case study 04
 cv/Olajumoke_Medunoye_CV.pdf        CV download
-projects/                           full project reports (one per case study)
+projects/*.html                     full project reports
+projects/gender-pay-gap/            data, sql/analysis.sql, python/run_analysis.py, outputs/
+projects/labour-market/             data, python/labour_market.py, outputs/
+projects/attrition-risk-model/      data, python/attrition_model.py, outputs/
 ```
 
 
 ## Running locally
 
-No build step and no dependencies. Open `index.html` in a browser or serve the folder with any static server. GitHub Pages deploys from `main`.
+The site has no build step. Open `index.html` in a browser or serve the folder with any static server. GitHub Pages deploys from `main`.
+
+The Python projects need Python 3.11+ with pandas, matplotlib and scikit-learn. Run each script from its project folder, for example `cd projects/gender-pay-gap && python python/run_analysis.py`.
 
 ## Contact
 

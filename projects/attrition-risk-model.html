@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Attrition Risk Model | Olajumoke Medunoye</title>
+<meta name="description" content="Employee attrition risk model built in Python on the public IBM HR Analytics sample dataset: logistic regression and random forest, evaluation on a held-out test set, attrition drivers, limitations and responsible use. Prepared by Olajumoke O. Medunoye.">
+<link rel="canonical" href="https://olajumokemedunoye.github.io/projects/attrition-risk-model.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@700&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="report.css">
+<style>
+:root{--primary:#1F2933;--primary-2:#323F4B;--accent:#C4513B;--accent-text:#A63D29;--tint:#F6F3F1;--accent-on-dark:#F2A08F;
+--font-head:"Spectral",Georgia,serif;--font-body:"Manrope",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+</style>
+</head>
+<body>
+<header class="cover">
+  <div class="wrap">
+    <nav aria-label="Report"><a href="../index.html">Olajumoke Medunoye · Portfolio</a><a href="../index.html#additional-work">← All projects</a></nav>
+    <p class="kicker"><span></span>Predictive people analytics · public sample data</p>
+    <h1>Which Employees Are Most Likely to Leave, and Why</h1>
+    <p class="lede">An attrition risk model built and tested in Python, with the drivers behind it and the guardrails needed before a model like this is used on real employees.</p>
+    <div class="meta"><span><b>Data:</b> IBM HR Analytics sample (fictional, 1,470 employees)</span><span><b>Models:</b> logistic regression · random forest</span><span><b>Tools:</b> Python · scikit-learn · pandas</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="summary">
+    <div class="summary-card">
+      <h2>Executive summary</h2>
+      <ul class="kpis">
+        <li><span class="v" data-count="16.1" data-suffix="%">16.1%</span><span class="k">attrition in the dataset</span></li>
+        <li><span class="v" data-count="0.79">0.79</span><span class="k">ROC AUC on unseen employees</span></li>
+        <li><span class="v" data-count="64" data-suffix="%">64%</span><span class="k">of leavers flagged by the model</span></li>
+        <li><span class="v" data-count="3" data-suffix="×">3×</span><span class="k">attrition with regular overtime</span></li>
+      </ul>
+      <p>A logistic regression correctly ranks a leaver above a stayer 79% of the time on employees it has not seen. At the default threshold it flags 38 of the 59 leavers in the test set, alongside 64 false alarms. Overtime, frequent travel, short tenure and entry-level roles such as sales representative and laboratory technician carry the highest risk.</p>
+      <p><strong>Recommendation:</strong> use the model to target retention work at groups and conditions (overtime, travel, early tenure), not to label individuals, and validate it on the organisation's own data before any use.</p>
+    </div>
+  </div>
+
+<main>
+<section aria-labelledby="s1">
+  <div class="sec-head"><span class="sec-num">01</span><h2 id="s1">Business question</h2></div>
+  <p>Replacing an employee costs recruitment, onboarding and lost productivity. HR teams want to know which parts of the workforce are most at risk so they can act before people resign. This project tests how well standard HR data predicts attrition and which factors matter most.</p>
+  <p>The dataset is a fictional sample created by IBM data scientists and published for learning. It is not from a real organisation, and the results show the method rather than facts about any employer.</p>
+</section>
+
+<section aria-labelledby="s2">
+  <div class="sec-head"><span class="sec-num">02</span><h2 id="s2">Data and preparation</h2></div>
+  <p>1,470 employees and 35 columns covering role, department, level, pay, tenure, overtime, travel, satisfaction and performance ratings. 237 employees (16.1%) left.</p>
+  <ul class="cards">
+    <li><strong>Removed as uninformative</strong><code>EmployeeCount</code>, <code>Over18</code> and <code>StandardHours</code> have one value for everyone. <code>EmployeeNumber</code> is an ID.</li>
+    <li><strong>Excluded on purpose</strong>Age, gender and marital status are protected characteristics. They were left out so the model cannot base risk on them.</li>
+    <li><strong>Encoding</strong>Numbers were standardised so coefficients can be compared. Categories such as job role were one-hot encoded, with one level held as the baseline.</li>
+    <li><strong>Train and test split</strong>75% for training, 25% (368 employees, 59 leavers) held back for testing, keeping the same leaver share in both.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s3">
+  <div class="sec-head"><span class="sec-num">03</span><h2 id="s3">The model explained</h2></div>
+  <div class="measure"><h3>Pipeline</h3>
+<pre><code>prep = ColumnTransformer([
+    ("num", StandardScaler(), numeric),
+    ("cat", OneHotEncoder(handle_unknown="ignore", drop="first"), categorical),
+])
+model = Pipeline([("prep", prep),
+                  ("clf", LogisticRegression(max_iter=2000, class_weight="balanced"))])</code></pre>
+  <p>Preparation and model sit in one pipeline, so scaling is learned from training data only and applied unchanged to the test set. <code>class_weight="balanced"</code> gives leavers more weight, because only one in six employees left and an unweighted model would learn to predict "stays" for almost everyone.</p></div>
+  <div class="measure"><h3>Validation</h3>
+<pre><code>cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+cross_val_score(model, X_train, y_train, cv=cv, scoring="roc_auc")</code></pre>
+  <p>Five-fold cross-validation on the training data checks that performance is stable, before a single final check on the held-back test set.</p></div>
+  <p>A random forest was trained the same way for comparison. It captures interactions between factors but is harder to explain.</p>
+</section>
+
+<section aria-labelledby="s4">
+  <div class="sec-head"><span class="sec-num">04</span><h2 id="s4">How well it works</h2></div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Model</th><th class="num">CV ROC AUC</th><th class="num">Test ROC AUC</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1</th></tr></thead>
+    <tbody>
+      <tr><td>Logistic regression</td><td class="num">0.834 ± 0.042</td><td class="num">0.794</td><td class="num">0.373</td><td class="num">0.644</td><td class="num">0.472</td></tr>
+      <tr><td>Random forest</td><td class="num">0.799 ± 0.045</td><td class="num">0.758</td><td class="num">0.456</td><td class="num">0.525</td><td class="num">0.488</td></tr>
+    </tbody>
+  </table></div>
+  <ul class="cards">
+    <li><strong>ROC AUC</strong>The chance the model ranks a random leaver above a random stayer. 0.5 is guessing, 1.0 is perfect.</li>
+    <li><strong>Recall</strong>Share of actual leavers the model flags. 64% means 38 of 59.</li>
+    <li><strong>Precision</strong>Share of flagged employees who actually left. 37% means most flags are false alarms.</li>
+  </ul>
+  <figure>
+    <img src="attrition-risk-model/outputs/roc_curve.png" width="1280" height="1000" loading="lazy" alt="ROC curves on the held-out test set. The logistic regression curve, AUC 0.79, sits slightly above the random forest curve, AUC 0.76. Both are well above the diagonal random-guess line.">
+    <figcaption>ROC curves on the 368 test employees.</figcaption>
+  </figure>
+  <figure>
+    <img src="attrition-risk-model/outputs/confusion_matrix.png" width="1040" height="880" loading="lazy" alt="Confusion matrix for the logistic regression at a 0.5 threshold: 245 correctly predicted to stay, 64 predicted to leave who stayed, 21 predicted to stay who left, 38 correctly predicted to leave.">
+    <figcaption>Logistic regression at a 0.5 threshold: 38 leavers caught, 21 missed, 64 false alarms.</figcaption>
+  </figure>
+  <p>The logistic regression was chosen. It ranks employees better on unseen data and each coefficient can be explained to HR and managers. The threshold can be moved: a higher threshold means fewer false alarms but more missed leavers.</p>
+</section>
+
+<section aria-labelledby="s5">
+  <div class="sec-head"><span class="sec-num">05</span><h2 id="s5">What drives attrition</h2></div>
+  <figure>
+    <img src="attrition-risk-model/outputs/attrition_by_overtime_role.png" width="2000" height="840" loading="lazy" alt="Two bar charts. Left: attrition is 10.4 percent for employees without overtime and 30.5 percent with overtime. Right: attrition by job role, highest for sales representatives at 39.8 percent and lowest for research directors at 2.5 percent.">
+    <figcaption>Attrition rate by overtime and by job role.</figcaption>
+  </figure>
+  <p class="pull">Employees working regular overtime left at 30.5%, three times the rate of those who did not.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Group</th><th class="num">Attrition</th><th>Compared with</th><th class="num">Attrition</th></tr></thead>
+    <tbody>
+      <tr><td>Overtime</td><td class="num">30.5%</td><td>No overtime</td><td class="num">10.4%</td></tr>
+      <tr><td>Travels frequently</td><td class="num">24.9%</td><td>No travel</td><td class="num">8.0%</td></tr>
+      <tr><td>0 to 1 year at the company</td><td class="num">34.9%</td><td>11+ years</td><td class="num">8.1%</td></tr>
+      <tr><td>Job level 1</td><td class="num">26.3%</td><td>Job level 4</td><td class="num">4.7%</td></tr>
+      <tr><td>Sales representative</td><td class="num">39.8%</td><td>Research director</td><td class="num">2.5%</td></tr>
+    </tbody>
+  </table></div>
+  <figure>
+    <img src="attrition-risk-model/outputs/top_drivers.png" width="1400" height="960" loading="lazy" alt="Bar chart of the ten largest logistic regression coefficients. Laboratory technician, overtime, frequent travel and sales representative increase risk most. Education field other, research director and total working years reduce risk.">
+    <figcaption>The ten largest standardised coefficients. Right of zero raises risk, left lowers it.</figcaption>
+  </figure>
+  <ul>
+    <li>Overtime and frequent travel raise risk even after role, pay and tenure are taken into account. Both are working conditions the organisation can change.</li>
+    <li>Job role coefficients are measured against healthcare representatives, the baseline role.</li>
+    <li>Leavers had a median monthly income of 3,202 against 5,204 for stayers (units as supplied in the dataset). Pay overlaps with job level and experience, so the model spreads the effect across these, and single coefficients such as job level should not be read alone.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s6">
+  <div class="sec-head"><span class="sec-num">06</span><h2 id="s6">Limitations and responsible use</h2></div>
+  <ul class="cards">
+    <li><strong>Fictional data</strong>Results describe a sample dataset. A real organisation would need to rebuild and test the model on its own records.</li>
+    <li><strong>Association, not cause</strong>The model finds patterns linked to leaving. It does not prove that reducing overtime will keep a particular person.</li>
+    <li><strong>False alarms</strong>Most flagged employees stay. Treating a flag as a fact could damage trust or lead to unfair decisions.</li>
+    <li><strong>Fairness checks</strong>Protected characteristics were excluded, but other fields can act as proxies. Results should be checked for different outcomes by group before use.</li>
+    <li><strong>Privacy</strong>Employees should be told how their data is used, and a data protection impact assessment should be completed under UK GDPR.</li>
+    <li><strong>Drift</strong>Patterns change with the labour market and the organisation. The model needs retesting at least every six months.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s7">
+  <div class="sec-head"><span class="sec-num">07</span><h2 id="s7">Recommendations</h2></div>
+  <ol class="recs">
+    <li><strong>Review overtime patterns first.</strong> It is the strongest controllable driver. Report overtime by team monthly and set a threshold for review.</li>
+    <li><strong>Strengthen the first year.</strong> A third of employees with a year or less of service left. Structured onboarding and check-ins at 30, 90 and 180 days target the highest-risk period.</li>
+    <li><strong>Look at entry-level roles in sales and the laboratory,</strong> including pay against the market and progression routes.</li>
+    <li><strong>Use risk scores at group level</strong> in workforce planning and retention budgets, not as individual labels in performance or promotion decisions.</li>
+    <li><strong>Pilot on real data with governance:</strong> HR, legal and data protection sign-off, fairness testing and a regular review of accuracy.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="s8">
+  <div class="sec-head"><span class="sec-num">08</span><h2 id="s8">How to reproduce it</h2></div>
+  <ol>
+    <li>The IBM HR Analytics Employee Attrition &amp; Performance dataset is in <code>attrition-risk-model/data/</code>.</li>
+    <li>Run <code>python python/attrition_model.py</code>. It trains both models with a fixed random seed and writes <code>outputs/metrics.json</code> and the four charts.</li>
+  </ol>
+  <p><a href="https://github.com/olajumokemedunoye/olajumokemedunoye.github.io/tree/main/projects/attrition-risk-model">View the Python, data and outputs on GitHub</a></p>
+</section>
+</main>
+
+<footer>
+  <p>Attrition Risk Model · IBM HR Analytics Employee Attrition &amp; Performance sample dataset (fictional data)</p>
+  <p>Olajumoke O. Medunoye · People Analytics | HR Analytics | Workforce Planning · <a href="mailto:medunoyeolajumoke@gmail.com">medunoyeolajumoke@gmail.com</a></p>
+  <p class="back"><a href="../index.html#additional-work">← Back to projects</a></p>
+</footer>
+</div>
+
+<a class="signature" href="../index.html" aria-label="Prepared by Olajumoke O. Medunoye, back to portfolio"><span class="mono" aria-hidden="true">OM</span><span>Prepared by <b>Olajumoke O. Medunoye</b></span></a>
+<script src="report.js" defer></script>
+</body>
+</html>

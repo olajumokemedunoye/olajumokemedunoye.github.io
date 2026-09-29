@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UK Gender Pay Gap Analysis | Olajumoke Medunoye</title>
+<meta name="description" content="Analysis of UK gender pay gap reporting for 2023/24 and 2024/25 using SQL and Python on the public gov.uk dataset: sector and size gaps, pay quartiles, year-on-year change and bonus gaps. Prepared by Olajumoke O. Medunoye.">
+<link rel="canonical" href="https://olajumokemedunoye.github.io/projects/gender-pay-gap.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="report.css">
+<style>
+:root{--primary:#3B1C4A;--primary-2:#56296A;--accent:#B5446E;--accent-text:#8E2F55;--tint:#F7F1F5;--accent-on-dark:#E7A1BD;
+--font-head:"Cormorant Garamond",Georgia,serif;--font-body:"Work Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+</style>
+</head>
+<body>
+<header class="cover">
+  <div class="wrap">
+    <nav aria-label="Report"><a href="../index.html">Olajumoke Medunoye · Portfolio</a><a href="../index.html#additional-work">← All projects</a></nav>
+    <p class="kicker"><span></span>Pay equity report · public data</p>
+    <h1>Where the UK Gender Pay Gap Sits in 2024/25</h1>
+    <p class="lede">An analysis of every employer that published gender pay gap figures for the last two reporting years, by sector, size and pay quartile, and whether the same employers narrowed their gaps.</p>
+    <div class="meta"><span><b>Source:</b> gov.uk Gender Pay Gap Service</span><span><b>Employers:</b> 11,169 (2023/24) and 11,315 (2024/25)</span><span><b>Tools:</b> SQL (SQLite) · Python · pandas · matplotlib</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="summary">
+    <div class="summary-card">
+      <h2>Executive summary</h2>
+      <ul class="kpis">
+        <li><span class="v" data-count="8.4" data-suffix="%">8.4%</span><span class="k">median employer pay gap, 2024/25</span></li>
+        <li><span class="v" data-count="77.5" data-suffix="%">77.5%</span><span class="k">of employers pay men more at the median</span></li>
+        <li><span class="v" data-count="41.8" data-suffix="%">41.8%</span><span class="k">women's share of the top pay quartile</span></li>
+        <li><span class="v" data-count="51.2" data-suffix="%">51.2%</span><span class="k">of repeat reporters narrowed their gap</span></li>
+      </ul>
+      <p>The typical employer's median hourly pay gap fell only slightly, from 8.9% to 8.4%. The gap is driven more by where women work in the pay structure than by different pay for the same job: women make up 54.7% of the lowest-paid quarter of employees but 41.8% of the highest-paid quarter.</p>
+      <p><strong>Implication for HR:</strong> closing a gap depends on progression into senior and higher-paid roles, so it should be tracked through promotion, recruitment and quartile movement, not only the headline figure.</p>
+    </div>
+  </div>
+
+<main>
+<section aria-labelledby="s1">
+  <div class="sec-head"><span class="sec-num">01</span><h2 id="s1">Why this matters</h2></div>
+  <p>Employers in Great Britain with 250 or more employees must publish their gender pay gap each year. HR and reward teams are asked to explain their own figures, benchmark them against their sector and show progress. This project builds that benchmark from the full public dataset so an employer's number can be read in context.</p>
+</section>
+
+<section aria-labelledby="s2">
+  <div class="sec-head"><span class="sec-num">02</span><h2 id="s2">Data and preparation</h2></div>
+  <p>Two downloads from the Gender Pay Gap Service: reporting year 2023/24 (snapshot April 2023, deadline April 2024) and 2024/25 (snapshot April 2024, deadline April 2025). Each row is one employer's submission, with the mean and median hourly pay gaps, bonus gaps, the share of men and women receiving a bonus, and the share of women in each pay quartile.</p>
+  <ul class="cards">
+    <li><strong>Gap convention</strong>A positive figure means men's hourly pay is higher. A gap of 8.4% means women earn 8.4p less per £1 at the median.</li>
+    <li><strong>Sector</strong>Employers list SIC 2007 codes. The first code was mapped to its section (for example 85 = Education). 987 employers are listed as public sector bodies and 925 gave no code; these sit in "Not classified".</li>
+    <li><strong>Size band</strong>Taken as reported. The "Not Provided" band is excluded from the size comparison.</li>
+    <li><strong>Year-on-year</strong>Employers were matched on <code>EmployerId</code>; 10,585 reported in both years.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s3">
+  <div class="sec-head"><span class="sec-num">03</span><h2 id="s3">SQL explained</h2></div>
+  <p>Python loads both files into one SQLite table, <code>gpg</code>, with a <code>year</code> column. All analysis is in <code>sql/analysis.sql</code>.</p>
+
+  <div class="measure"><h3>Median with window functions</h3>
+<pre><code>WITH ranked AS (
+  SELECT section, median_gap,
+         ROW_NUMBER() OVER (PARTITION BY section ORDER BY median_gap) AS rn,
+         COUNT(*)     OVER (PARTITION BY section)                     AS n
+  FROM gpg_clean WHERE year = '2024/25'
+)
+SELECT section, MAX(n) AS employers,
+       AVG(CASE WHEN rn IN ((n + 1) / 2, (n + 2) / 2) THEN median_gap END) AS median_gap
+FROM ranked GROUP BY section HAVING MAX(n) &gt;= 50;</code></pre>
+  <p>SQLite has no <code>MEDIAN</code> function. Each employer is ranked within its sector, and the middle row (or the average of the two middle rows) is kept. The median is used instead of the average because a few employers report extreme gaps that would pull an average.</p></div>
+
+  <div class="measure"><h3>Sector lookup</h3>
+<pre><code>CREATE TABLE sic_section (div_from INTEGER, div_to INTEGER, section TEXT);
+-- (85, 85, 'Education'), (64, 66, 'Finance and insurance'), ...
+
+CREATE VIEW gpg_clean AS
+SELECT g.*, COALESCE(s.section, 'Not classified') AS section
+FROM gpg g
+LEFT JOIN sic_section s ON g.sic_division BETWEEN s.div_from AND s.div_to;</code></pre>
+  <p>A range join maps the two-digit SIC division to its section, so the lookup stays readable and easy to check.</p></div>
+
+  <div class="measure"><h3>Same employers, two years</h3>
+<pre><code>SELECT a.employer_id, a.median_gap AS gap_2324, b.median_gap AS gap_2425
+FROM gpg_clean a JOIN gpg_clean b
+  ON a.employer_id = b.employer_id
+ AND a.year = '2023/24' AND b.year = '2024/25';</code></pre>
+  <p>A self-join compares each employer with itself, which avoids mixing up real change with changes in who reported.</p></div>
+</section>
+
+<section aria-labelledby="s4">
+  <div class="sec-head"><span class="sec-num">04</span><h2 id="s4">Findings</h2></div>
+  <figure>
+    <img src="gender-pay-gap/outputs/gap_by_sector.png" width="1600" height="1280" loading="lazy" alt="Horizontal bar chart of the median gender pay gap by sector in 2024/25. Education is highest at 23.0 percent, then construction at 22.0 and finance and insurance at 20.1. Health and social work is lowest at 0.1 percent.">
+    <figcaption>Median employer pay gap by sector, 2024/25. Sectors with fewer than 50 employers are left out.</figcaption>
+  </figure>
+  <p class="pull">Education, construction and finance each have a typical gap above 20%, more than double the national figure.</p>
+  <ul>
+    <li><strong>Education (23.0%)</strong> has a high gap despite a mostly female workforce, largely because women hold most lower-paid support roles in schools and academy trusts.</li>
+    <li><strong>Construction (22.0%) and finance (20.1%)</strong> have fewer women in senior and technical roles.</li>
+    <li><strong>Health and social work (0.1%), hospitality (0.4%) and arts (1.1%)</strong> have gaps close to zero, in sectors where many roles are paid at similar rates.</li>
+  </ul>
+
+  <figure>
+    <img src="gender-pay-gap/outputs/quartiles.png" width="1400" height="840" loading="lazy" alt="Bar chart of women's share of each pay quartile in 2024/25: lower 54.7 percent, lower middle 50.7, upper middle 46.4, top 41.8.">
+    <figcaption>Average share of women in each pay quartile across employers, 2024/25.</figcaption>
+  </figure>
+  <p>Women's share falls at every step up the pay structure, by about 13 points from bottom to top. This pattern explains most of the headline gap.</p>
+
+  <div class="table-wrap"><table>
+    <thead><tr><th>Employer size</th><th class="num">Employers</th><th class="num">Median gap</th></tr></thead>
+    <tbody>
+      <tr><td>Less than 250</td><td class="num">473</td><td class="num">4.6%</td></tr>
+      <tr><td>250 to 499</td><td class="num">4,898</td><td class="num">9.1%</td></tr>
+      <tr><td>500 to 999</td><td class="num">2,901</td><td class="num">9.2%</td></tr>
+      <tr><td>1,000 to 4,999</td><td class="num">2,431</td><td class="num">7.4%</td></tr>
+      <tr><td>5,000 to 19,999</td><td class="num">543</td><td class="num">7.2%</td></tr>
+      <tr><td>20,000 or more</td><td class="num">69</td><td class="num">5.5%</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li>Mid-sized employers (250 to 999 staff) have the widest gaps. The largest employers are lower at 5.5%, although only 69 are in that band.</li>
+    <li>Of the 10,585 employers that reported in both years, 51.2% narrowed their gap and 41.4% widened it. The median change was only 0.1 points, so progress is slow.</li>
+    <li>Among employers paying bonuses to both men and women, the median bonus gap is 14.3%, even though similar shares of men (38.2%) and women (37.5%) receive one.</li>
+    <li>Late submissions fell from 7.6% to 6.8% of employers.</li>
+  </ul>
+  <figure>
+    <img src="gender-pay-gap/outputs/distribution.png" width="1600" height="840" loading="lazy" alt="Histogram of employer median pay gaps in 2024/25. Most employers sit between 0 and 20 percent, with a long tail above 20 percent and a smaller group below zero.">
+    <figcaption>Spread of employer gaps, 2024/25. About 24% of employers report a median gap of 20% or more; 13.9% report a gap in women's favour.</figcaption>
+  </figure>
+</section>
+
+<section aria-labelledby="s5">
+  <div class="sec-head"><span class="sec-num">05</span><h2 id="s5">Limitations</h2></div>
+  <ul>
+    <li>The data is self-reported by employers and is not audited. Some figures will contain errors.</li>
+    <li>A pay gap is not the same as unequal pay for equal work. It measures average pay across the whole organisation.</li>
+    <li>Sector is based on each employer's first SIC code, which may not describe the whole business.</li>
+    <li>Sector and size medians treat each employer equally regardless of headcount, so they describe the typical employer, not the typical employee. ONS figures for the whole workforce will differ.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s6">
+  <div class="sec-head"><span class="sec-num">06</span><h2 id="s6">Recommendations for an HR team</h2></div>
+  <ol class="recs">
+    <li><strong>Benchmark against your own sector and size band,</strong> not the national figure. An 18% gap is close to typical in finance and very high in retail.</li>
+    <li><strong>Report the quartile split alongside the headline gap.</strong> Movement of women into the upper quartiles is the clearest sign of real progress.</li>
+    <li><strong>Break the gap down internally</strong> by grade, function and working pattern to find where it comes from before choosing actions.</li>
+    <li><strong>Review bonus design,</strong> since bonus gaps are wider than pay gaps even when men and women receive bonuses at similar rates.</li>
+    <li><strong>Track promotion and hiring rates by gender each quarter,</strong> as these drive next year's quartile figures.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="s7">
+  <div class="sec-head"><span class="sec-num">07</span><h2 id="s7">How to reproduce it</h2></div>
+  <ol>
+    <li>Download the 2023/24 and 2024/25 CSV files from the Gender Pay Gap Service into <code>gender-pay-gap/data/</code>.</li>
+    <li>Run <code>python python/run_analysis.py</code>. It loads the data into SQLite, runs every query in <code>sql/analysis.sql</code>, and saves the charts and <code>outputs/results.json</code>.</li>
+  </ol>
+  <p><a href="https://github.com/olajumokemedunoye/olajumokemedunoye.github.io/tree/main/projects/gender-pay-gap">View the SQL, Python and outputs on GitHub</a></p>
+</section>
+</main>
+
+<footer>
+  <p>UK Gender Pay Gap Analysis · Public data from the gov.uk Gender Pay Gap Service, reporting years 2023/24 and 2024/25</p>
+  <p>Olajumoke O. Medunoye · People Analytics | HR Analytics | Workforce Planning · <a href="mailto:medunoyeolajumoke@gmail.com">medunoyeolajumoke@gmail.com</a></p>
+  <p class="back"><a href="../index.html#additional-work">← Back to projects</a></p>
+</footer>
+</div>
+
+<a class="signature" href="../index.html" aria-label="Prepared by Olajumoke O. Medunoye, back to portfolio"><span class="mono" aria-hidden="true">OM</span><span>Prepared by <b>Olajumoke O. Medunoye</b></span></a>
+<script src="report.js" defer></script>
+</body>
+</html>

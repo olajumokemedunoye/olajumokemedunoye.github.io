@@ -1,0 +1,183 @@
+{
+  "headline": [
+    {
+      "year": "2023/24",
+      "employers": 11169,
+      "median_of_median_gaps": 8.9,
+      "pct_men_paid_more": 77.9,
+      "pct_women_paid_more": 13.7,
+      "pct_no_gap": 8.4
+    },
+    {
+      "year": "2024/25",
+      "employers": 11315,
+      "median_of_median_gaps": 8.4,
+      "pct_men_paid_more": 77.5,
+      "pct_women_paid_more": 13.9,
+      "pct_no_gap": 8.6
+    }
+  ],
+  "by_size": [
+    {
+      "size_band": "Less than 250",
+      "employers": 473,
+      "median_gap": 4.6
+    },
+    {
+      "size_band": "250 to 499",
+      "employers": 4898,
+      "median_gap": 9.1
+    },
+    {
+      "size_band": "500 to 999",
+      "employers": 2901,
+      "median_gap": 9.2
+    },
+    {
+      "size_band": "1000 to 4999",
+      "employers": 2431,
+      "median_gap": 7.4
+    },
+    {
+      "size_band": "5000 to 19,999",
+      "employers": 543,
+      "median_gap": 7.2
+    },
+    {
+      "size_band": "20,000 or more",
+      "employers": 69,
+      "median_gap": 5.5
+    }
+  ],
+  "by_sector": [
+    {
+      "section": "Education",
+      "employers": 1001,
+      "median_gap": 23.0
+    },
+    {
+      "section": "Construction",
+      "employers": 329,
+      "median_gap": 22.0
+    },
+    {
+      "section": "Finance and insurance",
+      "employers": 512,
+      "median_gap": 20.1
+    },
+    {
+      "section": "Mining and quarrying",
+      "employers": 52,
+      "median_gap": 14.6
+    },
+    {
+      "section": "Information and communication",
+      "employers": 608,
+      "median_gap": 14.6
+    },
+    {
+      "section": "Energy supply",
+      "employers": 67,
+      "median_gap": 14.4
+    },
+    {
+      "section": "Professional, scientific and technical",
+      "employers": 790,
+      "median_gap": 12.9
+    },
+    {
+      "section": "Not classified",
+      "employers": 1912,
+      "median_gap": 10.6
+    },
+    {
+      "section": "Real estate",
+      "employers": 135,
+      "median_gap": 8.0
+    },
+    {
+      "section": "Water and waste",
+      "employers": 87,
+      "median_gap": 7.0
+    },
+    {
+      "section": "Manufacturing",
+      "employers": 1363,
+      "median_gap": 7.0
+    },
+    {
+      "section": "Transport and storage",
+      "employers": 402,
+      "median_gap": 5.6
+    },
+    {
+      "section": "Other services",
+      "employers": 210,
+      "median_gap": 5.2
+    },
+    {
+      "section": "Wholesale and retail",
+      "employers": 973,
+      "median_gap": 4.9
+    },
+    {
+      "section": "Administrative and support",
+      "employers": 1192,
+      "median_gap": 4.6
+    },
+    {
+      "section": "Agriculture, forestry and fishing",
+      "employers": 64,
+      "median_gap": 2.7
+    },
+    {
+      "section": "Arts and recreation",
+      "employers": 244,
+      "median_gap": 1.1
+    },
+    {
+      "section": "Accommodation and food",
+      "employers": 563,
+      "median_gap": 0.4
+    },
+    {
+      "section": "Health and social work",
+      "employers": 765,
+      "median_gap": 0.1
+    }
+  ],
+  "quartiles": [
+    {
+      "women_in_lower_quartile": 54.7,
+      "women_in_lower_middle": 50.7,
+      "women_in_upper_middle": 46.4,
+      "women_in_top_quartile": 41.8
+    }
+  ],
+  "matched": [
+    {
+      "matched_employers": 10585,
+      "pct_gap_narrowed": 51.2,
+      "pct_gap_widened": 41.4,
+      "median_change_pts": -0.1
+    }
+  ],
+  "bonus": [
+    {
+      "employers_with_bonuses": 8444,
+      "median_bonus_gap": 14.3,
+      "avg_pct_men_receiving": 38.2,
+      "avg_pct_women_receiving": 37.5
+    }
+  ],
+  "late": [
+    {
+      "year": "2023/24",
+      "pct_submitted_late": 7.6
+    },
+    {
+      "year": "2024/25",
+      "pct_submitted_late": 6.8
+    }
+  ]
+}

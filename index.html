@@ -483,33 +483,71 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
   <div class="wrap">
     <div class="section-head">
       <h2 id="more-title">Additional analytics work</h2>
-      <p>Other projects, kept brief.</p>
+      <p>Recent projects on public UK data and a public sample dataset, each with a full report, plus earlier work.</p>
     </div>
     <div class="more-grid">
 
       <article class="case" aria-labelledby="aw1">
-        <span class="label label-portfolio">Portfolio project</span>
-        <h3 id="aw1">Workforce Attrition Risk Modelling</h3>
-        <p class="summary">A classification model that gives each employee an attrition risk score, reported by department.</p>
-        <ul class="chips" aria-label="Tools and methods"><li>Python</li><li>SQL</li><li>Power BI</li></ul>
+        <span class="label label-portfolio">Portfolio project · public data</span>
+        <h3 id="aw1">UK Gender Pay Gap Analysis 2023–2025</h3>
+        <p class="summary">Every published employer pay gap for the last two reporting years, benchmarked by sector, size and pay quartile.</p>
+        <ul class="chips" aria-label="Tools and methods"><li>SQL</li><li>Python</li><li>pandas</li></ul>
         <details class="more">
           <summary><span class="when-closed">View project</span><span class="when-open">Hide project</span></summary>
           <div class="cs-body">
-            <div class="cs-block"><h4>Problem</h4><p>HR only learned someone was at risk once they had resigned, so retention conversations came too late.</p></div>
-            <div class="cs-block"><h4>Data</h4><p>Tenure, engagement survey scores, performance ratings, manager-change history and absence patterns.</p></div>
-            <div class="cs-block"><h4>Analysis</h4><ul>
-              <li>Joined the workforce records into one table per employee with SQL.</li>
-              <li>Engineered features in Python (pandas): tenure bands, engagement trend and manager-change flags.</li>
-              <li>Trained a classification model (scikit-learn) and checked its output against known historical leavers.</li>
-              <li>Reported risk by department in Power BI.</li>
-            </ul></div>
-            <div class="cs-block"><h4>Limitations and responsible use</h4><ul>
-              <li>Evaluation results (precision, recall, ROC-AUC, confusion matrix) will be published with the code. Until then, read this as a description of the method.</li>
-              <li>A risk score should prompt a conversation, not decide anything. It shouldn't feed into performance, pay or disciplinary decisions.</li>
-              <li>Employee-level scores need restricted access, a documented lawful basis and checks for bias across protected characteristics before any live use.</li>
+            <div class="cs-block"><h4>Question</h4><p>How does an employer's gender pay gap compare with its sector and size band, and are gaps closing?</p></div>
+            <div class="cs-block"><h4>Data</h4><p>gov.uk Gender Pay Gap Service: 11,169 employers for 2023/24 and 11,315 for 2024/25.</p></div>
+            <div class="cs-block"><h4>Findings</h4><ul>
+              <li>The median employer gap fell from 8.9% to 8.4%, and 77.5% of employers still pay men more at the median.</li>
+              <li>Education (23.0%), construction (22.0%) and finance (20.1%) have the widest typical gaps.</li>
+              <li>Women are 54.7% of the lowest pay quartile but 41.8% of the top quartile.</li>
+              <li>Of 10,585 employers reporting in both years, 51.2% narrowed their gap.</li>
             </ul></div>
           </div>
         </details>
+        <p class="report-link"><a href="projects/gender-pay-gap.html">Read the full report<span class="visually-hidden"> on the UK gender pay gap</span></a></p>
+      </article>
+
+      <article class="case" aria-labelledby="aw4">
+        <span class="label label-portfolio">Portfolio project · public data</span>
+        <h3 id="aw4">UK Labour Market Briefing for Workforce Planning</h3>
+        <p class="summary">ONS vacancies, unemployment, inactivity and pay growth to June 2026, and what they mean for hiring and retention plans.</p>
+        <ul class="chips" aria-label="Tools and methods"><li>Python</li><li>pandas</li><li>ONS data</li></ul>
+        <details class="more">
+          <summary><span class="when-closed">View project</span><span class="when-open">Hide project</span></summary>
+          <div class="cs-body">
+            <div class="cs-block"><h4>Question</h4><p>How has the external labour market changed since 2022, and how should hiring targets, pay budgets and attrition expectations change with it?</p></div>
+            <div class="cs-block"><h4>Data</h4><p>Six ONS Labour Market Statistics series, September 2026 release.</p></div>
+            <div class="cs-block"><h4>Findings</h4><ul>
+              <li>Vacancies per unemployed person fell from 1.02 in mid-2022 to 0.40, below the pre-pandemic 0.56.</li>
+              <li>Unemployment is 4.9% and regular pay growth has slowed to 3.5%, from a peak of 7.9% in 2023.</li>
+              <li>Recommendation: reset time-to-fill and cost-per-hire targets and review agency spend, while protecting scarce skills.</li>
+            </ul></div>
+          </div>
+        </details>
+        <p class="report-link"><a href="projects/labour-market.html">Read the full report<span class="visually-hidden"> on the UK labour market</span></a></p>
+      </article>
+
+      <article class="case" aria-labelledby="aw5">
+        <span class="label label-portfolio">Portfolio project · public sample data</span>
+        <h3 id="aw5">Attrition Risk Model</h3>
+        <p class="summary">A logistic regression and random forest predicting attrition on the fictional IBM HR Analytics dataset, with drivers and guardrails for responsible use.</p>
+        <ul class="chips" aria-label="Tools and methods"><li>Python</li><li>scikit-learn</li><li>Classification</li></ul>
+        <details class="more">
+          <summary><span class="when-closed">View project</span><span class="when-open">Hide project</span></summary>
+          <div class="cs-body">
+            <div class="cs-block"><h4>Data</h4><p>IBM HR Analytics sample: 1,470 fictional employees, 16.1% attrition. Age, gender and marital status were excluded from the model.</p></div>
+            <div class="cs-block"><h4>Results on a held-out test set</h4><ul>
+              <li>Logistic regression: ROC AUC 0.79, recall 64%, precision 37% (cross-validated AUC 0.83).</li>
+              <li>Overtime (30.5% vs 10.4% attrition), frequent travel, first-year tenure and entry-level sales and laboratory roles carry the most risk.</li>
+            </ul></div>
+            <div class="cs-block"><h4>Responsible use</h4><ul>
+              <li>Most flagged employees stay, so scores should guide group-level retention work, not decisions about individuals.</li>
+              <li>Real use needs the organisation's own data, fairness testing and a data protection impact assessment.</li>
+            </ul></div>
+          </div>
+        </details>
+        <p class="report-link"><a href="projects/attrition-risk-model.html">Read the full report<span class="visually-hidden"> on the attrition risk model</span></a></p>
       </article>
 
       <article class="case" aria-labelledby="aw2">

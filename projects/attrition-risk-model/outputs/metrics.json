@@ -1,0 +1,114 @@
+{
+  "descriptive": {
+    "employees": 1470,
+    "leavers": 237,
+    "rate": 0.161,
+    "test_size": 368,
+    "test_leavers": 59,
+    "by_overtime": {
+      "No": 0.104,
+      "Yes": 0.305
+    },
+    "by_role": {
+      "Sales Representative": {
+        "mean": 0.398,
+        "size": 83
+      },
+      "Laboratory Technician": {
+        "mean": 0.239,
+        "size": 259
+      },
+      "Human Resources": {
+        "mean": 0.231,
+        "size": 52
+      },
+      "Sales Executive": {
+        "mean": 0.175,
+        "size": 326
+      },
+      "Research Scientist": {
+        "mean": 0.161,
+        "size": 292
+      },
+      "Healthcare Representative": {
+        "mean": 0.069,
+        "size": 131
+      },
+      "Manufacturing Director": {
+        "mean": 0.069,
+        "size": 145
+      },
+      "Manager": {
+        "mean": 0.049,
+        "size": 102
+      },
+      "Research Director": {
+        "mean": 0.025,
+        "size": 80
+      }
+    },
+    "by_joblevel": {
+      "1": 0.263,
+      "2": 0.097,
+      "3": 0.147,
+      "4": 0.047,
+      "5": 0.072
+    },
+    "by_years_at_company_band": {
+      "0-1": 0.349,
+      "2-3": 0.184,
+      "4-5": 0.131,
+      "6-10": 0.123,
+      "11+": 0.081
+    },
+    "by_business_travel": {
+      "Non-Travel": 0.08,
+      "Travel_Frequently": 0.249,
+      "Travel_Rarely": 0.15
+    },
+    "median_income_leavers": 3202,
+    "median_income_stayers": 5204
+  },
+  "models": {
+    "Logistic regression": {
+      "cv_roc_auc_mean": 0.834,
+      "cv_roc_auc_sd": 0.042,
+      "test_roc_auc": 0.794,
+      "precision": 0.373,
+      "recall": 0.644,
+      "f1": 0.472,
+      "confusion": {
+        "tn": 245,
+        "fp": 64,
+        "fn": 21,
+        "tp": 38
+      }
+    },
+    "Random forest": {
+      "cv_roc_auc_mean": 0.799,
+      "cv_roc_auc_sd": 0.045,
+      "test_roc_auc": 0.758,
+      "precision": 0.456,
+      "recall": 0.525,
+      "f1": 0.488,
+      "confusion": {
+        "tn": 272,
+        "fp": 37,
+        "fn": 28,
+        "tp": 31
+      }
+    }
+  },
+  "top_drivers_lr": {
+    "JobRole_Laboratory Technician": 1.67,
+    "OverTime_Yes": 1.582,
+    "BusinessTravel_Travel_Frequently": 1.444,
+    "JobRole_Sales Representative": 1.3,
+    "EducationField_Other": -1.037,
+    "JobRole_Research Director": -0.985,
+    "TotalWorkingYears": -0.817,
+    "BusinessTravel_Travel_Rarely": 0.73,
+    "JobLevel": 0.669,
+    "JobRole_Human Resources": 0.607
+  }
+}

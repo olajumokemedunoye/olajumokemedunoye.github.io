@@ -1,0 +1,40 @@
+{
+  "latest_period_end": "Jun 2026",
+  "latest": {
+    "vacancies_k": 706.0,
+    "unemployed_k": 1778.0,
+    "unemployment_rate": 4.9,
+    "employment_rate": 75.1,
+    "inactivity_rate": 20.9,
+    "regular_pay_growth": 3.5,
+    "vacancies_per_unemployed": 0.4
+  },
+  "year_earlier": {
+    "vacancies_k": 727.0,
+    "unemployed_k": 1696.0,
+    "unemployment_rate": 4.7,
+    "employment_rate": 75.2,
+    "inactivity_rate": 21.0,
+    "regular_pay_growth": 4.9,
+    "vacancies_per_unemployed": 0.43
+  },
+  "pre_pandemic_feb_2020": {
+    "vacancies_k": 788.0,
+    "unemployed_k": 1410.0,
+    "unemployment_rate": 4.1,
+    "employment_rate": 75.9,
+    "inactivity_rate": 20.7,
+    "regular_pay_growth": 2.9,
+    "vacancies_per_unemployed": 0.56
+  },
+  "vacancy_peak": {
+    "period_end": "May 2022",
+    "vacancies_k": 1294.0,
+    "unemployed_k": 1297.0,
+    "unemployment_rate": 3.8,
+    "employment_rate": 75.0,
+    "inactivity_rate": 21.9,
+    "regular_pay_growth": 4.7,
+    "vacancies_per_unemployed": 1.0
+  }
+}

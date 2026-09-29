@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UK Labour Market Briefing | Olajumoke Medunoye</title>
+<meta name="description" content="Workforce planning briefing on the UK labour market to June 2026 using ONS Labour Market Statistics: vacancies, unemployment, inactivity and pay growth, with implications for hiring and retention. Prepared by Olajumoke O. Medunoye.">
+<link rel="canonical" href="https://olajumokemedunoye.github.io/projects/labour-market.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="report.css">
+<style>
+:root{--primary:#0E3B43;--primary-2:#17555F;--accent:#D08C2E;--accent-text:#8A5A12;--tint:#F3F6F4;--accent-on-dark:#F0BE6E;
+--font-head:"Merriweather",Georgia,serif;--font-body:"Nunito Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+</style>
+</head>
+<body>
+<header class="cover">
+  <div class="wrap">
+    <nav aria-label="Report"><a href="../index.html">Olajumoke Medunoye · Portfolio</a><a href="../index.html#additional-work">← All projects</a></nav>
+    <p class="kicker"><span></span>Workforce planning briefing · public data</p>
+    <h1>The UK Labour Market Has Loosened. What That Means for Hiring</h1>
+    <p class="lede">A briefing for HR and resourcing leaders on vacancies, unemployment, inactivity and pay growth from 2019 to mid-2026, and how the shift affects hiring plans, pay budgets and retention.</p>
+    <div class="meta"><span><b>Source:</b> ONS Labour Market Statistics, released 15 September 2026</span><span><b>Period:</b> Jan 2019 to Jun 2026</span><span><b>Tools:</b> Python · pandas · matplotlib</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="summary">
+    <div class="summary-card">
+      <h2>Executive summary</h2>
+      <ul class="kpis">
+        <li><span class="v" data-count="0.4">0.4</span><span class="k">vacancies per unemployed person</span></li>
+        <li><span class="v" data-count="706" data-suffix="K">706K</span><span class="k">vacancies, Apr to Jun 2026</span></li>
+        <li><span class="v" data-count="4.9" data-suffix="%">4.9%</span><span class="k">unemployment rate</span></li>
+        <li><span class="v" data-count="3.5" data-suffix="%">3.5%</span><span class="k">regular pay growth, year on year</span></li>
+      </ul>
+      <p>In mid-2022 there was roughly one vacancy for every unemployed person. There are now 0.4, below the 0.56 seen just before the pandemic. Vacancies have fallen 45% from their peak, unemployment has risen to 1.78 million, and pay growth has slowed from 7.9% to 3.5%.</p>
+      <p><strong>Implication:</strong> for most roles, employers have more candidates and less pressure on pay than at any point since 2021. The risk moves from failing to hire to holding on to key people and hiring well.</p>
+    </div>
+  </div>
+
+<main>
+<section aria-labelledby="s1">
+  <div class="sec-head"><span class="sec-num">01</span><h2 id="s1">Why workforce planners need this</h2></div>
+  <p>Hiring plans, time-to-fill targets, pay budgets and attrition forecasts all depend on the external labour market. An attrition rate that was normal in 2022 may be high in 2026, and a pay rise that kept people then may be more than the market needs now. This briefing sets out the external picture a workforce plan should start from.</p>
+</section>
+
+<section aria-labelledby="s2">
+  <div class="sec-head"><span class="sec-num">02</span><h2 id="s2">Data</h2></div>
+  <p>Six ONS time series, downloaded as CSV from the Labour Market Statistics release of 15 September 2026:</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Series ID</th><th>Measure</th><th>Coverage</th></tr></thead>
+    <tbody>
+      <tr><td>AP2Y</td><td>Vacancies (thousands)</td><td>UK, all industries</td></tr>
+      <tr><td>MGSC</td><td>Unemployed people (thousands)</td><td>UK, aged 16+</td></tr>
+      <tr><td>MGSX</td><td>Unemployment rate (%)</td><td>UK, aged 16+</td></tr>
+      <tr><td>LF24</td><td>Employment rate (%)</td><td>UK, aged 16 to 64</td></tr>
+      <tr><td>LF2S</td><td>Economic inactivity rate (%)</td><td>UK, aged 16 to 64</td></tr>
+      <tr><td>KAI9</td><td>Regular pay growth, three-month average, year on year (%)</td><td>Great Britain, whole economy</td></tr>
+    </tbody>
+  </table></div>
+  <ul class="cards">
+    <li><strong>Rolling periods</strong>Each monthly figure covers three months. "Jun 2026" means April to June 2026.</li>
+    <li><strong>Common end date</strong>The series are joined on date and cut to the last month all six share, June 2026. The vacancy series runs one month further, to 702K for May to July.</li>
+    <li><strong>Tightness measure</strong>Vacancies divided by unemployed people. Above 1 means more open jobs than jobseekers.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s3">
+  <div class="sec-head"><span class="sec-num">03</span><h2 id="s3">Method explained</h2></div>
+  <div class="measure"><h3>Reading only the monthly rows</h3>
+<pre><code>raw = pd.read_csv(file, header=None, names=["period", "value"], dtype=str)
+monthly = raw[raw["period"].str.match(r"^\d{4} [A-Z]{3}$", na=False)]
+monthly["date"] = pd.to_datetime(monthly["period"], format="%Y %b")</code></pre>
+  <p>ONS files mix header rows, annual, quarterly and monthly values in one column. A pattern match keeps only labels such as <code>2026 JUN</code>, so annual averages are never mixed into the monthly trend.</p></div>
+  <div class="measure"><h3>Labour market tightness</h3>
+<pre><code>df = pd.concat({name: load_monthly(f) for name, f in SERIES.items()},
+               axis=1, sort=True).dropna()
+df["vacancies_per_unemployed"] = df["vacancies_k"] / df["unemployed_k"]</code></pre>
+  <p>Joining on the date and dropping incomplete months means every ratio uses figures for the same three-month period.</p></div>
+</section>
+
+<section aria-labelledby="s4">
+  <div class="sec-head"><span class="sec-num">04</span><h2 id="s4">Findings</h2></div>
+  <figure>
+    <img src="labour-market/outputs/tightness.png" width="1800" height="800" loading="lazy" alt="Line chart of vacancies per unemployed person in the UK from 2019 to 2026. The ratio falls to about 0.25 in 2020, rises to a peak just above 1.0 in mid-2022, then declines steadily to 0.40 in 2026, below the February 2020 level of 0.56.">
+    <figcaption>Vacancies per unemployed person. The dashed line is the level just before the pandemic.</figcaption>
+  </figure>
+  <p class="pull">The market has moved from one vacancy per jobseeker in 2022 to one vacancy for every two and a half.</p>
+  <figure>
+    <img src="labour-market/outputs/vacancies_vs_unemployed.png" width="1800" height="880" loading="lazy" alt="Line chart of UK vacancies and unemployed people in thousands from 2019 to 2026. Vacancies peak near 1.3 million in 2022 and fall to about 700 thousand. Unemployed people fall to about 1.2 million in 2022 and rise to about 1.8 million by 2026.">
+    <figcaption>Vacancies and unemployed people, thousands.</figcaption>
+  </figure>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Measure</th><th class="num">Feb 2020</th><th class="num">Peak tightness, 2022</th><th class="num">Jun 2025</th><th class="num">Jun 2026</th></tr></thead>
+    <tbody>
+      <tr><td>Vacancies</td><td class="num">788K</td><td class="num">1,294K (May)</td><td class="num">727K</td><td class="num">706K</td></tr>
+      <tr><td>Unemployed people</td><td class="num">1,410K</td><td class="num">1,297K (May)</td><td class="num">1,696K</td><td class="num">1,778K</td></tr>
+      <tr><td>Vacancies per unemployed</td><td class="num">0.56</td><td class="num">1.02 (Jul)</td><td class="num">0.43</td><td class="num">0.40</td></tr>
+      <tr><td>Unemployment rate</td><td class="num">4.1%</td><td class="num">3.8% (May)</td><td class="num">4.7%</td><td class="num">4.9%</td></tr>
+      <tr><td>Regular pay growth</td><td class="num">2.9%</td><td class="num">4.7% (May)</td><td class="num">4.9%</td><td class="num">3.5%</td></tr>
+    </tbody>
+  </table></div>
+  <figure>
+    <img src="labour-market/outputs/rates_and_pay.png" width="2200" height="800" loading="lazy" alt="Two line charts. Left: the UK unemployment rate rises from about 3.6 percent in 2022 to a high of 5.2 percent in late 2025 and is 4.9 percent in 2026, while the inactivity rate falls from about 22 percent to 20.9 percent. Right: regular pay growth peaks at 7.9 percent in 2023 and slows to 3.5 percent in 2026.">
+    <figcaption>Left: unemployment and inactivity rates on separate axes. Right: regular pay growth, not adjusted for inflation.</figcaption>
+  </figure>
+  <ul>
+    <li><strong>Unemployment</strong> rose from 3.6% in 2022 to a high of 5.2% in late 2025, and has settled at 4.9%.</li>
+    <li><strong>Inactivity</strong> (people neither working nor looking for work) fell from a high above 22% to 20.9%, so more people are back in the labour force, adding to candidate supply.</li>
+    <li><strong>Employment</strong> is steady at 75.1%, slightly below its pre-pandemic level of 75.9%.</li>
+    <li><strong>Pay growth</strong> peaked at 7.9% in mid-2023 and has slowed to 3.5%, down from 4.9% a year earlier.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s5">
+  <div class="sec-head"><span class="sec-num">05</span><h2 id="s5">Implications for workforce planning</h2></div>
+  <ul class="cards">
+    <li><strong>Hiring</strong>Larger applicant pools should shorten time-to-fill for most roles. Plans can rely less on agencies and more on direct sourcing.</li>
+    <li><strong>Pay</strong>Pressure on starting salaries has eased, but pay awards set in 2023 and 2024 may have raised the salary base. Benchmark before the next pay round.</li>
+    <li><strong>Attrition</strong>Voluntary turnover usually falls when there are fewer vacancies. A team whose attrition is still high in this market likely has a local cause worth investigating.</li>
+    <li><strong>Skills</strong>These are whole-economy figures. Shortage roles in areas such as data, engineering and health can stay hard to fill even in a looser market.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s6">
+  <div class="sec-head"><span class="sec-num">06</span><h2 id="s6">Limitations</h2></div>
+  <ul>
+    <li>The Labour Force Survey has had low response rates since 2023, and ONS advises caution with its estimates. Unemployment, employment and inactivity come from this survey.</li>
+    <li>National figures hide large differences by region, industry and occupation. A local plan should add regional or occupation-level data.</li>
+    <li>Pay growth is nominal. Real pay growth depends on inflation, which is not included here.</li>
+    <li>ONS revises recent figures, so the latest months may change.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s7">
+  <div class="sec-head"><span class="sec-num">07</span><h2 id="s7">Recommendations</h2></div>
+  <ol class="recs">
+    <li><strong>Reset time-to-fill and cost-per-hire targets</strong> for the 2027 plan, since targets set in 2022 assumed a much tighter market.</li>
+    <li><strong>Review agency spend</strong> and move volume roles to direct sourcing where applicant numbers support it.</li>
+    <li><strong>Compare internal attrition with the market</strong> and investigate teams whose turnover has not fallen as vacancies dropped.</li>
+    <li><strong>Protect scarce skills</strong> with targeted retention and development rather than broad pay increases.</li>
+    <li><strong>Refresh this briefing each month</strong> after the ONS release, and add a regional or sector cut for the business.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="s8">
+  <div class="sec-head"><span class="sec-num">08</span><h2 id="s8">How to reproduce it</h2></div>
+  <ol>
+    <li>Download the six series above from the ONS website as CSV into <code>labour-market/data/</code>.</li>
+    <li>Run <code>python python/labour_market.py</code>. It writes the joined monthly table, a JSON summary and the three charts to <code>outputs/</code>.</li>
+  </ol>
+  <p><a href="https://github.com/olajumokemedunoye/olajumokemedunoye.github.io/tree/main/projects/labour-market">View the Python, data and outputs on GitHub</a></p>
+</section>
+</main>
+
+<footer>
+  <p>UK Labour Market Briefing · Source: Office for National Statistics, Labour Market Statistics, September 2026. Contains public sector information licensed under the Open Government Licence v3.0.</p>
+  <p>Olajumoke O. Medunoye · People Analytics | HR Analytics | Workforce Planning · <a href="mailto:medunoyeolajumoke@gmail.com">medunoyeolajumoke@gmail.com</a></p>
+  <p class="back"><a href="../index.html#additional-work">← Back to projects</a></p>
+</footer>
+</div>
+
+<a class="signature" href="../index.html" aria-label="Prepared by Olajumoke O. Medunoye, back to portfolio"><span class="mono" aria-hidden="true">OM</span><span>Prepared by <b>Olajumoke O. Medunoye</b></span></a>
+<script src="report.js" defer></script>
+</body>
+</html>
