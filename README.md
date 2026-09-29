@@ -11,7 +11,7 @@ This is the source for my job-search portfolio. It covers workforce planning, at
 | # | Case study | Tools | Type |
 |---|---|---|---|
 | 01 | Workforce Planning: Replacement Hiring & Attrition Scenarios | Excel, Power BI, DAX | Portfolio project |
-| 02 | HR Attrition & Cost-of-Turnover Analysis | SQL, Excel, Power BI | Portfolio project |
+| 02 | HR Attrition & Cost of Turnover | Power BI, Power Query, DAX | Portfolio project |
 | 03 | Recruitment Cost & Hiring Routes | Power BI, Power Query, DAX | Portfolio project |
 | 04 | HR Reporting Automation: Performance Dashboard | Power BI, DAX | Portfolio project |
 
@@ -33,6 +33,7 @@ The site separates three kinds of evidence:
 index.html                          single-page site (HTML, CSS, a little JS)
 profile.jpeg                        portrait
 workforce_planning_powerbi.png      Power BI screenshot used in case study 01
+attrition_cost_powerbi.png          Power BI screenshot used in case study 02
 recruitment_cost_powerbi.png        Power BI screenshot used in case study 03
 performance_dashboard_powerbi.png   Power BI screenshot used in case study 04
 cv/Olajumoke_Medunoye_CV.pdf        CV download

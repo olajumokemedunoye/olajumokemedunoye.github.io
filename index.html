@@ -261,8 +261,8 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
     <div class="impact">
       <div class="impact-item">
         <span class="label label-portfolio">Portfolio project</span>
-        <p class="figure">£312K</p>
-        <p>Annual turnover cost quantified by a cost-per-departure model. Standard headcount reports didn't show it.</p>
+        <p class="figure">$2.66M</p>
+        <p>Estimated turnover cost across 85 leavers in a 1,000-person case-study workforce, at 30% of salary.</p>
       </div>
       <div class="impact-item">
         <span class="label label-pro">Professional</span>
@@ -353,27 +353,37 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
         <span class="case-num" aria-hidden="true">02</span>
         <div>
           <span class="label label-portfolio">Portfolio project</span>
-          <h3 id="cs2">HR Attrition &amp; Cost-of-Turnover Analysis</h3>
-          <p class="summary">Put a cost on attrition so that retention could be argued as a business case.</p>
-          <ul class="chips" aria-label="Tools and methods"><li>SQL</li><li>Excel</li><li>Power BI</li><li>Data cleaning</li><li>Segmentation</li></ul>
+          <h3 id="cs2">HR Attrition &amp; Cost of Turnover</h3>
+          <p class="summary">A Power BI view of who left Lumina Tech, a case-study company, when in their tenure, and what the turnover cost.</p>
+          <ul class="chips" aria-label="Tools and methods"><li>Power BI</li><li>DAX</li><li>Power Query</li><li>Segmentation</li><li>Scenario modelling</li></ul>
         </div>
       </div>
       <details class="more">
         <summary><span class="when-closed">View case study</span><span class="when-open">Hide case study</span></summary>
         <div class="cs-body">
-          <div class="cs-block"><h4>Business problem</h4><p>Leadership believed attrition was high but had no costed figure to justify spending on retention. Headcount reports showed who left, not what leaving cost.</p></div>
-          <div class="cs-block"><h4>Data</h4><p>Departure records, salary data, recruitment spend and onboarding cost estimates.</p></div>
+          <div class="cs-block"><h4>Business problem</h4><p>Leadership knew people were leaving but had no costed figure to justify spending on retention. Headcount reports showed who left, not what leaving cost.</p></div>
+          <div class="cs-block"><h4>Data</h4><p>Records for 1,000 employees: department, job title, salary, hire date and exit date. 85 have an exit date.</p></div>
           <div class="cs-block full"><h4>Analysis</h4><ul>
-            <li>Pulled departure and salary records with SQL.</li>
-            <li>Built a cost-per-departure formula in Excel covering recruitment, onboarding and productivity ramp-up.</li>
-            <li>Applied it to every departure in the period, then segmented the total by tenure band, department and performance band in Power BI.</li>
-            <li>Checked the total against payroll figures before presenting it.</li>
+            <li>Removed names, ethnicity and location coordinates in Power Query; they are not needed to cost turnover.</li>
+            <li>Derived a leaver flag, exit year, tenure at exit and tenure bands from hire and exit dates.</li>
+            <li>Wrote DAX measures for leavers, leaver rate, salary of leavers and average tenure at exit.</li>
+            <li>Costed turnover as salary of leavers multiplied by an adjustable replacement-cost assumption, shown on a slider so the estimate is transparent.</li>
           </ul></div>
-          <div class="cs-block"><h4>Tools</h4><p>SQL, Excel, Power BI.</p></div>
-          <div class="cs-block"><h4>Key findings</h4><p>£312K a year in turnover cost that headcount reporting didn't capture (portfolio project figure). A few departments and the early-tenure leavers carried a disproportionate share of it.</p></div>
-          <div class="cs-block"><h4>Business implication</h4><p>With a cost attached, retention became a business case leadership could fund.</p></div>
-          <div class="cs-block"><h4>Recommendation</h4><p>Focus retention spend on the departments and tenure bands carrying the most cost, starting with early-tenure leavers.</p></div>
-          <div class="cs-block full"><h4>Outcome</h4><p>A costed, department-level view that let leadership set retention priorities.</p></div>
+          <div class="cs-block"><h4>Tools</h4><p>Power BI, Power Query, DAX (including a what-if parameter).</p></div>
+          <div class="cs-block"><h4>Key findings</h4><ul>
+            <li>85 of 1,000 employees left (8.5%), holding $8.88M in salary.</li>
+            <li>Marketing (12.6%) and Engineering (10.8%) lost staff at the highest rates; IT the lowest (6.6%).</li>
+            <li>20 leavers went within their first year, and 30 after five or more years, so both new starters and experienced staff were leaving.</li>
+            <li>Exits rose sharply from 2017, peaking at 20 in 2021.</li>
+          </ul></div>
+          <div class="cs-block"><h4>Business implication</h4><p>At an assumed 30% of salary, turnover cost about $2.66M, with Engineering and Marketing together around $1.15M. The cost scales directly with the assumption, so the slider lets leaders test their own figure.</p></div>
+          <div class="cs-block"><h4>Recommendation</h4><p>Target retention at Marketing and Engineering, review onboarding for the first-year leavers, and look at career progression for long-tenured staff.</p></div>
+          <div class="cs-block full"><h4>Outcome</h4><p>A costed, department-level view that lets leadership set retention priorities and see how sensitive the cost is to its assumptions.</p>
+            <figure>
+              <img src="attrition_cost_powerbi.png" width="2400" height="1376" loading="lazy" decoding="async" alt="Power BI dashboard titled Lumina Tech: Attrition and Cost of Turnover, showing KPI cards for employees, leavers, leaver rate, salary of leavers and average tenure at exit, leaver rate by department, leavers by year and by tenure band, a replacement cost assumption slider set to 30 percent with estimated turnover cost, and a department table.">
+              <figcaption>Power BI report from this project, with the cost assumption at 30% of salary. Case-study dataset. The turnover cost is an estimate, not a measured figure.</figcaption>
+            </figure>
+          </div>
         </div>
       </details>
     </article>
