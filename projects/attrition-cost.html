@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Attrition &amp; Cost of Turnover Report | Olajumoke Medunoye</title>
+<meta name="description" content="Attrition and cost of turnover report for Lumina Tech: Power Query preparation, DAX measures, the replacement cost assumption, findings and recommendations. Prepared by Olajumoke O. Medunoye.">
+<link rel="canonical" href="https://olajumokemedunoye.github.io/projects/attrition-cost.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="report.css">
+<style>
+:root{--primary:#5B1530;--primary-2:#7E2A47;--accent:#C9A227;--accent-text:#7E2A47;--tint:#FBF5EE;--accent-on-dark:#E4C45A;
+--font-head:"Playfair Display",Georgia,serif;--font-body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+</style>
+</head>
+<body>
+<header class="cover">
+  <div class="wrap">
+    <nav aria-label="Report"><a href="../index.html">Olajumoke Medunoye · Portfolio</a><a href="../index.html#case-studies">← All case studies</a></nav>
+    <p class="kicker"><span></span>Attrition report · case-study data</p>
+    <h1>Who Is Leaving Lumina Tech, When, and What It Costs</h1>
+    <p class="lede">A costed view of attrition by department and tenure, with the cost assumption placed in the hands of the reader instead of buried in a formula.</p>
+    <div class="meta"><span><b>Organisation:</b> Lumina Tech (case study)</span><span><b>Population:</b> 1,000 employees</span><span><b>Tools:</b> Power BI · Power Query · DAX</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="summary">
+    <div class="summary-card">
+      <h2>Executive summary</h2>
+      <ul class="kpis">
+        <li><span class="v" data-count="85">85</span><span class="k">employees left</span></li>
+        <li><span class="v" data-count="12.6" data-suffix="%">12.6%</span><span class="k">leaver rate in Marketing, the highest</span></li>
+        <li><span class="v" data-count="20">20</span><span class="k">left within their first year</span></li>
+        <li><span class="v" data-count="2.66" data-prefix="$" data-suffix="M">$2.66M</span><span class="k">estimated cost at 30% of salary</span></li>
+      </ul>
+      <p>85 of 1,000 employees left, holding $8.88M in salary. Marketing and Engineering lose people fastest. Leavers split between new starters who go in their first year and experienced staff who go after five or more, and exits rose sharply from 2017.</p>
+      <p><strong>Recommendation:</strong> target retention at Marketing and Engineering, fix the first-year experience, and review progression for long-serving staff. Use the cost slider to agree the turnover cost assumption before building a business case.</p>
+    </div>
+  </div>
+
+<main>
+<section aria-labelledby="s1">
+  <div class="sec-head"><span class="sec-num">01</span><h2 id="s1">Business context</h2></div>
+  <p>Leadership could see people leaving but had no costed figure to justify retention spending. Standard headcount reports showed who left and when. They did not show what those departures cost, or where the cost concentrated.</p>
+</section>
+
+<section aria-labelledby="s2">
+  <div class="sec-head"><span class="sec-num">02</span><h2 id="s2">Data and preparation in Power Query</h2></div>
+  <p>The source is a 1,000-row employee sheet with job title, department, business unit, salary, hire date, exit date and location. 85 rows have an exit date.</p>
+  <h3>Steps applied</h3>
+  <ol>
+    <li><strong>Removed personal fields not needed for the question:</strong> full name, ethnicity, latitude and longitude. A cost-of-turnover view needs no names, and dropping them keeps the model lean and privacy-safe.</li>
+    <li><strong>Set explicit types</strong> for every column, including true date types for hire and exit dates.</li>
+    <li><strong>Added a leaver flag:</strong> 1 if an exit date exists, otherwise 0.</li>
+    <li><strong>Added exit year</strong> from the exit date for the trend chart.</li>
+    <li><strong>Calculated tenure at exit</strong> as the days between hire and exit divided by 365.25, so leap years do not distort it.</li>
+    <li><strong>Grouped tenure into bands:</strong> under 1 year, 1 to 2, 2 to 5, and 5 or more. Each band starts with a number so it sorts in the right order.</li>
+  </ol>
+<div class="measure"><h3>Tenure band column (Power Query M)</h3>
+<pre><code>Table.AddColumn(Tenure, "Tenure Band", each
+    let t = [#"Tenure at Exit (yrs)"] in
+    if t = null then null
+    else if t &lt; 1 then "1. Under 1 yr"
+    else if t &lt; 2 then "2. 1-2 yrs"
+    else if t &lt; 5 then "3. 2-5 yrs"
+    else "4. 5+ yrs",
+  type text)</code></pre>
+<p>Current employees have no tenure at exit and fall into no band, so the chart counts only leavers.</p></div>
+</section>
+
+<section aria-labelledby="s3">
+  <div class="sec-head"><span class="sec-num">03</span><h2 id="s3">DAX measures explained</h2></div>
+
+  <div class="measure"><h3>Employees Count</h3>
+<pre><code>Employees Count = COUNTROWS(Employees)</code></pre>
+  <p>One row per employee, so counting rows gives headcount in any filter context.</p></div>
+
+  <div class="measure"><h3>Leavers</h3>
+<pre><code>Leavers = CALCULATE(COUNTROWS(Employees), Employees[Is Leaver] = 1)</code></pre>
+  <p>An early version summed the leaver flag and added zero. That returned 0 for current staff and created an empty "(Blank)" bar in the tenure chart. Counting filtered rows returns blank for groups with no leavers, which keeps the charts clean.</p></div>
+
+  <div class="measure"><h3>Leaver Rate</h3>
+<pre><code>Leaver Rate = DIVIDE([Leavers], [Employees Count])</code></pre>
+  <p><code>DIVIDE</code> protects against a zero denominator. Formatted to one decimal place.</p></div>
+
+  <div class="measure"><h3>Salary of Leavers</h3>
+<pre><code>Salary of Leavers =
+CALCULATE(SUM(Employees[Annual Salary]), Employees[Is Leaver] = 1) + 0</code></pre>
+  <p>The annual salary attached to the roles that were vacated. It is the base the cost estimate is built on.</p></div>
+
+  <div class="measure"><h3>Avg Tenure at Exit</h3>
+<pre><code>Avg Tenure at Exit = AVERAGE(Employees[Tenure at Exit (yrs)])</code></pre>
+  <p>Averages only leavers, because current employees have a blank tenure at exit. Formatted as years to one decimal place.</p></div>
+</section>
+
+<section aria-labelledby="s4">
+  <div class="sec-head"><span class="sec-num">04</span><h2 id="s4">The cost assumption slider</h2></div>
+  <p>Turnover cost is not recorded in any HR system. It has to be estimated, and the estimate depends on an assumption. Rather than hide that assumption, the dashboard puts it on a slider.</p>
+  <div class="measure"><h3>Est Turnover Cost</h3>
+<pre><code>Est Turnover Cost =
+[Salary of Leavers] * 'Replacement Cost Pct'[Replacement Cost Pct Value] / 100</code></pre>
+  <p>The parameter <code>Replacement Cost Pct</code> runs from 0% to 100% of salary in steps of 10, with a default of 30%. The department table recalculates as the slider moves.</p></div>
+  <h3>Why 30%</h3>
+  <p>Published estimates of the full cost of replacing an employee vary widely, from under a third of annual salary for junior roles to more than a full year's salary for specialist and senior roles. 30% sits at the conservative end of that range, so the headline figure is unlikely to overstate the problem.</p>
+  <ul class="cards">
+    <li><strong>What 30% covers</strong>Recruitment, onboarding and the productivity lost while a new hire gets up to speed, as a single rate.</li>
+    <li><strong>Same rate for every role</strong>A senior engineer and a junior analyst are costed at the same share of salary, which understates specialist exits.</li>
+    <li><strong>Linear scaling</strong>Doubling the rate doubles the cost. At 50% the estimate is about $4.44M.</li>
+    <li><strong>Agree it first</strong>The rate should be agreed with Finance before the figure goes into a business case.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s5">
+  <div class="sec-head"><span class="sec-num">05</span><h2 id="s5">Dashboard and findings</h2></div>
+  <figure>
+    <img src="../attrition_cost_powerbi.png" width="2400" height="1376" loading="lazy" alt="Lumina Tech attrition and cost of turnover dashboard in Power BI with KPI cards, leaver rate by department, leavers by year and by tenure band, a replacement cost slider set to 30 percent and a department cost table.">
+    <figcaption>The Power BI dashboard with the cost assumption at 30% of salary.</figcaption>
+  </figure>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Department</th><th class="num">Staff</th><th class="num">Left</th><th class="num">Rate</th><th class="num">Salary of leavers</th><th class="num">Est. cost at 30%</th></tr></thead>
+    <tbody>
+      <tr><td>Marketing</td><td class="num">119</td><td class="num">15</td><td class="num">12.6%</td><td class="num">$1,865,888</td><td class="num">$559,766</td></tr>
+      <tr><td>Engineering</td><td class="num">158</td><td class="num">17</td><td class="num">10.8%</td><td class="num">$1,952,470</td><td class="num">$585,741</td></tr>
+      <tr><td>Human Resources</td><td class="num">125</td><td class="num">11</td><td class="num">8.8%</td><td class="num">$796,532</td><td class="num">$238,960</td></tr>
+      <tr><td>Finance</td><td class="num">120</td><td class="num">9</td><td class="num">7.5%</td><td class="num">$1,026,206</td><td class="num">$307,862</td></tr>
+      <tr><td>Accounting</td><td class="num">95</td><td class="num">7</td><td class="num">7.4%</td><td class="num">$699,816</td><td class="num">$209,945</td></tr>
+      <tr><td>Sales</td><td class="num">139</td><td class="num">10</td><td class="num">7.2%</td><td class="num">$975,941</td><td class="num">$292,782</td></tr>
+      <tr><td>IT</td><td class="num">241</td><td class="num">16</td><td class="num">6.6%</td><td class="num">$1,560,252</td><td class="num">$468,076</td></tr>
+      <tr><td>Board Member</td><td class="num">3</td><td class="num">0</td><td class="num">0.0%</td><td class="num">$0</td><td class="num">$0</td></tr>
+    </tbody>
+    <tfoot><tr><td>Total</td><td class="num">1,000</td><td class="num">85</td><td class="num">8.5%</td><td class="num">$8,877,105</td><td class="num">$2,663,132</td></tr></tfoot>
+  </table></div>
+  <p class="pull">Marketing and Engineering hold just over a quarter of the workforce but account for 38% of leavers and 43% of the estimated cost.</p>
+  <ul>
+    <li><strong>Tenure pattern:</strong> 20 leavers went in their first year, 13 between one and two years, 22 between two and five, and 30 after five or more. Average tenure at exit was 4.9 years.</li>
+    <li><strong>Trend:</strong> exits were occasional before 2013, then rose sharply from 2017 and peaked at 20 in 2021.</li>
+    <li><strong>IT</strong> is the largest department but has the lowest leaver rate, 6.6%.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s6">
+  <div class="sec-head"><span class="sec-num">06</span><h2 id="s6">Limitations</h2></div>
+  <ul>
+    <li><strong>Not an annual rate.</strong> Exit dates span 1994 to 2022, so the 8.5% leaver rate is cumulative across the whole period. It should not be compared with a yearly attrition benchmark.</li>
+    <li><strong>No reason for leaving.</strong> The data does not record voluntary versus involuntary exits, so regretted attrition cannot be separated out.</li>
+    <li><strong>Cost is an estimate.</strong> It rests on the assumption in section 04 and should be read as a range, not a fact.</li>
+    <li><strong>Case-study data.</strong> Figures describe a fictional company and are not results from an employer.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s7">
+  <div class="sec-head"><span class="sec-num">07</span><h2 id="s7">Recommendations</h2></div>
+  <ol class="recs">
+    <li><strong>Prioritise Marketing and Engineering.</strong> Run exit and stay interviews in both to find the causes before committing budget.</li>
+    <li><strong>Strengthen the first year.</strong> Structured 30, 60 and 90-day check-ins would target the 20 people who left before their first anniversary.</li>
+    <li><strong>Review progression for long-serving staff.</strong> 30 leavers had five or more years' service, which points to limited routes upward.</li>
+    <li><strong>Agree the cost rate with Finance,</strong> then use the slider to present a low, central and high estimate rather than a single figure.</li>
+    <li><strong>Record exit reasons</strong> so future reporting can separate regretted from non-regretted attrition and track it by year.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="s8">
+  <div class="sec-head"><span class="sec-num">08</span><h2 id="s8">How to reproduce it</h2></div>
+  <ol>
+    <li>Load the employee sheet and apply the Power Query steps in section 02. Name the query <code>Employees</code>.</li>
+    <li>Set <code>Exit Year</code> to "Don't summarize" so it works as a chart axis.</li>
+    <li>Create the measures in section 03 and the parameter in section 04: 0 to 100, increment 10, default 30.</li>
+    <li>Sort the tenure chart by <code>Tenure Band</code> ascending so the bands read in order.</li>
+  </ol>
+</section>
+</main>
+
+<footer>
+  <p>Attrition &amp; Cost of Turnover Report · Lumina Tech (case-study data)</p>
+  <p>Olajumoke O. Medunoye · People Analytics | HR Analytics | Workforce Planning · <a href="mailto:medunoyeolajumoke@gmail.com">medunoyeolajumoke@gmail.com</a></p>
+  <p class="back"><a href="../index.html#case-studies">← Back to case studies</a></p>
+</footer>
+</div>
+
+<a class="signature" href="../index.html" aria-label="Prepared by Olajumoke O. Medunoye, back to portfolio"><span class="mono" aria-hidden="true">OM</span><span>Prepared by <b>Olajumoke O. Medunoye</b></span></a>
+<script src="report.js" defer></script>
+</body>
+</html>

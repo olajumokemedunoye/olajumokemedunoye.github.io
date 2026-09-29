@@ -134,6 +134,10 @@ section[id],header[id]{scroll-margin-top:72px}
 .case .summary{color:var(--text-2);margin:0 0 14px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0}
 .chips li{font-size:13px;color:var(--text-2);background:#F9FAFB;border:1px solid var(--border);padding:3px 10px;border-radius:6px}
+.report-link{margin:14px 0 0;font-size:15px;font-weight:600}
+.report-link a{text-decoration:none;border-bottom:2px solid var(--orange-100)}
+.report-link a:hover{border-bottom-color:var(--orange-700)}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 details.more{margin-top:20px;border-top:1px solid var(--border);padding-top:16px}
 #case-studies .case>details.more{margin-left:48px}
 details.more>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:var(--orange-700);padding:6px 0;min-height:44px}
@@ -316,6 +320,7 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
           <h3 id="cs1">Workforce Planning: Replacement Hiring &amp; Attrition Scenarios</h3>
           <p class="summary">A Power BI planning view for OptiGrowth Enterprises, a case-study company: how many roles each department must refill if attrition holds, and what changes if it falls.</p>
           <ul class="chips" aria-label="Tools and methods"><li>Power BI</li><li>DAX</li><li>Excel</li><li>Data modelling</li><li>Scenario modelling</li></ul>
+          <p class="report-link"><a href="projects/workforce-planning.html">Read the full report<span class="visually-hidden"> on workforce planning</span> <span aria-hidden="true">→</span></a></p>
         </div>
       </div>
       <details class="more">
@@ -356,6 +361,7 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
           <h3 id="cs2">HR Attrition &amp; Cost of Turnover</h3>
           <p class="summary">A Power BI view of who left Lumina Tech, a case-study company, when in their tenure, and what the turnover cost.</p>
           <ul class="chips" aria-label="Tools and methods"><li>Power BI</li><li>DAX</li><li>Power Query</li><li>Segmentation</li><li>Scenario modelling</li></ul>
+          <p class="report-link"><a href="projects/attrition-cost.html">Read the full report<span class="visually-hidden"> on attrition and cost of turnover</span> <span aria-hidden="true">→</span></a></p>
         </div>
       </div>
       <details class="more">
@@ -396,6 +402,7 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
           <h3 id="cs3">Recruitment Cost &amp; Hiring Routes</h3>
           <p class="summary">A Power BI view of what each hiring route cost Ted Square Ltd, a case-study company, and what a higher internal share would save.</p>
           <ul class="chips" aria-label="Tools and methods"><li>Power BI</li><li>DAX</li><li>Power Query</li><li>Data cleaning</li><li>Scenario modelling</li></ul>
+          <p class="report-link"><a href="projects/recruitment-cost.html">Read the full report<span class="visually-hidden"> on recruitment cost</span> <span aria-hidden="true">→</span></a></p>
         </div>
       </div>
       <details class="more">
@@ -436,6 +443,7 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
           <h3 id="cs4">HR Reporting Automation: Performance Dashboard</h3>
           <p class="summary">A self-service Power BI report on performance appraisal data for Salford &amp; Co, a case-study company.</p>
           <ul class="chips" aria-label="Tools and methods"><li>Power BI</li><li>DAX</li><li>Data modelling</li><li>Visualisation</li></ul>
+          <p class="report-link"><a href="projects/performance-reporting.html">Read the full report<span class="visually-hidden"> on performance reporting</span> <span aria-hidden="true">→</span></a></p>
         </div>
       </div>
       <details class="more">
@@ -459,8 +467,8 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
           <div class="cs-block"><h4>Recommendation</h4><p>Target development at individual goals and manager feedback, and review whether training content, not volume, supports performance.</p></div>
           <div class="cs-block full"><h4>Outcome</h4><p>A single refreshable report HR can filter by quarter, department and employee.</p>
             <figure>
-              <img src="performance_dashboard_powerbi.png" width="1212" height="679" loading="lazy" decoding="async" alt="Power BI dashboard titled Overview of Employee Performance, showing KPI cards for total employees, average performance, engagement and tenure, a quarterly performance trend line, a training hours versus performance scatter plot, an appraisal table, a marital status donut and performance bands by department.">
-              <figcaption>Power BI report from this project. Employee names are hidden.</figcaption>
+              <img src="performance_dashboard_powerbi.png" width="2400" height="1373" loading="lazy" decoding="async" alt="Power BI dashboard titled Overview of Employee Performance, showing KPI cards for total employees, average performance, engagement and tenure, a quarterly performance trend line, a training hours versus performance scatter plot, an appraisal table, a marital status donut and performance bands by department.">
+              <figcaption>Power BI report from this project, exported directly from the file. Employee names are hidden.</figcaption>
             </figure>
           </div>
         </div>

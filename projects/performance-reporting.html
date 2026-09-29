@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Performance Reporting Report | Olajumoke Medunoye</title>
+<meta name="description" content="Performance appraisal reporting for Salford &amp; Co: data model, time intelligence and DAX measures, the quarter-on-quarter fix, findings and recommendations. Prepared by Olajumoke O. Medunoye.">
+<link rel="canonical" href="https://olajumokemedunoye.github.io/projects/performance-reporting.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="report.css">
+<style>
+:root{--primary:#2E1F4F;--primary-2:#4A3278;--accent:#8C7AB8;--accent-text:#4A3278;--tint:#F4F2F9;--accent-on-dark:#C9BEE6;
+--font-head:"DM Serif Display",Georgia,serif;--font-body:"DM Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+h1,h2,h3{font-weight:400}
+</style>
+</head>
+<body>
+<header class="cover">
+  <div class="wrap">
+    <nav aria-label="Report"><a href="../index.html">Olajumoke Medunoye · Portfolio</a><a href="../index.html#case-studies">← All case studies</a></nav>
+    <p class="kicker"><span></span>HR reporting automation · case-study data</p>
+    <h1>A Self-Service Performance Report for Salford &amp; Co</h1>
+    <p class="lede">One refreshable Power BI report that answers the recurring questions about performance, engagement and training, so HR stops rebuilding the same pack each quarter.</p>
+    <div class="meta"><span><b>Organisation:</b> Salford &amp; Co (case study)</span><span><b>Population:</b> 753 employees, 2024</span><span><b>Tools:</b> Power BI · DAX · time intelligence</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="summary">
+    <div class="summary-card">
+      <h2>Executive summary</h2>
+      <ul class="kpis">
+        <li><span class="v" data-count="753">753</span><span class="k">employees appraised</span></li>
+        <li><span class="v" data-count="74.8" data-suffix="%">74.8%</span><span class="k">average performance score</span></li>
+        <li><span class="v" data-count="1.0" data-suffix=" pt">1.0 pt</span><span class="k">dip from Q1 to Q2, since recovered</span></li>
+        <li><span class="v" data-count="12">12</span><span class="k">DAX measures behind the report</span></li>
+      </ul>
+      <p>Performance averaged 74.8% across 2024. It dipped from 75.3% in Q1 to 74.3% in Q2, then held at 74.8% for the rest of the year. Results by department were almost identical, and more training hours did not line up with higher scores.</p>
+      <p><strong>Recommendation:</strong> direct development at individuals and managers rather than whole departments, and review what training covers rather than how many hours it takes.</p>
+    </div>
+  </div>
+
+<main>
+<section aria-labelledby="s1">
+  <div class="sec-head"><span class="sec-num">01</span><h2 id="s1">Business context</h2></div>
+  <p>Every quarter HR was asked the same questions: how is performance trending, which teams need attention, is training paying off? Each answer meant a new spreadsheet cut. The aim was one report that answers them on demand and refreshes with new appraisal data.</p>
+</section>
+
+<section aria-labelledby="s2">
+  <div class="sec-head"><span class="sec-num">02</span><h2 id="s2">Data model</h2></div>
+  <p>Appraisal records for 753 employees across 2024, holding performance score, goals met, engagement score, tenure, training hours, department, job role, gender, marital status and a manager's remark.</p>
+  <ul class="cards">
+    <li><strong>HR Performance Appraisal</strong>The fact table: one row per appraisal.</li>
+    <li><strong>Calendar Dim</strong>A date table related to the appraisal date. Time intelligence functions such as <code>PREVIOUSQUARTER</code> depend on it.</li>
+    <li><strong>Key Measures</strong>An empty table used as a folder, so all measures sit in one place.</li>
+    <li><strong>QuarterOverQuarter Measures</strong>A second folder for the comparison and colour logic.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s3">
+  <div class="sec-head"><span class="sec-num">03</span><h2 id="s3">DAX measures explained</h2></div>
+  <h3>Headline measures</h3>
+  <div class="measure"><h3>Total Employees</h3>
+<pre><code>Total Employees = DISTINCTCOUNT('HR Performance Appraisal'[Employee ID])</code></pre>
+  <p>Counts distinct IDs rather than rows, so an employee appraised more than once is still counted once.</p></div>
+
+  <div class="measure"><h3>Averages</h3>
+<pre><code>Avg Performance Score = AVERAGE('HR Performance Appraisal'[Performance Score])
+Avg Engagement Score  = AVERAGE('HR Performance Appraisal'[Engagement Score])
+Avg Tenure            = AVERAGE('HR Performance Appraisal'[Tenure (Years)])
+Avg Goals Met         = AVERAGE('HR Performance Appraisal'[Goals Met])
+Avg Training Hours    = AVERAGE('HR Performance Appraisal'[Training Hours Completed])
+Total Training Hours  = SUM('HR Performance Appraisal'[Training Hours Completed])</code></pre>
+  <p>Simple aggregations, defined once so every visual and slicer uses the same logic.</p></div>
+
+  <h3>Time intelligence</h3>
+  <div class="measure"><h3>Previous Quarter Performance</h3>
+<pre><code>Previous Quarter Performance =
+CALCULATE(
+    AVERAGE('HR Performance Appraisal'[Performance Score]),
+    PREVIOUSQUARTER('Calendar Dim'[Date])
+)</code></pre>
+  <p><code>PREVIOUSQUARTER</code> shifts the date filter back one quarter, so on the Q3 point of a chart this returns Q2's average.</p></div>
+
+  <div class="measure"><h3>Quarter-on-Quarter Change (rewritten)</h3>
+<pre><code>QuarterOverQuarter Performance Change(%) =
+VAR LatestDay = LASTNONBLANK('Calendar Dim'[Date], [Avg Performance Score])
+VAR CurrentQ  = CALCULATE([Avg Performance Score], DATESQTD(LatestDay))
+VAR PreviousQ = CALCULATE([Avg Performance Score], PREVIOUSQUARTER(LatestDay))
+VAR PctChange = DIVIDE(CurrentQ - PreviousQ, PreviousQ)
+VAR Icon = SWITCH(TRUE(), PctChange &gt; 0, "▲ ", PctChange &lt; 0, "▼ ", "↔ ")
+RETURN
+    IF(ISBLANK(PctChange), BLANK(), Icon &amp; FORMAT(PctChange, "0.0%"))</code></pre>
+  <p>The original measure divided by the previous quarter with <code>/</code>. On the headline card there is no single "current quarter", so the previous-quarter value was blank and the card showed <strong>#INF</strong>. The rewrite finds the latest date with data, compares that quarter with the one before it, and uses <code>DIVIDE</code> so a missing value returns blank instead of an error. The card now reads ▲ 0.1%.</p></div>
+
+  <h3>Presentation logic</h3>
+  <div class="measure"><h3>Performance Color Code</h3>
+<pre><code>Performance Color Code =
+VAR PerformanceDifference = [Avg Performance Score] - [Previous Quarter Performance]
+RETURN
+SWITCH(TRUE(),
+    PerformanceDifference &gt; 0, "#6AA84F",   -- green: improving
+    PerformanceDifference &lt; 0, "#E06666",   -- red: declining
+    "#F4F3F3")                              -- grey: no change</code></pre>
+  <p>Returns a colour code that drives conditional formatting, so the direction of change is visible without reading the number.</p></div>
+
+  <div class="measure"><h3>Dynamic Overview Title</h3>
+<pre><code>Dynamic Overview Title =
+VAR SelectedEmployee   = SELECTEDVALUE('HR Performance Appraisal'[Employee Name])
+VAR SelectedDepartment = SELECTEDVALUE('HR Performance Appraisal'[Department])
+RETURN
+IF(NOT ISBLANK(SelectedEmployee), SelectedEmployee &amp; "'s Performance Record",
+IF(NOT ISBLANK(SelectedDepartment), "Performance Overview for " &amp; SelectedDepartment,
+"Overview Of Employee Performance"))</code></pre>
+  <p><code>SELECTEDVALUE</code> returns a value only when exactly one is selected in the slicers, so the page title changes to match the view: company, department or individual. An earlier version added "Mr" or "Ms" based on gender. It was removed because a report title has no need for it.</p></div>
+
+  <div class="measure"><h3>Removed: Training Time Breakdown</h3>
+  <p>This measure converted total training hours into a "days, hours, minutes" string. It was shown on an unlabelled card reading "3152DD,4HH,0MM", which no reader could interpret. The card was deleted. Training is covered by Avg Training Hours on the scatter chart.</p></div>
+</section>
+
+<section aria-labelledby="s4">
+  <div class="sec-head"><span class="sec-num">04</span><h2 id="s4">How the report is used</h2></div>
+  <p>This report has no what-if slider. Its interactive controls are three slicers: quarter, department and employee. They filter every visual and the dynamic title, so a manager can move from company to department to one person without a new report being built.</p>
+  <ul class="cards">
+    <li><strong>Quarter</strong>Compares any quarter with the trend line and the quarter-on-quarter card.</li>
+    <li><strong>Department</strong>Isolates one team, and the title updates to name it.</li>
+    <li><strong>Employee</strong>Shows one person's record for appraisal conversations.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s5">
+  <div class="sec-head"><span class="sec-num">05</span><h2 id="s5">Dashboard and findings</h2></div>
+  <figure>
+    <img src="../performance_dashboard_powerbi.png" width="2400" height="1373" loading="lazy" alt="Salford and Co performance dashboard in Power BI with KPI cards, a quarterly performance trend line, a training hours versus performance scatter plot, an appraisal table with names hidden, a marital status donut and performance bands by department.">
+    <figcaption>The Power BI report exported directly from the file. Employee names are hidden for this portfolio.</figcaption>
+  </figure>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Quarter 2024</th><th class="num">Avg performance</th><th class="num">Change</th></tr></thead>
+    <tbody>
+      <tr><td>Q1</td><td class="num">75.3%</td><td class="num">–</td></tr>
+      <tr><td>Q2</td><td class="num">74.3%</td><td class="num">▼ 1.0 pt</td></tr>
+      <tr><td>Q3</td><td class="num">74.8%</td><td class="num">▲ 0.5 pt</td></tr>
+      <tr><td>Q4</td><td class="num">74.8%</td><td class="num">▲ 0.1 pt</td></tr>
+    </tbody>
+  </table></div>
+  <p class="pull">Performance bands look almost identical in HR, Marketing, Operations and Sales, so the differences that matter sit with individuals, not teams.</p>
+  <ul>
+    <li>Within each department, the average scores of the above-average, average and exceptional bands differ by one point or less between teams.</li>
+    <li>The scatter of training hours against performance shows no visible pattern: employees with 10 hours and 40 hours of training score across the same range.</li>
+    <li>Marital status groups are close to even in size and add little to the performance story. That visual could be replaced with goals met by role.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s6">
+  <div class="sec-head"><span class="sec-num">06</span><h2 id="s6">Limitations and responsible use</h2></div>
+  <ul>
+    <li><strong>No statistical test.</strong> The training finding is read from the scatter chart. A correlation coefficient would confirm it.</li>
+    <li><strong>One year of data.</strong> Four quarters are too few to call a trend. The Q2 dip may be seasonal.</li>
+    <li><strong>Personal data.</strong> The report shows named employees with manager remarks. In live use, row-level security should limit each manager to their own team, and demographic visuals such as marital status should be justified before they are shown.</li>
+    <li><strong>Case-study data.</strong> Figures describe a fictional company and are not results from an employer.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s7">
+  <div class="sec-head"><span class="sec-num">07</span><h2 id="s7">Recommendations</h2></div>
+  <ol class="recs">
+    <li><strong>Target development at individuals and managers,</strong> using the employee slicer and manager remarks, since department averages are too similar to prioritise one team.</li>
+    <li><strong>Review training content, not volume.</strong> More hours are not linked to higher scores, so assess which programmes change performance.</li>
+    <li><strong>Investigate the Q2 dip</strong> with managers before assuming it is seasonal, and watch whether it recurs in 2025.</li>
+    <li><strong>Add row-level security</strong> before the report is shared beyond HR.</li>
+    <li><strong>Refresh quarterly from the appraisal system</strong> so the report replaces the manual pack for good.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="s8">
+  <div class="sec-head"><span class="sec-num">08</span><h2 id="s8">How to reproduce it</h2></div>
+  <ol>
+    <li>Load the appraisal data and create a calendar table. Mark it as a date table and relate it to the appraisal date.</li>
+    <li>Create measure folder tables and the measures in section 03.</li>
+    <li>Apply the colour code measure through conditional formatting on the change card.</li>
+    <li>Add the three slicers and bind the page title to the dynamic title measure.</li>
+  </ol>
+</section>
+</main>
+
+<footer>
+  <p>Performance Reporting Report · Salford &amp; Co (case-study data)</p>
+  <p>Olajumoke O. Medunoye · People Analytics | HR Analytics | Workforce Planning · <a href="mailto:medunoyeolajumoke@gmail.com">medunoyeolajumoke@gmail.com</a></p>
+  <p class="back"><a href="../index.html#case-studies">← Back to case studies</a></p>
+</footer>
+</div>
+
+<a class="signature" href="../index.html" aria-label="Prepared by Olajumoke O. Medunoye, back to portfolio"><span class="mono" aria-hidden="true">OM</span><span>Prepared by <b>Olajumoke O. Medunoye</b></span></a>
+<script src="report.js" defer></script>
+</body>
+</html>

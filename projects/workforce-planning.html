@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workforce Planning Report | Olajumoke Medunoye</title>
+<meta name="description" content="Workforce planning report for OptiGrowth Enterprises: data preparation, DAX measures, the attrition reduction scenario, findings and recommendations. Prepared by Olajumoke O. Medunoye.">
+<link rel="canonical" href="https://olajumokemedunoye.github.io/projects/workforce-planning.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="report.css">
+<style>
+:root{--primary:#0F2A44;--primary-2:#1B4A6B;--accent:#14A3A1;--accent-text:#0B6564;--tint:#EDF6F6;--accent-on-dark:#5FD1CE;
+--font-head:"Fraunces",Georgia,serif;--font-body:"Inter",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+</style>
+</head>
+<body>
+<header class="cover">
+  <div class="wrap">
+    <nav aria-label="Report"><a href="../index.html">Olajumoke Medunoye · Portfolio</a><a href="../index.html#case-studies">← All case studies</a></nav>
+    <p class="kicker"><span></span>Workforce planning report · case-study data</p>
+    <h1>Replacement Hiring &amp; Attrition Scenarios at OptiGrowth Enterprises</h1>
+    <p class="lede">How many roles each department will need to refill if attrition holds, where that demand comes from, and what a realistic improvement in retention would change.</p>
+    <div class="meta"><span><b>Organisation:</b> OptiGrowth Enterprises (case study)</span><span><b>Population:</b> 300 employees</span><span><b>Tools:</b> Excel · Power BI · DAX</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="summary">
+    <div class="summary-card">
+      <h2>Executive summary</h2>
+      <ul class="kpis">
+        <li><span class="v" data-count="58">58</span><span class="k">roles to refill at current rates</span></li>
+        <li><span class="v" data-count="19.3" data-suffix="%">19.3%</span><span class="k">attrition across the workforce</span></li>
+        <li><span class="v" data-count="4.26" data-prefix="$" data-suffix="M">$4.26M</span><span class="k">salary attached to leavers</span></li>
+        <li><span class="v" data-count="12">12</span><span class="k">hires avoided at a 20% reduction</span></li>
+      </ul>
+      <p>One in five employees left. Demand for replacement hiring sits in Sales, Logistics and Operations, and in coordinator, analyst and manager roles. Long hours are common everywhere, including the lowest-attrition team, so workload alone does not explain who leaves.</p>
+      <p><strong>Recommendation:</strong> plan capacity for about 58 hires, target retention at the three highest-attrition roles, and set a 20% retention goal, which would cut the hiring load to 46.</p>
+    </div>
+  </div>
+
+<main>
+<section aria-labelledby="s1">
+  <div class="sec-head"><span class="sec-num">01</span><h2 id="s1">Business context</h2></div>
+  <p>Leadership needed to size next year's recruitment effort and asked three questions:</p>
+  <ul>
+    <li>How many roles will need refilling if current attrition continues?</li>
+    <li>Which departments and roles drive that demand?</li>
+    <li>How much would a realistic improvement in retention reduce the hiring load and the salary at stake?</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s2">
+  <div class="sec-head"><span class="sec-num">02</span><h2 id="s2">Data and preparation</h2></div>
+  <p>The source is a single Excel sheet with one row per employee.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Field</th><th>Type</th><th>Use in the analysis</th></tr></thead>
+    <tbody>
+      <tr><td><code>Employee_ID</code></td><td>Whole number</td><td>Row identifier</td></tr>
+      <tr><td><code>Department</code></td><td>Text, 6 values</td><td>Main breakdown</td></tr>
+      <tr><td><code>Job_Role</code></td><td>Text, 5 values</td><td>Second breakdown</td></tr>
+      <tr><td><code>Salary ($)</code></td><td>Number</td><td>Salary of leavers</td></tr>
+      <tr><td><code>Work_Hours</code></td><td>Whole number, 30 to 60</td><td>Workload indicator</td></tr>
+      <tr><td><code>Productivity_Score</code></td><td>Decimal, 0.46 to 1.00</td><td>Output indicator</td></tr>
+      <tr><td><code>Attrition_Flag</code></td><td>0 or 1</td><td>1 means the employee left</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Checks before modelling</h3>
+  <ul>
+    <li>No blank values in any field.</li>
+    <li>No duplicate <code>Employee_ID</code> values, so each row is one person.</li>
+    <li>Ranges were plausible: hours 30 to 60, productivity 0 to 1, salaries $30,136 to $210,848.</li>
+  </ul>
+  <p>The sheet loaded cleanly, so the only modelling step was renaming the table to <code>Workforce</code> so the measures read clearly. The data has no dates, which limits what can be claimed (section 06).</p>
+</section>
+
+<section aria-labelledby="s3">
+  <div class="sec-head"><span class="sec-num">03</span><h2 id="s3">DAX measures explained</h2></div>
+  <p>Every figure on the dashboard comes from an explicit measure, so each number has one definition that anyone can check.</p>
+
+  <div class="measure"><h3>Headcount</h3>
+<pre><code>Headcount = COUNTROWS(Workforce)</code></pre>
+  <p>Counts rows. Each row is one employee, so this returns headcount for whatever the visual is filtered to: a department, a role or the whole company.</p></div>
+
+  <div class="measure"><h3>Leavers</h3>
+<pre><code>Leavers =
+CALCULATE(COUNTROWS(Workforce), Workforce[Attrition_Flag] = 1) + 0</code></pre>
+  <p><code>CALCULATE</code> adds a filter for employees flagged as leavers. The <code>+ 0</code> shows zero rather than a blank for any group with no leavers.</p></div>
+
+  <div class="measure"><h3>Attrition Rate</h3>
+<pre><code>Attrition Rate = DIVIDE([Leavers], [Headcount])</code></pre>
+  <p><code>DIVIDE</code> returns blank instead of an error if headcount is zero, which a plain <code>/</code> would not. Formatted as a percentage to one decimal place.</p></div>
+
+  <div class="measure"><h3>Avg Weekly Hours and Share Over 45 Hours</h3>
+<pre><code>Avg Weekly Hours = AVERAGE(Workforce[Work_Hours])
+
+Share Over 45 Hours =
+DIVIDE(
+    CALCULATE(COUNTROWS(Workforce), Workforce[Work_Hours] &gt; 45),
+    [Headcount]
+)</code></pre>
+  <p>An average hides the spread, so the share of people above 45 hours shows how widespread long weeks are.</p></div>
+
+  <div class="measure"><h3>Avg Productivity</h3>
+<pre><code>Avg Productivity = AVERAGE(Workforce[Productivity_Score])</code></pre>
+  <p>Placed next to attrition and hours so a reader can see whether high-attrition teams are also lower-output teams.</p></div>
+
+  <div class="measure"><h3>Salary of Leavers</h3>
+<pre><code>Salary Base of Leavers =
+CALCULATE(SUM(Workforce[Salary ($)]), Workforce[Attrition_Flag] = 1) + 0</code></pre>
+  <p>The annual salary attached to vacated roles. It shows what is at stake. It is not a turnover cost.</p></div>
+</section>
+
+<section aria-labelledby="s4">
+  <div class="sec-head"><span class="sec-num">04</span><h2 id="s4">The scenario slider</h2></div>
+  <p>A numeric what-if parameter, <code>Attrition Reduction Pct</code>, runs from 0 to 50 in steps of 5. Power BI creates a one-column table and a measure that returns the slider position. Three measures respond to it.</p>
+
+  <div class="measure"><h3>Hires Needed (Scenario)</h3>
+<pre><code>Hires Needed (Scenario) =
+ROUND(
+    [Leavers] * (1 - 'Attrition Reduction Pct'[Attrition Reduction Pct Value] / 100),
+    0
+)</code></pre>
+  <p>Leavers reduced by the chosen percentage and rounded to whole people, because a plan cannot hire part of a person.</p></div>
+
+  <div class="measure"><h3>Hires Avoided</h3>
+<pre><code>Hires Avoided = [Leavers] - [Hires Needed (Scenario)]</code></pre>
+  <p>Calculated from the rounded figure so the two cards always add back to the leaver total.</p></div>
+
+  <div class="measure"><h3>Salary Retained (Scenario)</h3>
+<pre><code>Salary Base Retained (Scenario) =
+[Salary Base of Leavers] * 'Attrition Reduction Pct'[Attrition Reduction Pct Value] / 100</code></pre>
+  <p>The salary attached to the departures the scenario avoids.</p></div>
+
+  <h3>What the slider assumes</h3>
+  <ul class="cards">
+    <li><strong>One-for-one replacement</strong>Every leaver is replaced. In practice some roles would be removed or merged.</li>
+    <li><strong>Average salary</strong>Avoided leavers are assumed to earn the average leaver salary. Retaining higher-paid roles would raise the figure.</li>
+    <li><strong>Salary, not savings</strong>Salary retained is not money saved. The saving is avoided recruitment, onboarding and lost output, which this data cannot measure.</li>
+    <li><strong>Even improvement</strong>The reduction applies equally to every department and role, although targeted retention would not work that way.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s5">
+  <div class="sec-head"><span class="sec-num">05</span><h2 id="s5">Dashboard and findings</h2></div>
+  <figure>
+    <img src="../workforce_planning_powerbi.png" width="2400" height="1376" loading="lazy" alt="OptiGrowth workforce planning dashboard in Power BI with KPI cards, attrition by department and job role, headcount and leavers by department, an attrition reduction slider and a department summary table.">
+    <figcaption>The Power BI dashboard with the scenario slider set to 20%. The top row answers "how big is the problem", the middle row "where is it", and the bottom row "what happens if we act".</figcaption>
+  </figure>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Department</th><th class="num">Staff</th><th class="num">Left</th><th class="num">Attrition</th><th class="num">Avg hrs</th><th class="num">Over 45 hrs</th><th class="num">Productivity</th></tr></thead>
+    <tbody>
+      <tr><td>Sales</td><td class="num">50</td><td class="num">11</td><td class="num">22.0%</td><td class="num">45.5</td><td class="num">52%</td><td class="num">71.9%</td></tr>
+      <tr><td>Logistics</td><td class="num">52</td><td class="num">11</td><td class="num">21.2%</td><td class="num">46.2</td><td class="num">52%</td><td class="num">72.7%</td></tr>
+      <tr><td>Operations</td><td class="num">49</td><td class="num">10</td><td class="num">20.4%</td><td class="num">45.5</td><td class="num">51%</td><td class="num">76.5%</td></tr>
+      <tr><td>HR</td><td class="num">55</td><td class="num">11</td><td class="num">20.0%</td><td class="num">46.9</td><td class="num">60%</td><td class="num">75.6%</td></tr>
+      <tr><td>IT</td><td class="num">47</td><td class="num">9</td><td class="num">19.1%</td><td class="num">45.5</td><td class="num">49%</td><td class="num">72.1%</td></tr>
+      <tr><td>Marketing</td><td class="num">47</td><td class="num">6</td><td class="num">12.8%</td><td class="num">46.7</td><td class="num">55%</td><td class="num">72.4%</td></tr>
+    </tbody>
+    <tfoot><tr><td>Total</td><td class="num">300</td><td class="num">58</td><td class="num">19.3%</td><td class="num">46.1</td><td class="num">53%</td><td class="num">73.6%</td></tr></tfoot>
+  </table></div>
+  <p class="pull">Five of six departments lose around one in five people. Marketing is the exception, yet its staff work hours as long as anyone's.</p>
+  <ul>
+    <li>By role, coordinators (23.2%), analysts (22.4%) and managers (22.4%) leave far more often than engineers (14.0%) and executives (12.2%).</li>
+    <li>53% of staff work over 45 hours a week, rising to 60% in HR.</li>
+    <li>Productivity varies only modestly between departments, from 71.9% to 76.5%, and does not track attrition.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s6">
+  <div class="sec-head"><span class="sec-num">06</span><h2 id="s6">Limitations</h2></div>
+  <ul>
+    <li><strong>No dates.</strong> The data is a single snapshot, so 19.3% is the share of this population that left, not an annual rate. Treating it as a one-year rate is a working assumption to replace with dated leaver data before a budget is set.</li>
+    <li><strong>Correlation, not cause.</strong> Hours, role and attrition are shown side by side. The analysis does not show that any one causes another.</li>
+    <li><strong>Case-study data.</strong> Figures describe a fictional company and are not results from an employer.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s7">
+  <div class="sec-head"><span class="sec-num">07</span><h2 id="s7">Recommendations</h2></div>
+  <ol class="recs">
+    <li><strong>Plan recruitment capacity for about 58 replacement hires</strong> at current rates, weighted towards Sales, Logistics and Operations.</li>
+    <li><strong>Focus retention on coordinator, analyst and manager roles.</strong> Start with stay interviews and a review of progression routes, since these roles carry the highest attrition.</li>
+    <li><strong>Review workload in HR,</strong> where 60% of staff exceed 45 hours a week, before it appears as attrition.</li>
+    <li><strong>Set a retention target with the scenario.</strong> A 20% reduction leaves 46 hires instead of 58 and keeps about $852K of salary in roles that stay filled.</li>
+    <li><strong>Add hire and exit dates to the data</strong> so attrition can be measured per year and tracked monthly on the same dashboard.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="s8">
+  <div class="sec-head"><span class="sec-num">08</span><h2 id="s8">How to reproduce it</h2></div>
+  <ol>
+    <li>Load the Excel sheet into Power BI and rename the table <code>Workforce</code>.</li>
+    <li>Create the measures in sections 03 and 04 and set formats: whole numbers, percentages to one decimal place, dollars with no decimals.</li>
+    <li>Add the parameter from Modeling &gt; New parameter &gt; Numeric range: 0 to 50, increment 5, default 0.</li>
+    <li>Build the visuals in three rows as described in section 05, with one accent colour.</li>
+  </ol>
+</section>
+</main>
+
+<footer>
+  <p>Workforce Planning Report · OptiGrowth Enterprises (case-study data)</p>
+  <p>Olajumoke O. Medunoye · People Analytics | HR Analytics | Workforce Planning · <a href="mailto:medunoyeolajumoke@gmail.com">medunoyeolajumoke@gmail.com</a></p>
+  <p class="back"><a href="../index.html#case-studies">← Back to case studies</a></p>
+</footer>
+</div>
+
+<a class="signature" href="../index.html" aria-label="Prepared by Olajumoke O. Medunoye, back to portfolio"><span class="mono" aria-hidden="true">OM</span><span>Prepared by <b>Olajumoke O. Medunoye</b></span></a>
+<script src="report.js" defer></script>
+</body>
+</html>

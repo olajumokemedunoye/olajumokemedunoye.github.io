@@ -37,6 +37,7 @@ attrition_cost_powerbi.png          Power BI screenshot used in case study 02
 recruitment_cost_powerbi.png        Power BI screenshot used in case study 03
 performance_dashboard_powerbi.png   Power BI screenshot used in case study 04
 cv/Olajumoke_Medunoye_CV.pdf        CV download
+projects/                           full project reports (one per case study)
 ```
 
 

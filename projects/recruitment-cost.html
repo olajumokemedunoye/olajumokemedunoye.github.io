@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recruitment Cost &amp; Hiring Routes Report | Olajumoke Medunoye</title>
+<meta name="description" content="Recruitment cost report for Ted Square Ltd: Power Query date repair, DAX measures, the internal hiring scenario, findings and recommendations. Prepared by Olajumoke O. Medunoye.">
+<link rel="canonical" href="https://olajumokemedunoye.github.io/projects/recruitment-cost.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="report.css">
+<style>
+:root{--primary:#173D2E;--primary-2:#24573F;--accent:#B08A3E;--accent-text:#1F5A40;--tint:#F1F5F0;--accent-on-dark:#D9B86A;
+--font-head:"Libre Baskerville",Georgia,serif;--font-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+</style>
+</head>
+<body>
+<header class="cover">
+  <div class="wrap">
+    <nav aria-label="Report"><a href="../index.html">Olajumoke Medunoye · Portfolio</a><a href="../index.html#case-studies">← All case studies</a></nav>
+    <p class="kicker"><span></span>Recruitment report · case-study data</p>
+    <h1>What Each Hiring Route Costs Ted Square Ltd</h1>
+    <p class="lede">A comparison of internal and external hiring over eight years, and a scenario showing what a higher internal share would do to recruitment spend.</p>
+    <div class="meta"><span><b>Organisation:</b> Ted Square Ltd (case study)</span><span><b>Hires:</b> 44, from 2008 to 2016</span><span><b>Tools:</b> Power BI · Power Query · DAX</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="summary">
+    <div class="summary-card">
+      <h2>Executive summary</h2>
+      <ul class="kpis">
+        <li><span class="v" data-count="82" data-suffix="%">82%</span><span class="k">of hires were external</span></li>
+        <li><span class="v" data-count="1.27" data-prefix="£" data-suffix="M">£1.27M</span><span class="k">total recruitment spend</span></li>
+        <li><span class="v" data-count="5.2" data-suffix="×">5.2×</span><span class="k">external cost per hire vs internal</span></li>
+        <li><span class="v" data-count="626" data-prefix="£" data-suffix="K">£626K</span><span class="k">lower spend at a 70% internal share</span></li>
+      </ul>
+      <p>External hiring made up 36 of 44 hires and £1.22M of the £1.27M spent. Each external hire cost £33,972 against £6,500 for an internal move. Most of the spend sits in IT/IS, which made 29 external hires.</p>
+      <p><strong>Recommendation:</strong> build internal mobility and succession routes for IT/IS, keep external hiring for skills the business does not have, and set an internal-hiring target using the scenario.</p>
+    </div>
+  </div>
+
+<main>
+<section aria-labelledby="s1">
+  <div class="sec-head"><span class="sec-num">01</span><h2 id="s1">Business context</h2></div>
+  <p>Ted Square Ltd relied heavily on external recruitment and wanted to know whether that was financially sustainable, and how much a shift towards internal hiring would change spend without lowering the quality of hires.</p>
+</section>
+
+<section aria-labelledby="s2">
+  <div class="sec-head"><span class="sec-num">02</span><h2 id="s2">Data and preparation</h2></div>
+  <p>Two sheets: a hiring record for 44 employees (department, position, hire date, source channel, hiring route, performance score and cost per hire) and a cost breakdown listing each recruitment cost line by route.</p>
+  <h3>The date problem</h3>
+  <p>The original report showed hire dates as numbers such as 42125. The <code>Date of Hire</code> column mixed two formats: genuine Excel dates, which load as serial numbers, and US-style text such as <code>10/27/2008</code>. Power BI could not read the column as dates, so any time-based chart was wrong.</p>
+<div class="measure"><h3>Fixing the hire date (Power Query M)</h3>
+<pre><code>Table.TransformColumns(#"Promoted Headers", {{"Date of Hire", each
+    if _ is date or _ is datetime or _ is number
+        then Date.From(_)
+        else Date.FromText(Text.Trim(Text.From(_)), [Culture="en-US"]),
+    type date}})</code></pre>
+<p>Each value is checked: numbers and dates are converted directly, and text is parsed explicitly as a US date so that 10/27/2008 cannot be misread as the 10th day of the 27th month. Names and source channels were also trimmed of stray spaces.</p></div>
+  <h3>Hire Year column</h3>
+<pre><code>Hire Year = YEAR(Raw[Date of Hire])</code></pre>
+  <p>A calculated column set to "Don't summarize", so the years sit on a chart axis instead of being added together.</p>
+</section>
+
+<section aria-labelledby="s3">
+  <div class="sec-head"><span class="sec-num">03</span><h2 id="s3">DAX measures explained</h2></div>
+
+  <div class="measure"><h3>Hires, External Hires, Internal Hires</h3>
+<pre><code>Hires = COUNTROWS(Raw)
+
+External Hires = CALCULATE([Hires], Raw[Employment Method] = "External") + 0
+Internal Hires = CALCULATE([Hires], Raw[Employment Method] = "Internal") + 0</code></pre>
+  <p>The route measures reuse <code>[Hires]</code> with a filter, so there is one definition of a hire. Using both as series on one chart splits every year into external and internal.</p></div>
+
+  <div class="measure"><h3>Recruitment Cost and Avg Cost per Hire</h3>
+<pre><code>Recruitment Cost = SUM(Raw[Cost per hire])
+
+Avg Cost per Hire = DIVIDE([Recruitment Cost], [Hires])</code></pre>
+  <p>Total spend and its average per hire, formatted in pounds.</p></div>
+
+  <div class="measure"><h3>Cost per hire by route, fixed</h3>
+<pre><code>External Cost per Hire =
+CALCULATE([Avg Cost per Hire],
+    REMOVEFILTERS(Raw[Employment Method]),
+    Raw[Employment Method] = "External")
+
+Internal Cost per Hire =
+CALCULATE([Avg Cost per Hire],
+    REMOVEFILTERS(Raw[Employment Method]),
+    Raw[Employment Method] = "Internal")</code></pre>
+  <p><code>REMOVEFILTERS</code> clears any route filter from the page before applying its own, so each measure always returns the cost for its route. The scenario needs both values at once.</p></div>
+</section>
+
+<section aria-labelledby="s4">
+  <div class="sec-head"><span class="sec-num">04</span><h2 id="s4">The internal hiring scenario</h2></div>
+  <p>A what-if parameter, <code>Internal Hire Target</code>, sets the share of hires filled internally, from 0% to 100% in steps of 10. The default is 70%, the target proposed in the original Ted Square recommendations.</p>
+  <div class="measure"><h3>Scenario Cost and Scenario Saving</h3>
+<pre><code>Scenario Cost =
+VAR t = 'Internal Hire Target'[Internal Hire Target Value] / 100
+VAR n = CALCULATE([Hires], REMOVEFILTERS(Raw[Employment Method]))
+RETURN n * (t * [Internal Cost per Hire] + (1 - t) * [External Cost per Hire])
+
+Scenario Saving =
+CALCULATE([Recruitment Cost], REMOVEFILTERS(Raw[Employment Method]))
+    - [Scenario Cost]</code></pre>
+  <p>The scenario keeps the same 44 hires and asks what they would have cost at the chosen mix. At 70% internal that is about 31 internal and 13 external hires, costing £649K instead of £1,275K.</p></div>
+  <h3>What the scenario assumes</h3>
+  <ul class="cards">
+    <li><strong>Costs scale with volume</strong>The model applies an average cost per hire. In reality, much external spend is fixed (agency fees, job boards, adverts), so savings would not fall exactly in line.</li>
+    <li><strong>How cost per hire was allocated</strong>The dataset spreads each route's total cost evenly across its hires, and lists per-employee costs such as checks and travel once rather than per hire. The figures are used as supplied and would need checking against real invoices.</li>
+    <li><strong>Internal candidates exist</strong>A 70% internal share assumes suitable people are ready to move. That depends on succession planning that is not yet in place.</li>
+    <li><strong>Backfill is ignored</strong>An internal move creates a new vacancy, which the model does not count.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s5">
+  <div class="sec-head"><span class="sec-num">05</span><h2 id="s5">Dashboard and findings</h2></div>
+  <figure>
+    <img src="../recruitment_cost_powerbi.png" width="2400" height="1376" loading="lazy" alt="Ted Square recruitment cost dashboard in Power BI with KPI cards, cost per hire by route, hires by year split by route, hires by source, an internal hire share slider set to 70 percent and a department table.">
+    <figcaption>The Power BI dashboard with the scenario set to 70% internal.</figcaption>
+  </figure>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Department</th><th class="num">Hires</th><th class="num">External</th><th class="num">Internal</th><th class="num">Spend</th><th class="num">Cost per hire</th></tr></thead>
+    <tbody>
+      <tr><td>IT/IS</td><td class="num">33</td><td class="num">29</td><td class="num">4</td><td class="num">£1,011,194</td><td class="num">£30,642</td></tr>
+      <tr><td>Admin Offices</td><td class="num">10</td><td class="num">6</td><td class="num">4</td><td class="num">£229,833</td><td class="num">£22,983</td></tr>
+      <tr><td>Executive Office</td><td class="num">1</td><td class="num">1</td><td class="num">0</td><td class="num">£33,972</td><td class="num">£33,972</td></tr>
+    </tbody>
+    <tfoot><tr><td>Total</td><td class="num">44</td><td class="num">36</td><td class="num">8</td><td class="num">£1,275,000</td><td class="num">£28,977</td></tr></tfoot>
+  </table></div>
+  <p class="pull">IT/IS alone accounts for 79% of recruitment spend, almost all of it through external hiring.</p>
+  <ul>
+    <li>Hiring ran at a few people a year until 2014 (8 hires), then peaked at 21 in 2015, 20 of them external.</li>
+    <li>Employee referral was the largest single source, with 10 hires, followed by internal moves (8) and Glassdoor (5).</li>
+    <li>Performance ratings were similar across both routes. Internal hires are too few (8) to prove they perform better or worse.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s6">
+  <div class="sec-head"><span class="sec-num">06</span><h2 id="s6">Limitations</h2></div>
+  <ul>
+    <li><strong>Small sample.</strong> 44 hires, only 8 internal, so route comparisons are indicative rather than conclusive.</li>
+    <li><strong>No time-to-fill data.</strong> The dataset has hire dates but no requisition dates, so speed of hiring cannot be measured.</li>
+    <li><strong>Case-study data.</strong> Figures describe a fictional company and are not results from an employer.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="s7">
+  <div class="sec-head"><span class="sec-num">07</span><h2 id="s7">Recommendations</h2></div>
+  <ol class="recs">
+    <li><strong>Build internal routes into IT/IS roles</strong> through succession plans and a skills inventory, since the department drives most of the spend.</li>
+    <li><strong>Keep external hiring for skills the business lacks,</strong> and review agency use first, as the agency fee is the largest single cost line.</li>
+    <li><strong>Grow the referral programme.</strong> It is already the top source, and total referral bonuses (£180K) were well below agency fees (£600K).</li>
+    <li><strong>Set a phased internal-hiring target,</strong> for example 40% then 70%, and track it on the dashboard against actual spend.</li>
+    <li><strong>Capture requisition dates and real invoice costs</strong> so time-to-fill and true cost per hire can be measured.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="s8">
+  <div class="sec-head"><span class="sec-num">08</span><h2 id="s8">How to reproduce it</h2></div>
+  <ol>
+    <li>Load both sheets and apply the date fix in section 02 to the hiring sheet.</li>
+    <li>Add the <code>Hire Year</code> column and set it to "Don't summarize".</li>
+    <li>Create the measures in section 03 and the parameter in section 04: 0 to 100, increment 10, default 70.</li>
+    <li>Use External Hires and Internal Hires as two series on the yearly chart.</li>
+  </ol>
+</section>
+</main>
+
+<footer>
+  <p>Recruitment Cost &amp; Hiring Routes Report · Ted Square Ltd (case-study data)</p>
+  <p>Olajumoke O. Medunoye · People Analytics | HR Analytics | Workforce Planning · <a href="mailto:medunoyeolajumoke@gmail.com">medunoyeolajumoke@gmail.com</a></p>
+  <p class="back"><a href="../index.html#case-studies">← Back to case studies</a></p>
+</footer>
+</div>
+
+<a class="signature" href="../index.html" aria-label="Prepared by Olajumoke O. Medunoye, back to portfolio"><span class="mono" aria-hidden="true">OM</span><span>Prepared by <b>Olajumoke O. Medunoye</b></span></a>
+<script src="report.js" defer></script>
+</body>
+</html>
