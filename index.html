@@ -383,49 +383,35 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
         <span class="case-num" aria-hidden="true">03</span>
         <div>
           <span class="label label-portfolio">Portfolio project</span>
-          <h3 id="cs3">Recruitment Cost &amp; Hiring Analytics</h3>
-          <p class="summary">Compared the cost and speed of internal and external hiring for Ted Square Ltd, a case-study company.</p>
-          <ul class="chips" aria-label="Tools and methods"><li>Excel</li><li>Power BI</li><li>Cost analysis</li><li>Data cleaning</li></ul>
+          <h3 id="cs3">Recruitment Cost &amp; Hiring Routes</h3>
+          <p class="summary">A Power BI view of what each hiring route cost Ted Square Ltd, a case-study company, and what a higher internal share would save.</p>
+          <ul class="chips" aria-label="Tools and methods"><li>Power BI</li><li>DAX</li><li>Power Query</li><li>Data cleaning</li><li>Scenario modelling</li></ul>
         </div>
       </div>
       <details class="more">
         <summary><span class="when-closed">View case study</span><span class="when-open">Hide case study</span></summary>
         <div class="cs-body">
-          <div class="cs-block"><h4>Business problem</h4><p>Ted Square Ltd wanted to know whether its mix of internal and external hiring was financially sustainable, without lowering talent quality.</p></div>
-          <div class="cs-block"><h4>Data</h4><p>Hiring records with employment method (internal or external), cost of hire, department, date of hire and performance score.</p></div>
+          <div class="cs-block"><h4>Business problem</h4><p>Ted Square Ltd wanted to know whether its reliance on external hiring was financially sustainable, and how much a shift to internal hiring would change spend.</p></div>
+          <div class="cs-block"><h4>Data</h4><p>44 hires from 2008 to 2016 with hiring route (internal or external), source channel, department, hire date and cost per hire, plus a cost breakdown sheet.</p></div>
           <div class="cs-block full"><h4>Analysis</h4><ul>
-            <li>Cleaned the hiring records and split every hire by employment method.</li>
-            <li>Compared total cost, cost per hire and days to fill for internal and external hires.</li>
-            <li>Broke hiring cost down by department in Power BI and compared performance scores by recruitment method.</li>
+            <li>Fixed hire dates in Power Query: the column mixed real dates with US-format text, which had loaded as numbers such as 42125.</li>
+            <li>Wrote DAX measures for hires by route, recruitment spend, cost per hire and internal share.</li>
+            <li>Broke hires down by year, source channel and department.</li>
+            <li>Added a what-if slider for the share of hires filled internally, costing the same 44 hires at each route's actual cost per hire.</li>
           </ul></div>
-          <div class="cs-block"><h4>Tools</h4><p>Excel, Power BI, PowerPoint.</p></div>
+          <div class="cs-block"><h4>Tools</h4><p>Power BI, Power Query, DAX (including a what-if parameter).</p></div>
           <div class="cs-block"><h4>Key findings</h4><ul>
-            <li>External hiring cost £1,223,000 in total; internal hiring cost £52,000.</li>
-            <li>Cost per hire: £6,115 external against £1,733 internal.</li>
-            <li>Days to fill: 36 external against 14 internal.</li>
+            <li>36 of 44 hires (82%) were external. They cost £1,223,000 of £1,275,000 total spend.</li>
+            <li>Cost per hire: £33,972 external against £6,500 internal, over five times as much.</li>
+            <li>IT/IS made 33 of the 44 hires, 29 of them external, and accounted for £1.01M of spend.</li>
+            <li>Employee referral was the largest single source (10 hires). Hiring peaked in 2015 with 21 hires.</li>
           </ul></div>
-          <div class="cs-block"><h4>Business implication</h4><p>External hiring drove almost all recruitment spend. Filling suitable roles internally would cut both cost and time to fill.</p></div>
-          <div class="cs-block"><h4>Recommendation</h4><p>Prioritise internal recruitment where the skills exist, build succession plans for each department, and keep external hiring for specialist roles.</p></div>
-          <div class="cs-block full"><h4>Outcome</h4><p>A costed comparison and action plan the business could use to rebalance its hiring mix.</p>
+          <div class="cs-block"><h4>Business implication</h4><p>External hiring drove almost all recruitment spend, concentrated in IT/IS. At a 70% internal share the same 44 hires would cost about £649K, roughly £626K less.</p></div>
+          <div class="cs-block"><h4>Recommendation</h4><p>Build succession and internal mobility routes for IT/IS roles, keep external hiring for specialist skills, and track cost per hire by route on the dashboard.</p></div>
+          <div class="cs-block full"><h4>Outcome</h4><p>A costed comparison of hiring routes with a scenario slider leaders can use to set an internal-hiring target.</p>
             <figure>
-              <svg viewBox="0 0 640 250" role="img" aria-labelledby="rc-title rc-desc" style="width:100%;height:auto;display:block;border:1px solid var(--border);border-radius:8px;background:#fff">
-                <title id="rc-title">Internal versus external hiring at Ted Square Ltd</title>
-                <desc id="rc-desc">Total hiring cost: internal £52,000, external £1,223,000. Cost per hire: internal £1,733, external £6,115. Days to fill: internal 14, external 36.</desc>
-                <g font-family="system-ui,Segoe UI,Arial,sans-serif" font-size="13" fill="#1F2937">
-                  <rect x="20" y="16" width="12" height="12" rx="2" fill="#C2410C"/><text x="38" y="27">Internal</text>
-                  <rect x="110" y="16" width="12" height="12" rx="2" fill="#4B5563"/><text x="128" y="27">External</text>
-                  <text x="20" y="72" font-weight="600">Total hiring cost</text>
-                  <rect x="170" y="56" width="17" height="16" rx="2" fill="#C2410C"/><text x="193" y="69">£52,000</text>
-                  <rect x="170" y="76" width="380" height="16" rx="2" fill="#4B5563"/><text x="556" y="89">£1,223,000</text>
-                  <text x="20" y="142" font-weight="600">Cost per hire</text>
-                  <rect x="170" y="126" width="108" height="16" rx="2" fill="#C2410C"/><text x="284" y="139">£1,733</text>
-                  <rect x="170" y="146" width="380" height="16" rx="2" fill="#4B5563"/><text x="556" y="159">£6,115</text>
-                  <text x="20" y="212" font-weight="600">Days to fill</text>
-                  <rect x="170" y="196" width="148" height="16" rx="2" fill="#C2410C"/><text x="324" y="209">14 days</text>
-                  <rect x="170" y="216" width="380" height="16" rx="2" fill="#4B5563"/><text x="556" y="229">36 days</text>
-                </g>
-              </svg>
-              <figcaption>Chart drawn from the project's summary figures. Bars in each row are scaled to the external value.</figcaption>
+              <img src="recruitment_cost_powerbi.png" width="2400" height="1376" loading="lazy" decoding="async" alt="Power BI dashboard titled Ted Square Ltd: Recruitment Cost and Hiring Routes, showing KPI cards for total, external and internal hires, recruitment spend and average cost per hire, cost per hire by route, hires by year split by route, hires by source, an internal hire share slider set to 70 percent with cost at target mix and saving, and a department table.">
+              <figcaption>Power BI report from this project, with the scenario slider at 70% internal. Case-study dataset. The scenario assumes each route's cost per hire stays the same.</figcaption>
             </figure>
           </div>
         </div>
