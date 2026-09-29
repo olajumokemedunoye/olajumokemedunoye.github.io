@@ -313,26 +313,37 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
         <span class="case-num" aria-hidden="true">01</span>
         <div>
           <span class="label label-portfolio">Portfolio project</span>
-          <h3 id="cs1">Workforce Planning &amp; Headcount Forecasting</h3>
-          <p class="summary">A scenario model that lets leaders test a hiring plan before committing budget.</p>
-          <ul class="chips" aria-label="Tools and methods"><li>SQL</li><li>Excel</li><li>Power BI</li><li>Forecasting</li><li>Scenario modelling</li></ul>
+          <h3 id="cs1">Workforce Planning: Replacement Hiring &amp; Attrition Scenarios</h3>
+          <p class="summary">A Power BI planning view for OptiGrowth Enterprises, a case-study company: how many roles each department must refill if attrition holds, and what changes if it falls.</p>
+          <ul class="chips" aria-label="Tools and methods"><li>Power BI</li><li>DAX</li><li>Excel</li><li>Data modelling</li><li>Scenario modelling</li></ul>
         </div>
       </div>
       <details class="more">
         <summary><span class="when-closed">View case study</span><span class="when-open">Hide case study</span></summary>
         <div class="cs-body">
-          <div class="cs-block"><h4>Business problem</h4><p>Each department planned its own headcount as needs came up. Leadership had no way to stress-test a resourcing decision before committing budget.</p></div>
-          <div class="cs-block"><h4>Data</h4><p>Current headcount, historical attrition, hiring lead times and department growth targets.</p></div>
+          <div class="cs-block"><h4>Business problem</h4><p>Leadership wanted to know how much replacement hiring to plan for, where it would fall, and how much a retention improvement would reduce it.</p></div>
+          <div class="cs-block"><h4>Data</h4><p>Records for 300 employees: department, job role, salary, weekly hours, productivity score and a leaver flag. A single snapshot with no dates.</p></div>
           <div class="cs-block full"><h4>Analysis</h4><ul>
-            <li>Extracted headcount and historical attrition with SQL.</li>
-            <li>Built growth, steady-state and reduction scenarios in Excel, each driven by adjustable assumptions for attrition, lead time and growth.</li>
-            <li>Published the scenarios in Power BI so leaders could switch between cases and see the resourcing gap by department.</li>
+            <li>Checked the data for blanks and duplicate IDs (none found) and loaded it into a Power BI model.</li>
+            <li>Wrote DAX measures for headcount, leavers, attrition rate, salary of leavers and the share of staff working over 45 hours a week.</li>
+            <li>Broke attrition down by department and job role, alongside workload and productivity.</li>
+            <li>Added a what-if slider: leaders choose a reduction in attrition and see hires still needed, hires avoided and salary retained.</li>
           </ul></div>
-          <div class="cs-block"><h4>Tools</h4><p>SQL, Excel, Power BI.</p></div>
-          <div class="cs-block"><h4>Key findings</h4><p>Two departments carried a structural understaffing risk that standard headcount reports did not show.</p></div>
-          <div class="cs-block"><h4>Business implication</h4><p>For those departments, waiting for gaps to appear before hiring would leave them short for the whole hiring lead time.</p></div>
-          <div class="cs-block"><h4>Recommendation</h4><p>Plan hiring for the two flagged departments ahead of demand, and review the model's assumptions every quarter.</p></div>
-          <div class="cs-block full"><h4>Outcome</h4><p>A scenario model leaders can use to test a hiring plan against lead times and attrition before committing budget.</p></div>
+          <div class="cs-block"><h4>Tools</h4><p>Excel, Power BI, DAX (including a what-if parameter).</p></div>
+          <div class="cs-block"><h4>Key findings</h4><ul>
+            <li>58 of 300 employees left: 19.3% attrition, $4.26M in salary.</li>
+            <li>Sales (22.0%), Logistics (21.2%) and Operations (20.4%) had the highest attrition; Marketing the lowest (12.8%).</li>
+            <li>Coordinators (23.2%), Analysts and Managers (22.4%) left far more often than Engineers (14.0%) and Executives (12.2%).</li>
+            <li>53% of staff work over 45 hours a week, from 49% in IT to 60% in HR.</li>
+          </ul></div>
+          <div class="cs-block"><h4>Business implication</h4><p>If rates hold, roughly one role in five needs refilling, so recruitment capacity has to be planned for about 58 hires. Long hours are common in every department, including low-attrition Marketing, so hours alone do not explain who leaves.</p></div>
+          <div class="cs-block"><h4>Recommendation</h4><p>Target retention at coordinator, analyst and manager roles in Sales, Logistics and Operations. Review workload in HR, where 60% work over 45 hours. Use the slider to set a retention target: a 20% cut leaves 46 hires instead of 58.</p></div>
+          <div class="cs-block full"><h4>Outcome</h4><p>A one-page planning dashboard that turns the retention conversation into numbers: at a 20% reduction, 12 hires avoided and about $852K of salary retained.</p>
+            <figure>
+              <img src="workforce_planning_powerbi.png" width="2400" height="1376" loading="lazy" decoding="async" alt="Power BI dashboard titled OptiGrowth Enterprises: Workforce Planning, showing KPI cards for headcount, leavers, attrition rate, salary of leavers and share working over 45 hours, attrition by department and job role, headcount and leavers by department, an attrition reduction slider set to 20 percent with hires needed, hires avoided and salary retained, and a department summary table.">
+              <figcaption>Power BI report from this project, with the scenario slider set to 20%. Case-study dataset. Salary retained assumes avoided leavers earn the average leaver salary.</figcaption>
+            </figure>
+          </div>
         </div>
       </details>
     </article>
