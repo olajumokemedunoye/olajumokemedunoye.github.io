@@ -51,6 +51,7 @@ projects/*.html                     full project reports
 projects/gender-pay-gap/            data, sql/analysis.sql, python/run_analysis.py, outputs/
 projects/labour-market/             data, python/labour_market.py, outputs/
 projects/attrition-risk-model/      data, python/attrition_model.py, outputs/
+projects/powerbi/                   Power BI (.pbix) files for the four featured case studies
 ```
 
 
