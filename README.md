@@ -63,6 +63,6 @@ The Python projects need Python 3.11+ with pandas, matplotlib and scikit-learn. 
 
 ## Contact
 
-medunoyeolajumoke@gmail.com · [LinkedIn](https://www.linkedin.com/in/olajumoke-medunoye) · [GitHub](https://github.com/olajumokemedunoye)
+olajumokemedunoye@gmail.com · [LinkedIn](https://www.linkedin.com/in/olajumoke-medunoye) · [GitHub](https://github.com/olajumokemedunoye)
 
 Consulting and HR analytics templates are a separate business: [OlaDigitalHub](https://olajumokemedunoye.github.io/OlaDigitalHub/).
