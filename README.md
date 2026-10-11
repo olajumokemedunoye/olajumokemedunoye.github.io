@@ -63,6 +63,8 @@ The Python projects need Python 3.11+ with pandas, matplotlib and scikit-learn. 
 
 ## Contact
 
-olajumokemedunoye@gmail.com · [LinkedIn](https://www.linkedin.com/in/olajumoke-medunoye) · [GitHub](https://github.com/olajumokemedunoye)
+olajumokemedunoye@gmail.com · [LinkedIn](https://www.linkedin.com/in/olajumoke-medunoye) · [GitHub](https://github.com/olajumokemedunoye) · [Notion](https://sheer-double-3b8.notion.site/Olajumoke-Medunoye-People-Analytics-Portfolio-3f6750eba04e8145b48cf5f5f0efb8f2) · [NotebookLM](https://notebook.google.com/notebook/5f12778f-3f41-45e7-b7c4-331c5fbb0322)
+
+NotebookLM requires a Google account. The homepage links to each full report once, with public profiles collected in the contact section.
 
 Consulting and HR analytics templates are a separate business: [OlaDigitalHub](https://olajumokemedunoye.github.io/OlaDigitalHub/).
