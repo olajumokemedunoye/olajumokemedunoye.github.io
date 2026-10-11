@@ -209,6 +209,7 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
 .contact-links a.primary{background:var(--orange-700);border-color:var(--orange-700)}
 .contact-links a.primary:hover{background:var(--orange-800)}
 .contact :focus-visible{outline-color:#FDBA74}
+.profile-note{font-size:14px;margin:16px 0 0}
 .foot{border-top:1px solid #374151;margin-top:56px;padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:14px;color:#9CA3AF}
 .foot a{color:#FDBA74}
 .foot a:hover{color:#FED7AA}
@@ -230,7 +231,6 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
         <li><a href="#skills">Skills</a></li>
         <li><a class="nav-cv" href="cv/Olajumoke_Medunoye_CV.pdf" data-cv>CV</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="https://github.com/olajumokemedunoye" rel="noopener">GitHub</a></li>
       </ul>
     </nav>
   </div>
@@ -248,7 +248,7 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
       <div class="actions">
         <a class="btn btn-primary" href="#case-studies">View case studies</a>
         <a class="btn btn-secondary" href="cv/Olajumoke_Medunoye_CV.pdf" data-cv download>Download CV</a>
-        <a class="btn btn-text" href="https://github.com/olajumokemedunoye" rel="noopener">GitHub →</a>
+        <a class="btn btn-text" href="#contact">Profiles &amp; contact</a>
       </div>
       <p class="stack"><strong>Tools:</strong> Power BI · SQL · DAX · Excel · Python · PostgreSQL</p>
     </div>
@@ -260,7 +260,7 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
   <div class="wrap">
     <div class="section-head">
       <h2 id="impact-title">Selected impact</h2>
-      <p>Each item says where it comes from, so you can tell employment results from project work.</p>
+      <p>Highlights from my professional experience and portfolio projects.</p>
     </div>
     <div class="impact">
       <div class="impact-item">
@@ -293,7 +293,6 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
       <div class="section-head"><h2 id="about-title">About</h2></div>
       <p>I have over 8 years of work experience across banking, financial services, customer operations and HR analytics, and my background is HR. I hold an MSc in Human Resource Management and I'm an Associate Member of the CIPD and a Master HR Analytics Professional (MHRAP). The analytics grew out of that background.</p>
       <p>I build the reporting and models that answer the questions HR leaders get asked: who is leaving and what it costs, where hiring slows down, and how much headcount a plan needs. I work in SQL and Excel to get the data right, and use Power BI to put it in front of the people making the decision.</p>
-      <p>I'm looking for People Analytics, HR Analytics and Workforce Planning roles in the UK, remote or hybrid.</p>
     </div>
     <ul class="focus" aria-label="Areas of focus">
       <li>Workforce planning and headcount forecasting</li>
@@ -309,7 +308,7 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
   <div class="wrap">
     <div class="section-head">
       <h2 id="cs-title">Case studies</h2>
-      <p>Four projects, each written up the same way: the problem, the data, the analysis, and what it meant for the business.</p>
+      <p>Explore four Power BI projects. Each report covers the business question, data, analysis and recommendations.</p>
     </div>
 
     <article class="case" aria-labelledby="cs1">
@@ -323,34 +322,6 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
           <p class="report-link"><a href="projects/workforce-planning.html">Read the full report<span class="visually-hidden"> on workforce planning</span> <span aria-hidden="true">→</span></a></p>
         </div>
       </div>
-      <details class="more">
-        <summary><span class="when-closed">View case study</span><span class="when-open">Hide case study</span></summary>
-        <div class="cs-body">
-          <div class="cs-block"><h4>Business problem</h4><p>Leadership wanted to know how much replacement hiring to plan for, where it would fall, and how much a retention improvement would reduce it.</p></div>
-          <div class="cs-block"><h4>Data</h4><p>Records for 300 employees: department, job role, salary, weekly hours, productivity score and a leaver flag. A single snapshot with no dates.</p></div>
-          <div class="cs-block full"><h4>Analysis</h4><ul>
-            <li>Checked the data for blanks and duplicate IDs (none found) and loaded it into a Power BI model.</li>
-            <li>Wrote DAX measures for headcount, leavers, attrition rate, salary of leavers and the share of staff working over 45 hours a week.</li>
-            <li>Broke attrition down by department and job role, alongside workload and productivity.</li>
-            <li>Added a what-if slider: leaders choose a reduction in attrition and see hires still needed, hires avoided and salary retained.</li>
-          </ul></div>
-          <div class="cs-block"><h4>Tools</h4><p>Excel, Power BI, DAX (including a what-if parameter).</p></div>
-          <div class="cs-block"><h4>Key findings</h4><ul>
-            <li>58 of 300 employees left: 19.3% attrition, $4.26M in salary.</li>
-            <li>Sales (22.0%), Logistics (21.2%) and Operations (20.4%) had the highest attrition; Marketing the lowest (12.8%).</li>
-            <li>Coordinators (23.2%), Analysts and Managers (22.4%) left far more often than Engineers (14.0%) and Executives (12.2%).</li>
-            <li>53% of staff work over 45 hours a week, from 49% in IT to 60% in HR.</li>
-          </ul></div>
-          <div class="cs-block"><h4>Business implication</h4><p>If rates hold, roughly one role in five needs refilling, so recruitment capacity has to be planned for about 58 hires. Long hours are common in every department, including low-attrition Marketing, so hours alone do not explain who leaves.</p></div>
-          <div class="cs-block"><h4>Recommendation</h4><p>Target retention at coordinator, analyst and manager roles in Sales, Logistics and Operations. Review workload in HR, where 60% work over 45 hours. Use the slider to set a retention target: a 20% cut leaves 46 hires instead of 58.</p></div>
-          <div class="cs-block full"><h4>Outcome</h4><p>A one-page planning dashboard that turns the retention conversation into numbers: at a 20% reduction, 12 hires avoided and about $852K of salary retained.</p>
-            <figure>
-              <img src="workforce_planning_powerbi.png" width="2400" height="1376" loading="lazy" decoding="async" alt="Power BI dashboard titled OptiGrowth Enterprises: Workforce Planning, showing KPI cards for headcount, leavers, attrition rate, salary of leavers and share working over 45 hours, attrition by department and job role, headcount and leavers by department, an attrition reduction slider set to 20 percent with hires needed, hires avoided and salary retained, and a department summary table.">
-              <figcaption>Power BI report from this project, with the scenario slider set to 20%. Case-study dataset. Salary retained assumes avoided leavers earn the average leaver salary.</figcaption>
-            </figure>
-          </div>
-        </div>
-      </details>
     </article>
 
     <article class="case" aria-labelledby="cs2">
@@ -364,34 +335,6 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
           <p class="report-link"><a href="projects/attrition-cost.html">Read the full report<span class="visually-hidden"> on attrition and cost of turnover</span> <span aria-hidden="true">→</span></a></p>
         </div>
       </div>
-      <details class="more">
-        <summary><span class="when-closed">View case study</span><span class="when-open">Hide case study</span></summary>
-        <div class="cs-body">
-          <div class="cs-block"><h4>Business problem</h4><p>Leadership knew people were leaving but had no costed figure to justify spending on retention. Headcount reports showed who left, not what leaving cost.</p></div>
-          <div class="cs-block"><h4>Data</h4><p>Records for 1,000 employees: department, job title, salary, hire date and exit date. 85 have an exit date.</p></div>
-          <div class="cs-block full"><h4>Analysis</h4><ul>
-            <li>Removed names, ethnicity and location coordinates in Power Query; they are not needed to cost turnover.</li>
-            <li>Derived a leaver flag, exit year, tenure at exit and tenure bands from hire and exit dates.</li>
-            <li>Wrote DAX measures for leavers, leaver rate, salary of leavers and average tenure at exit.</li>
-            <li>Costed turnover as salary of leavers multiplied by an adjustable replacement-cost assumption, shown on a slider so the estimate is transparent.</li>
-          </ul></div>
-          <div class="cs-block"><h4>Tools</h4><p>Power BI, Power Query, DAX (including a what-if parameter).</p></div>
-          <div class="cs-block"><h4>Key findings</h4><ul>
-            <li>85 of 1,000 employees left (8.5%), holding $8.88M in salary.</li>
-            <li>Marketing (12.6%) and Engineering (10.8%) lost staff at the highest rates; IT the lowest (6.6%).</li>
-            <li>20 leavers went within their first year, and 30 after five or more years, so both new starters and experienced staff were leaving.</li>
-            <li>Exits rose sharply from 2017, peaking at 20 in 2021.</li>
-          </ul></div>
-          <div class="cs-block"><h4>Business implication</h4><p>At an assumed 30% of salary, turnover cost about $2.66M, with Engineering and Marketing together around $1.15M. The cost scales directly with the assumption, so the slider lets leaders test their own figure.</p></div>
-          <div class="cs-block"><h4>Recommendation</h4><p>Target retention at Marketing and Engineering, review onboarding for the first-year leavers, and look at career progression for long-tenured staff.</p></div>
-          <div class="cs-block full"><h4>Outcome</h4><p>A costed, department-level view that lets leadership set retention priorities and see how sensitive the cost is to its assumptions.</p>
-            <figure>
-              <img src="attrition_cost_powerbi.png" width="2400" height="1376" loading="lazy" decoding="async" alt="Power BI dashboard titled Lumina Tech: Attrition and Cost of Turnover, showing KPI cards for employees, leavers, leaver rate, salary of leavers and average tenure at exit, leaver rate by department, leavers by year and by tenure band, a replacement cost assumption slider set to 30 percent with estimated turnover cost, and a department table.">
-              <figcaption>Power BI report from this project, with the cost assumption at 30% of salary. Case-study dataset. The turnover cost is an estimate, not a measured figure.</figcaption>
-            </figure>
-          </div>
-        </div>
-      </details>
     </article>
 
     <article class="case" aria-labelledby="cs3">
@@ -405,34 +348,6 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
           <p class="report-link"><a href="projects/recruitment-cost.html">Read the full report<span class="visually-hidden"> on recruitment cost</span> <span aria-hidden="true">→</span></a></p>
         </div>
       </div>
-      <details class="more">
-        <summary><span class="when-closed">View case study</span><span class="when-open">Hide case study</span></summary>
-        <div class="cs-body">
-          <div class="cs-block"><h4>Business problem</h4><p>Ted Square Ltd wanted to know whether its reliance on external hiring was financially sustainable, and how much a shift to internal hiring would change spend.</p></div>
-          <div class="cs-block"><h4>Data</h4><p>44 hires from 2008 to 2016 with hiring route (internal or external), source channel, department, hire date and cost per hire, plus a cost breakdown sheet.</p></div>
-          <div class="cs-block full"><h4>Analysis</h4><ul>
-            <li>Fixed hire dates in Power Query: the column mixed real dates with US-format text, which had loaded as numbers such as 42125.</li>
-            <li>Wrote DAX measures for hires by route, recruitment spend, cost per hire and internal share.</li>
-            <li>Broke hires down by year, source channel and department.</li>
-            <li>Added a what-if slider for the share of hires filled internally, costing the same 44 hires at each route's actual cost per hire.</li>
-          </ul></div>
-          <div class="cs-block"><h4>Tools</h4><p>Power BI, Power Query, DAX (including a what-if parameter).</p></div>
-          <div class="cs-block"><h4>Key findings</h4><ul>
-            <li>36 of 44 hires (82%) were external. They cost £1,223,000 of £1,275,000 total spend.</li>
-            <li>Cost per hire: £33,972 external against £6,500 internal, over five times as much.</li>
-            <li>IT/IS made 33 of the 44 hires, 29 of them external, and accounted for £1.01M of spend.</li>
-            <li>Employee referral was the largest single source (10 hires). Hiring peaked in 2015 with 21 hires.</li>
-          </ul></div>
-          <div class="cs-block"><h4>Business implication</h4><p>External hiring drove almost all recruitment spend, concentrated in IT/IS. At a 70% internal share the same 44 hires would cost about £649K, roughly £626K less.</p></div>
-          <div class="cs-block"><h4>Recommendation</h4><p>Build succession and internal mobility routes for IT/IS roles, keep external hiring for specialist skills, and track cost per hire by route on the dashboard.</p></div>
-          <div class="cs-block full"><h4>Outcome</h4><p>A costed comparison of hiring routes with a scenario slider leaders can use to set an internal-hiring target.</p>
-            <figure>
-              <img src="recruitment_cost_powerbi.png" width="2400" height="1376" loading="lazy" decoding="async" alt="Power BI dashboard titled Ted Square Ltd: Recruitment Cost and Hiring Routes, showing KPI cards for total, external and internal hires, recruitment spend and average cost per hire, cost per hire by route, hires by year split by route, hires by source, an internal hire share slider set to 70 percent with cost at target mix and saving, and a department table.">
-              <figcaption>Power BI report from this project, with the scenario slider at 70% internal. Case-study dataset. The scenario assumes each route's cost per hire stays the same.</figcaption>
-            </figure>
-          </div>
-        </div>
-      </details>
     </article>
 
     <article class="case" aria-labelledby="cs4">
@@ -446,33 +361,6 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
           <p class="report-link"><a href="projects/performance-reporting.html">Read the full report<span class="visually-hidden"> on performance reporting</span> <span aria-hidden="true">→</span></a></p>
         </div>
       </div>
-      <details class="more">
-        <summary><span class="when-closed">View case study</span><span class="when-open">Hide case study</span></summary>
-        <div class="cs-body">
-          <div class="cs-block"><h4>Business problem</h4><p>HR needed one view of appraisal results to answer recurring questions about performance, engagement and training without building a new report each quarter.</p></div>
-          <div class="cs-block"><h4>Data</h4><p>Performance appraisal records for 753 employees: performance score, goals met, engagement, tenure, training hours, department, job role and manager remarks.</p></div>
-          <div class="cs-block full"><h4>Analysis</h4><ul>
-            <li>Built a data model with a calendar dimension so results could be viewed by year and quarter.</li>
-            <li>Wrote DAX measures for average performance, goals met, engagement, tenure, training hours and quarter-on-quarter change.</li>
-            <li>Added slicers for quarter, department and employee, so users filter the report instead of asking for new cuts.</li>
-            <li>Plotted training hours against performance score, and performance bands by department.</li>
-          </ul></div>
-          <div class="cs-block"><h4>Tools</h4><p>Power BI, DAX.</p></div>
-          <div class="cs-block"><h4>Key findings</h4><ul>
-            <li>Average performance was 74.8%. It dipped from 75.3% in Q1 to 74.3% in Q2 2024, then held at 74.8% in Q3 and Q4.</li>
-            <li>Performance bands were almost identical across HR, Marketing, Operations and Sales.</li>
-            <li>The scatter showed no clear link between training hours and performance score.</li>
-          </ul></div>
-          <div class="cs-block"><h4>Business implication</h4><p>Performance differences sat with individuals, not departments. More training hours alone were unlikely to lift scores.</p></div>
-          <div class="cs-block"><h4>Recommendation</h4><p>Target development at individual goals and manager feedback, and review whether training content, not volume, supports performance.</p></div>
-          <div class="cs-block full"><h4>Outcome</h4><p>A single refreshable report HR can filter by quarter, department and employee.</p>
-            <figure>
-              <img src="performance_dashboard_powerbi.png" width="2400" height="1373" loading="lazy" decoding="async" alt="Power BI dashboard titled Overview of Employee Performance, showing KPI cards for total employees, average performance, engagement and tenure, a quarterly performance trend line, a training hours versus performance scatter plot, an appraisal table, a marital status donut and performance bands by department.">
-              <figcaption>Power BI report from this project, exported directly from the file. Employee names are hidden.</figcaption>
-            </figure>
-          </div>
-        </div>
-      </details>
     </article>
 
     <p class="evidence">All four are portfolio projects. Their figures come from the project analysis and are not claimed as results from an employer.</p>
@@ -492,19 +380,6 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
         <h3 id="aw1">UK Gender Pay Gap Analysis 2023–2025</h3>
         <p class="summary">Every published employer pay gap for the last two reporting years, benchmarked by sector, size and pay quartile.</p>
         <ul class="chips" aria-label="Tools and methods"><li>SQL</li><li>Python</li><li>pandas</li></ul>
-        <details class="more">
-          <summary><span class="when-closed">View project</span><span class="when-open">Hide project</span></summary>
-          <div class="cs-body">
-            <div class="cs-block"><h4>Question</h4><p>How does an employer's gender pay gap compare with its sector and size band, and are gaps closing?</p></div>
-            <div class="cs-block"><h4>Data</h4><p>gov.uk Gender Pay Gap Service: 11,169 employers for 2023/24 and 11,315 for 2024/25.</p></div>
-            <div class="cs-block"><h4>Findings</h4><ul>
-              <li>The median employer gap fell from 8.9% to 8.4%, and 77.5% of employers still pay men more at the median.</li>
-              <li>Education (23.0%), construction (22.0%) and finance (20.1%) have the widest typical gaps.</li>
-              <li>Women are 54.7% of the lowest pay quartile but 41.8% of the top quartile.</li>
-              <li>Of 10,585 employers reporting in both years, 51.2% narrowed their gap.</li>
-            </ul></div>
-          </div>
-        </details>
         <p class="report-link"><a href="projects/gender-pay-gap.html">Read the full report<span class="visually-hidden"> on the UK gender pay gap</span></a></p>
       </article>
 
@@ -513,18 +388,6 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
         <h3 id="aw4">UK Labour Market Briefing for Workforce Planning</h3>
         <p class="summary">ONS vacancies, unemployment, inactivity and pay growth to June 2026, and what they mean for hiring and retention plans.</p>
         <ul class="chips" aria-label="Tools and methods"><li>Python</li><li>pandas</li><li>ONS data</li></ul>
-        <details class="more">
-          <summary><span class="when-closed">View project</span><span class="when-open">Hide project</span></summary>
-          <div class="cs-body">
-            <div class="cs-block"><h4>Question</h4><p>How has the external labour market changed since 2022, and how should hiring targets, pay budgets and attrition expectations change with it?</p></div>
-            <div class="cs-block"><h4>Data</h4><p>Six ONS Labour Market Statistics series, September 2026 release.</p></div>
-            <div class="cs-block"><h4>Findings</h4><ul>
-              <li>Vacancies per unemployed person fell from 1.02 in mid-2022 to 0.40, below the pre-pandemic 0.56.</li>
-              <li>Unemployment is 4.9% and regular pay growth has slowed to 3.5%, from a peak of 7.9% in 2023.</li>
-              <li>Recommendation: reset time-to-fill and cost-per-hire targets and review agency spend, while protecting scarce skills.</li>
-            </ul></div>
-          </div>
-        </details>
         <p class="report-link"><a href="projects/labour-market.html">Read the full report<span class="visually-hidden"> on the UK labour market</span></a></p>
       </article>
 
@@ -533,20 +396,6 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
         <h3 id="aw5">Attrition Risk Model</h3>
         <p class="summary">A logistic regression and random forest predicting attrition on the fictional IBM HR Analytics dataset, with drivers and guardrails for responsible use.</p>
         <ul class="chips" aria-label="Tools and methods"><li>Python</li><li>scikit-learn</li><li>Classification</li></ul>
-        <details class="more">
-          <summary><span class="when-closed">View project</span><span class="when-open">Hide project</span></summary>
-          <div class="cs-body">
-            <div class="cs-block"><h4>Data</h4><p>IBM HR Analytics sample: 1,470 fictional employees, 16.1% attrition. Age, gender and marital status were excluded from the model.</p></div>
-            <div class="cs-block"><h4>Results on a held-out test set</h4><ul>
-              <li>Logistic regression: ROC AUC 0.79, recall 64%, precision 37% (cross-validated AUC 0.83).</li>
-              <li>Overtime (30.5% vs 10.4% attrition), frequent travel, first-year tenure and entry-level sales and laboratory roles carry the most risk.</li>
-            </ul></div>
-            <div class="cs-block"><h4>Responsible use</h4><ul>
-              <li>Most flagged employees stay, so scores should guide group-level retention work, not decisions about individuals.</li>
-              <li>Real use needs the organisation's own data, fairness testing and a data protection impact assessment.</li>
-            </ul></div>
-          </div>
-        </details>
         <p class="report-link"><a href="projects/attrition-risk-model.html">Read the full report<span class="visually-hidden"> on the attrition risk model</span></a></p>
       </article>
 
@@ -696,14 +545,16 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px}
 
 <footer class="contact" id="contact" aria-labelledby="contact-title">
   <div class="wrap">
-    <h2 id="contact-title">Contact</h2>
+    <h2 id="contact-title">Profiles &amp; contact</h2>
     <p>I'm open to People Analytics, HR Analytics and Workforce Planning roles in the UK, remote or hybrid. Email is the quickest way to reach me.</p>
-    <ul class="contact-links">
+    <ul class="contact-links" aria-label="Email and public profiles">
       <li><a class="primary" href="mailto:olajumokemedunoye@gmail.com">olajumokemedunoye@gmail.com</a></li>
       <li><a href="https://www.linkedin.com/in/olajumoke-medunoye" rel="noopener">LinkedIn</a></li>
       <li><a href="https://github.com/olajumokemedunoye" rel="noopener">GitHub</a></li>
-      <li><a href="cv/Olajumoke_Medunoye_CV.pdf" data-cv download>Download CV</a></li>
+      <li><a href="https://sheer-double-3b8.notion.site/Olajumoke-Medunoye-People-Analytics-Portfolio-3f6750eba04e8145b48cf5f5f0efb8f2" rel="noopener">Notion</a></li>
+      <li><a href="https://notebook.google.com/notebook/5f12778f-3f41-45e7-b7c4-331c5fbb0322" rel="noopener" aria-describedby="notebook-access">NotebookLM</a></li>
     </ul>
+    <p class="profile-note" id="notebook-access">NotebookLM requires a Google account.</p>
     <div class="foot">
       <span>© 2026 Olajumoke Medunoye</span>
       <span>Consulting &amp; projects: <a href="https://olajumokemedunoye.github.io/OlaDigitalHub/" rel="noopener">OlaDigitalHub</a></span>
