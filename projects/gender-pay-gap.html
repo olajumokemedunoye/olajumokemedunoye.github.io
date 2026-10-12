@@ -4,8 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>UK Gender Pay Gap Analysis | Olajumoke Medunoye</title>
-<meta name="description" content="Analysis of UK gender pay gap reporting for 2023/24 and 2024/25 using SQL and Python on the public gov.uk dataset: sector and size gaps, pay quartiles, year-on-year change and bonus gaps. Prepared by Olajumoke O. Medunoye.">
-<link rel="canonical" href="https://olajumokemedunoye.github.io/projects/gender-pay-gap.html">
+<meta name="description" content="SQL and Python analysis of UK employer gender pay gaps for 2023/24 and 2024/25, including sector benchmarks and pay quartiles.">
+<link rel="canonical" href="https://olajumokemedunoye.com/projects/gender-pay-gap.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UK Gender Pay Gap Analysis | Olajumoke Medunoye">
+<meta property="og:description" content="SQL and Python analysis of UK employer gender pay gaps for 2023/24 and 2024/25, including sector benchmarks and pay quartiles.">
+<meta property="og:url" content="https://olajumokemedunoye.com/projects/gender-pay-gap.html">
+<meta property="og:image" content="https://olajumokemedunoye.com/projects/gender-pay-gap/outputs/gap_by_sector.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -20,8 +26,8 @@
   <div class="wrap">
     <nav aria-label="Report"><a href="../index.html">Olajumoke Medunoye · Portfolio</a><a href="../index.html#additional-work">← All projects</a></nav>
     <p class="kicker"><span></span>Pay equity report · public data</p>
-    <h1>Where the UK Gender Pay Gap Sits in 2024/25</h1>
-    <p class="lede">An analysis of every employer that published gender pay gap figures for the last two reporting years, by sector, size and pay quartile, and whether the same employers narrowed their gaps.</p>
+    <h1>UK Gender Pay Gap Analysis: 2023/24–2024/25</h1>
+    <p class="lede">I analysed published employer data for 2023/24 and 2024/25 to compare gender pay gaps by sector, employer size and pay quartile. I also tracked changes among employers reporting in both years to separate improvement from changes in the sample.</p>
     <div class="meta"><span><b>Source:</b> gov.uk Gender Pay Gap Service</span><span><b>Employers:</b> 11,169 (2023/24) and 11,315 (2024/25)</span><span><b>Tools:</b> SQL (SQLite) · Python · pandas · matplotlib</span></div>
   </div>
 </header>
@@ -172,7 +178,6 @@ FROM gpg_clean a JOIN gpg_clean b
 </footer>
 </div>
 
-<a class="signature" href="../index.html" aria-label="Prepared by Olajumoke O. Medunoye, back to portfolio"><span class="mono" aria-hidden="true">OM</span><span>Prepared by <b>Olajumoke O. Medunoye</b></span></a>
 <script src="report.js" defer></script>
 </body>
 </html>

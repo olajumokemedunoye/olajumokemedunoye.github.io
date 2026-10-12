@@ -3,9 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Attrition &amp; Cost of Turnover Report | Olajumoke Medunoye</title>
-<meta name="description" content="Attrition and cost of turnover report for Lumina Tech: Power Query preparation, DAX measures, the replacement cost assumption, findings and recommendations. Prepared by Olajumoke O. Medunoye.">
-<link rel="canonical" href="https://olajumokemedunoye.github.io/projects/attrition-cost.html">
+<title>Attrition &amp; Cost of Turnover | Olajumoke Medunoye</title>
+<meta name="description" content="A Power BI case study on attrition by department and tenure, with transparent assumptions for estimating the cost of turnover.">
+<link rel="canonical" href="https://olajumokemedunoye.com/projects/attrition-cost.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Attrition &amp; Cost of Turnover | Olajumoke Medunoye">
+<meta property="og:description" content="A Power BI case study on attrition by department and tenure, with transparent assumptions for estimating the cost of turnover.">
+<meta property="og:url" content="https://olajumokemedunoye.com/projects/attrition-cost.html">
+<meta property="og:image" content="https://olajumokemedunoye.com/attrition_cost_powerbi.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
@@ -20,8 +26,8 @@
   <div class="wrap">
     <nav aria-label="Report"><a href="../index.html">Olajumoke Medunoye · Portfolio</a><a href="../index.html#case-studies">← All case studies</a></nav>
     <p class="kicker"><span></span>Attrition report · case-study data</p>
-    <h1>Who Is Leaving Lumina Tech, When, and What It Costs</h1>
-    <p class="lede">A costed view of attrition by department and tenure, with the cost assumption placed in the hands of the reader instead of buried in a formula.</p>
+    <h1>HR Attrition &amp; Cost of Turnover</h1>
+    <p class="lede">I analysed when people left Lumina Tech, where attrition was concentrated and how replacement-cost assumptions changed the estimated cost of turnover. The report makes those assumptions visible so HR leaders can assess the figures.</p>
     <div class="meta"><span><b>Organisation:</b> Lumina Tech (case study)</span><span><b>Population:</b> 1,000 employees</span><span><b>Tools:</b> Power BI · Power Query · DAX</span></div>
   </div>
 </header>
@@ -181,7 +187,6 @@ CALCULATE(SUM(Employees[Annual Salary]), Employees[Is Leaver] = 1) + 0</code></p
 </footer>
 </div>
 
-<a class="signature" href="../index.html" aria-label="Prepared by Olajumoke O. Medunoye, back to portfolio"><span class="mono" aria-hidden="true">OM</span><span>Prepared by <b>Olajumoke O. Medunoye</b></span></a>
 <script src="report.js" defer></script>
 </body>
 </html>

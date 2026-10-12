@@ -4,8 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Attrition Risk Model | Olajumoke Medunoye</title>
-<meta name="description" content="Employee attrition risk model built in Python on the public IBM HR Analytics sample dataset: logistic regression and random forest, evaluation on a held-out test set, attrition drivers, limitations and responsible use. Prepared by Olajumoke O. Medunoye.">
-<link rel="canonical" href="https://olajumokemedunoye.github.io/projects/attrition-risk-model.html">
+<meta name="description" content="A Python attrition modelling project comparing logistic regression and random forest, with test results, risk drivers and responsible-use limits.">
+<link rel="canonical" href="https://olajumokemedunoye.com/projects/attrition-risk-model.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Attrition Risk Model | Olajumoke Medunoye">
+<meta property="og:description" content="A Python attrition modelling project comparing logistic regression and random forest, with test results, risk drivers and responsible-use limits.">
+<meta property="og:url" content="https://olajumokemedunoye.com/projects/attrition-risk-model.html">
+<meta property="og:image" content="https://olajumokemedunoye.com/projects/attrition-risk-model/outputs/roc_curve.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@700&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
@@ -20,8 +26,8 @@
   <div class="wrap">
     <nav aria-label="Report"><a href="../index.html">Olajumoke Medunoye · Portfolio</a><a href="../index.html#additional-work">← All projects</a></nav>
     <p class="kicker"><span></span>Predictive people analytics · public sample data</p>
-    <h1>Which Employees Are Most Likely to Leave, and Why</h1>
-    <p class="lede">An attrition risk model built and tested in Python, with the drivers behind it and the guardrails needed before a model like this is used on real employees.</p>
+    <h1>Attrition Risk Model</h1>
+    <p class="lede">I compared logistic regression and random forest models using the fictional IBM HR Analytics dataset. I tested their performance on unseen records and examined the main drivers, limitations and safeguards needed before applying this approach to employees.</p>
     <div class="meta"><span><b>Data:</b> IBM HR Analytics sample (fictional, 1,470 employees)</span><span><b>Models:</b> logistic regression · random forest</span><span><b>Tools:</b> Python · scikit-learn · pandas</span></div>
   </div>
 </header>
@@ -169,7 +175,6 @@ cross_val_score(model, X_train, y_train, cv=cv, scoring="roc_auc")</code></pre>
 </footer>
 </div>
 
-<a class="signature" href="../index.html" aria-label="Prepared by Olajumoke O. Medunoye, back to portfolio"><span class="mono" aria-hidden="true">OM</span><span>Prepared by <b>Olajumoke O. Medunoye</b></span></a>
 <script src="report.js" defer></script>
 </body>
 </html>

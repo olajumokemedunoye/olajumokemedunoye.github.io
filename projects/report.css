@@ -89,17 +89,10 @@ p code,li code,td code{background:var(--tint);color:var(--ink);padding:1px 6px;b
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 
-/* Signature */
-.signature{position:fixed;right:18px;bottom:16px;z-index:20;background:#fff;border:1px solid var(--rule);border-radius:999px;padding:7px 14px 7px 8px;font-size:13px;color:var(--ink-2);box-shadow:0 6px 20px rgba(15,23,42,.12);display:flex;align-items:center;gap:8px;text-decoration:none}
-.signature .mono{width:24px;height:24px;border-radius:50%;background:var(--primary);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;letter-spacing:.02em}
-.signature b{color:var(--ink);font-weight:600}
-@media (max-width:600px){.signature{right:10px;bottom:10px;font-size:12px}}
-
 footer{margin-top:48px;border-top:1px solid var(--rule);padding:26px 0 80px;font-size:15px;color:var(--muted)}
 footer p{margin:0 0 6px}
 
 @media print{
-  .signature{position:static;box-shadow:none;margin:24px 0 0;display:inline-flex}
   .cover nav,.back{display:none}
   .reveal{opacity:1;transform:none}
   .summary{margin-top:16px}

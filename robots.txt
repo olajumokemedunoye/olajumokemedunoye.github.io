@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://olajumokemedunoye.com/sitemap.xml

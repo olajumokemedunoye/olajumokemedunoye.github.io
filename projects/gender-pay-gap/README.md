@@ -6,6 +6,6 @@ Benchmarks every employer that published gender pay gap figures for reporting ye
 - **SQL:** `sql/analysis.sql` (SQLite, medians via window functions, SIC section lookup, year-on-year self-join)
 - **Python:** `python/run_analysis.py` loads the CSVs into SQLite, runs every query and draws the charts
 - **Outputs:** `outputs/results.json` and three charts
-- **Report:** https://olajumokemedunoye.github.io/projects/gender-pay-gap.html
+- **Report:** https://olajumokemedunoye.com/projects/gender-pay-gap.html
 
 Run: `python python/run_analysis.py` from this folder.

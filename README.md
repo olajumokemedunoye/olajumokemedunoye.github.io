@@ -2,7 +2,9 @@
 
 People Analytics | HR Analytics | Workforce Planning
 
-**Live site:** https://olajumokemedunoye.github.io
+**Live site:** https://olajumokemedunoye.com
+
+The custom domain is the primary portfolio. GitHub Pages publishes redirect pages only; Vercel deployment addresses redirect to the custom domain. Notion and NotebookLM provide supporting project resources.
 
 This is the source for my job-search portfolio. It covers workforce planning, attrition and cost-of-turnover analysis, recruitment analytics and HR reporting automation, built with Power BI, SQL, Excel and Python.
 
@@ -23,9 +25,9 @@ Each has its code, data and outputs in `projects/` and a full report on the site
 
 | Project | Data | Tools | Report |
 |---|---|---|---|
-| UK Gender Pay Gap Analysis 2023–2025 | gov.uk Gender Pay Gap Service, 2023/24 and 2024/25 | SQL (SQLite), Python | [projects/gender-pay-gap.html](https://olajumokemedunoye.github.io/projects/gender-pay-gap.html) |
-| UK Labour Market Briefing for Workforce Planning | ONS Labour Market Statistics, September 2026 | Python, pandas | [projects/labour-market.html](https://olajumokemedunoye.github.io/projects/labour-market.html) |
-| Attrition Risk Model | IBM HR Analytics sample dataset (fictional employees) | Python, scikit-learn | [projects/attrition-risk-model.html](https://olajumokemedunoye.github.io/projects/attrition-risk-model.html) |
+| UK Gender Pay Gap Analysis 2023–2025 | gov.uk Gender Pay Gap Service, 2023/24 and 2024/25 | SQL (SQLite), Python | [projects/gender-pay-gap.html](https://olajumokemedunoye.com/projects/gender-pay-gap.html) |
+| UK Labour Market Briefing for Workforce Planning | ONS Labour Market Statistics, September 2026 | Python, pandas | [projects/labour-market.html](https://olajumokemedunoye.com/projects/labour-market.html) |
+| Attrition Risk Model | IBM HR Analytics sample dataset (fictional employees) | Python, scikit-learn | [projects/attrition-risk-model.html](https://olajumokemedunoye.com/projects/attrition-risk-model.html) |
 
 Also on the site: a Customer Service Operations KPI Dashboard and an illustrative first-year attrition analysis built on synthetic data.
 
