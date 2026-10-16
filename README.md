@@ -31,6 +31,18 @@ Each has its code, data and outputs in `projects/` and a full report on the site
 
 Also on the site: a Customer Service Operations KPI Dashboard and an illustrative first-year attrition analysis built on synthetic data.
 
+## Earlier customer experience and business analytics
+
+| Project | Type | Report |
+|---|---|---|
+| Customer Onboarding at Tangerine Africa | Professional case study | [Project](https://olajumokemedunoye.com/projects/customer-onboarding.html) |
+| Customer Service Process Improvement at Wema Bank | Professional case study | [Project](https://olajumokemedunoye.com/projects/customer-service-process.html) |
+| Client Retention at AXA Mansard Pensions | Professional case study | [Project](https://olajumokemedunoye.com/projects/client-retention.html) |
+| Retail Sales Performance in Excel | Portfolio project | [Project](https://olajumokemedunoye.com/projects/retail-sales-analysis.html) |
+| Product & Regional Profitability in Power BI | Portfolio project | [Project](https://olajumokemedunoye.com/projects/product-regional-profitability.html) |
+
+These five earlier projects are consolidated into the custom-domain portfolio. Customer experience pages describe the approach without repeating unsupported outcome percentages. The two analytics pages preserve the original dashboard screenshots and explain their data scope.
+
 ## How results are labelled
 
 The site separates three kinds of evidence:
@@ -59,7 +71,7 @@ projects/powerbi/                   Power BI (.pbix) files for the four featured
 
 ## Running locally
 
-The site has no build step. Open `index.html` in a browser or serve the folder with any static server. GitHub Pages deploys from `main`.
+The site has no build step. Open `index.html` in a browser or serve the folder with any static server. GitHub Pages deploys a redirect-only artifact through the workflow on `main`.
 
 The Python projects need Python 3.11+ with pandas, matplotlib and scikit-learn. Run each script from its project folder, for example `cd projects/gender-pay-gap && python python/run_analysis.py`.
 
