@@ -41,7 +41,7 @@ Also on the site: a Customer Service Operations KPI Dashboard and an illustrativ
 | Retail Sales Performance in Excel | Portfolio project | [Project](https://olajumokemedunoye.com/projects/retail-sales-analysis.html) |
 | Product & Regional Profitability in Power BI | Portfolio project | [Project](https://olajumokemedunoye.com/projects/product-regional-profitability.html) |
 
-These five earlier projects are consolidated into the custom-domain portfolio. Customer experience pages describe the approach without repeating unsupported outcome percentages. The two analytics pages preserve the original dashboard screenshots and explain their data scope.
+These five earlier projects are consolidated into the custom-domain portfolio. Customer experience pages cover the workflows, tools and lessons from the work. The two analytics pages preserve the original dashboard screenshots and explain their data scope.
 
 ## How results are labelled
 
